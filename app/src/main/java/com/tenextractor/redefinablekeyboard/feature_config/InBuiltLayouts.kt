@@ -130,6 +130,12 @@ Caucasian
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Cheyenne
+á ȧ â é ė ê ó ȯ ô š
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Chukchi
 ё ӄ ԓ ӈ ъ
 й ц у к е н г ш щ з х
@@ -221,6 +227,16 @@ q w e r t z u i o p ü
 a s d f g h j k l ö ä
 y x c v b n m ß
 
+Gitxsan
+q w e r t y u i o p
+a s d f g h j k l ḵ
+z x c v b n m x̱
+
+Guaymí/Ngäbere
+q w e r t y u i o p ü
+a s d f g h j k l ñ ä
+z x c v b n m ö
+
 Hausa
 q w e r t y u i o p ƴ
 a s d f g h j k l ƙ
@@ -250,10 +266,10 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
-Ingrian
+Ingrian/Izhorian
 q w e r t y u i o p š
 a s d f g h j k l ö ä
-z x c v b n m ž
+z x c v b n m ь ž
 
 Iñupiaq
 ġ ḷ ł ł̣ ñ ŋ r̂
@@ -278,6 +294,12 @@ Karakalpak (Cyrillic)
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Karelian
+č š ž ä ö
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Kazakh (Cyrillic)
 ё ә і ң ғ ү ұ қ ө һ ъ
 й ц у к е н г ш щ з х
@@ -300,6 +322,12 @@ Khasi
 q w e r t y u i o p
 a s d f g h j k l ñ
 z x c v b n m ï
+
+Komi
+ё і ӧ ъ
+й ц у к е н г ш щ з х
+ф ы в а п р о л д ж э
+я ч с м и т ь б ю
 
 Koryak
 ё вʼ гʼ ӄ ӈ ъ
@@ -372,6 +400,11 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
+Massachusett/Wampanoag
+q w e r t y u i o p ô
+a s d f g h j k l â 8
+z x c v b n m
+
 Mi'kmaq
 á é í ó ú ɨ ꞌ
 q w e r t y u i o p
@@ -390,6 +423,12 @@ Nanai
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Navajo (Big)
+á ą ą́ é ę ę́ í į į́ ó ǫ
+q w e r t y u i o p ǫ́
+a s d f g h j k l ł
+z x c v b n m
+
 Nenets
 ё ʼ ˮ ӈ ъ
 й ц у к е н г ш щ з х
@@ -402,17 +441,34 @@ Nganasan
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Nisga'a
+ḵ w̓ x̱ l̓ y̓ n̓ m̓
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Nivkh
 ё ӷ ў ӄ ғ ӈ ӻ р̌ ӽ ӿ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Nuxalk
+q w e r t y u i o p
+a s d f g h j k l 7
+z x c v b n m
+
 O'odham
 ḏ ḍ ñ ŋ ṣ :
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
+
+Odun/Tundra Yukaghir
+ё җ қ ә ҥ ҕ ө ъ
+й ц у к е н г ш щ з х
+ф ы в а п р о л д ж э
+я ч с м и т ь б ю
 
 Ossetian
 ё « ӕ » ъ
@@ -473,7 +529,7 @@ a s d f g h j k l ö æ
 z x c v b n m ï
 
 Sami (Ume)
-á đ ï ŋ ŧ ü å ä ö
+á đ å ŧ ŋ ü ï ö ä
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -524,11 +580,23 @@ Tatar (Cyrillic)
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Tłı̨chǫ (Big)
+à ą ą̀ è ę ę̀ ì ı̨ į̀ ò ǫ
+q w e r t y u ı o p ǫ̀
+a s d f g h j k l ł i
+z x c v b n m
+
 Tofa
 ё і ү қ ә ң ғ ө һ ҷ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Tsimshian (Coast)
+ḵ ẅ a̰ ɫ ü g̲
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
 
 Turkmen
 ä ş ç ž ň ý ü ö
@@ -548,6 +616,11 @@ Ukrainian
 ф і в а п р о л д ж є
 я ч с м и т ь б ю
 
+Ute
+q w e r t y u i o p
+a s d f g h j k l ɵ
+z x c v b n m ʉ
+
 Uzbek (Cyrillic)
 ё ғ ҳ ъ
 й ц у к е н г ш ў з х
@@ -566,7 +639,7 @@ a s d f g h j k l
 z x c v b n m
 
 Votic
-ä ö õ ü š ž
+š ž ü ä ö õ
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -668,6 +741,36 @@ val layouts = listOf(
             ဇ ဌ ဃ ဠ ဎ ဉ ဦ ဧ
         """.trimIndent()
     ),*/
+    Layout(
+        name = "Crimean Tatar (Latin)",
+        layout = """
+            ç ğ ş ñ ü ı ö
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        capsLayer = """
+            Ç Ğ Ş Ñ Ü I Ö
+            Q W E R T Y U İ O P
+            A S D F G H J K L
+            Z X C V B N M
+        """.trimIndent()
+    ),
+    Layout(
+        name = "Gagauz",
+        layout = """
+            ä ê ç ţ ş ü ı ö
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        capsLayer = """
+            Ä Ê Ç Ţ Ş Ü I Ö
+            Q W E R T Y U İ O P
+            A S D F G H J K L
+            Z X C V B N M
+        """.trimIndent()
+    ),
     Layout(
         name = "Georgian (ქწერტყ)",
         layout = """
@@ -855,25 +958,35 @@ val layouts = listOf(
         bottomRowKey = Key(text = "ґ", width = KeyWidth.FractionWidth(.1F))
     ),
     Layout(
+        name = "Saanich",
+        layout = """
+            Á W̱ Ⱥ Ć Ⱦ Ṯ Ȼ Í Ꞣ Ḵ Ś
+            Q W E R T Y U I O P X̱
+            A S D F G H J K L Ƚ
+            Z X C V B N M Ṉ
+        """.trimIndent(),
+        capsLayer = """
+            á w̱ ⱥ ć ⱦ ṯ ȼ í ꞣ ḵ ś
+            q w e r t y u i o p x̱
+            a s d f g h j k l ƚ
+            z x c v b n m ṉ
+        """.trimIndent()
+    ),
+    Layout(
         name = "Sami (Kildin) (Small)",
         layout = """
-            ё ј һ ¯ ӭ ӈ ӓ , ъ ҍ
+            ё ј һ ¯, ӭ ӈ ӓ ъ ҍ
             й ц у к е н г ш щ з х
             ф ы в а п р о л д ж э
             я ч с м и т ь б ю
         """.trimIndent(),
         otherLayers = listOf("""
-            ё̄ ј һ ¯ ӭ̄ ӈ ӓ̄ , ъ ҍ
-            й ц ӯ к е̄ н г ш щ з х
-            ф ы̄ в а̄ п р о̄ л д ж э̄
-            я̄ ч с м ӣ т ь б ю̄
-        """.trimIndent(), """
-            ё ј һ ¯ ӭ ӈ ӓ , ъ ҍ
-            ҋ ц у к е ӊ г ш щ з х
-            ф ы в а п ҏ о ӆ д ж э
-            я ч с ӎ и т ь б ю
+            ё̄ ј һ ¯, ӭ̄ ӈ ӓ̄ ъ ҍ
+            ҋ ц ӯ к е̄ ӊ г ш щ з х
+            ф ы̄ в а̄ п ҏ о̄ ӆ д ж э̄
+            я̄ ч с ӎ ӣ т ь б ю̄
         """.trimIndent()),
-        moveLayerKeys = listOf("¯", ","),
+        moveLayerKeys = listOf("¯,"),
         decoupleRows = listOf(0)
     ),
     Layout(
