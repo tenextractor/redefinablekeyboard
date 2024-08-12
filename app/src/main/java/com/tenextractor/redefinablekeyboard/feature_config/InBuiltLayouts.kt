@@ -42,6 +42,7 @@ fun symbolsKey1(width: KeyWidth = KeyWidth.FractionWidth(.15F)): Key {
 }
 val symbolsKey2 = Key(text = "", label = "={", moveToLayer = 2)
 val alphabetKey = Key(text = "", label = "AB", width = KeyWidth.FractionWidth(.15F), moveToLayer = 0)
+val zwnjKey = Key(text = "‌", label = "‹|›", width = KeyWidth.FractionWidth(.1F))
 
 val symbols1 = """
 1 2 3 4 5 6 7 8 9 0
@@ -73,7 +74,7 @@ Altai
 я ч с м и т ь б ю
 
 Arapaho
-é í ó ú 3
+3 é í ó ú
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -83,6 +84,18 @@ Bashkir
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Berber/Tamazight (AZERTY)
+č ẓ ɛ ṛ ṭ ɣ ǧ ḥ ř ṣ
+a z e r t y u i o p
+q s d f g h j k l m
+w x c v b n ḍ
+
+Berber/Tamazight (QWERTY)
+č ḍ ɛ ṛ ṭ ɣ ǧ ḥ ř ṣ
+q w e r t y u i o p
+a s d f g h j k l ẓ
+z x c v b n m
 
 Brahui (Latin)
 á ş đ ŕ ŧ ģ ú í ń ź
@@ -124,11 +137,22 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
+Catalan
+à ç é ï ŀ ü ú í ó ò
+q w e r t y u i o p
+a s d f g h j k l è
+z x c v b n m
+
 Caucasian
 ё « Ӏ » ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Chamorro
+q w e r t y u i o p
+a s d f g h j k l ñ
+z x c v b n m å
 
 Cheyenne
 á ȧ â é ė ê ó ȯ ô š
@@ -155,10 +179,16 @@ Chuvash
 я ч с м и т ь б ю
 
 Coptic
-ⲋ ϥ ϩ ϫ ϭ ϯ ⳁ
+ⲋ ϥ ϩ ϫ ϭ ϯ ⳁ ◌̀
 ϧ ϣ ⲉ ⲣ ⲧ ⲩ ⲑ ⲓ ⲟ ⲡ
 ⲁ ⲥ ⲇ ⲫ ⲅ ⲏ ⲝ ⲕ ⲗ
 ⲍ ⲭ ⲯ ⲱ ⲃ ⲛ ⲙ
+
+Cree (Latin)
+ê š ð â û î ô
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
 
 Czech
 ď ě š č ř ž ý á í é ň
@@ -166,9 +196,20 @@ q w e r t z u i o p ú
 a s d f g h j k l ů ó
 y x c v b n m
 
+Dagbani
+q w e r t y u i o p ɣ
+a s d f g h j k l ɔ ɛ
+z x c v b n m ʒ ŋ
+
 Danish(/Norwegian)
 q w e r t y u i o p å
 a s d f g h j k l æ ø
+z x c v b n m
+
+Dinka
+ä ɛ ë ɛ̈ ɣ ŋ ɔ ï ö ɔ̈
+q w e r t y u i o p
+a s d f g h j k l
 z x c v b n m
 
 Dungan
@@ -177,11 +218,21 @@ Dungan
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Efik
+q w e r t y u i o p
+a s d f g h j k l ñ
+z x c v b n m ọ
+
 Enets
 ё ԑ ӊ о̂ ˮ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+English (Colemak)
+q w f p g j l u y ;
+a r s t d h n e i o
+z x c v b k m
 
 Esperanto
 ŝ ĝ e r t ŭ u i o p
@@ -206,8 +257,20 @@ Evenki
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Ewe
+ɖ ɛ ƒ ɣ ŋ ɔ ʋ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
+Farefare/Frafra
+ŋ ã ɛ ẽ ĩ õ ʋ ɩ ɔ ũ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Faroese
-ð í ó ú ý æ ø
+ð æ ø ý ú í ó
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -217,15 +280,41 @@ q w e r t y u i o p å
 a s d f g h j k l ö ä
 z x c v b n m
 
-Fula
+Fulani/Fulfulde (All)
+ɓ ɗ ɠ ɲ ƴ ñ n̰ ŋ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
+Fulani/Fulfulde (Maasina)
 q w e r t y u i o p ƴ
 a s d f g h j k l ɗ ɓ
 z x c v b n m ŋ ɲ
+
+Garo
+q w e r t y u i o p
+a s d f g h j k l ·
+z x c v b n m
 
 German
 q w e r t z u i o p ü
 a s d f g h j k l ö ä
 y x c v b n m ß
+
+German (Neo 2)
+x v l c w k h g f q ß
+u i a e o s n r t d y
+ü ö ä p z b m j
+
+German (Switzerland)
+q w e r t z u i o p ü
+a s d f g h j k l ö ä
+y x c v b n m
+
+Gĩkũyũ/Kikuyu
+q w e r t y u i o p
+a s d f g h j k l ĩ
+z x c v b n m ũ
 
 Gitxsan
 q w e r t y u i o p
@@ -298,6 +387,12 @@ Karelian
 č š ž ä ö
 q w e r t y u i o p
 a s d f g h j k l
+z x c v b n m
+
+Kashubian
+ą ã ë é ń ô ù ó ò ż
+q w e r t y u i o p
+a s d f g h j k l ł
 z x c v b n m
 
 Kazakh (Cyrillic)
@@ -388,6 +483,12 @@ Mansi (Northern) (Big)
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Māori
+ā ē ī ō ū
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Mari (All)
 ё ӓ ӹ ө ӫ ҥ ӧ ӱ ъ
 й ц у к е н г ш щ з х
@@ -403,6 +504,12 @@ z x c v b n m
 Massachusett/Wampanoag
 q w e r t y u i o p ô
 a s d f g h j k l â 8
+z x c v b n m
+
+Menominee
+ā ē æ ǣ ö ū ī ō
+q w e r t y u i o p
+a s d f g h j k l
 z x c v b n m
 
 Mi'kmaq
@@ -464,7 +571,7 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
-Odun/Tundra Yukaghir
+Odun/Forest Yukaghir
 ё җ қ ә ҥ ҕ ө ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
@@ -492,6 +599,12 @@ Russian
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Russian (Phonetic)
+ё ъ
+я ш е р т ы у и о п ч
+а с д ф г х й к л ж э
+з ь ц в б н м ю щ
 
 Rusyn (All)
 ё ӯ ӱ ы о̄ ґ о̂ ї ъ
@@ -544,11 +657,22 @@ q w e r t z u i o p š
 a s d f g h j k l č ć
 y x c v b n m ž đ
 
+Setswana
+q w e r t y u i o p š
+a s d f g h j k l ô ê
+z x c v b n m
+
 Shuswap
 q̓ w̓ n̓ r̓ t̓ y̓ g̓ k̓ m̓ p̓
 q w e r t y u i o p
 a s d f g h j k l l̓
 z x c v b n m 7
+
+Siberian Tatar
+ё ө ү ҡ ә ң ғ ъ
+й ц у к е н г ш щ з х
+ф ы в а п р о л д ж э
+я ч с м и т ь б ю
 
 Slovak (Big)
 ď ĺ ň ó ô ŕ ú
@@ -566,6 +690,11 @@ Spanish
 á é ñ ¿ ¡ ú í ó ü
 q w e r t y u i o p
 a s d f g h j k l
+z x c v b n m
+
+Sundanese (Latin)
+q w e r t y u i o p
+a s d f g h j k l é
 z x c v b n m
 
 Tajik
@@ -596,6 +725,16 @@ Tsimshian (Coast)
 ḵ ẅ a̰ ɫ ü g̲
 q w e r t y u i o p
 a s d f g h j k l
+z x c v b n m
+
+Tswa
+q w e r t y u i o p ṅ
+a s d f g h j k l ŝ ẑ
+z x c v b n m
+
+Tumbuka
+q w e r t y u i o p
+a s d f g h j k l ŵ
 z x c v b n m
 
 Turkmen
@@ -667,9 +806,30 @@ Yakut
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Zazaki
+ç ê ğ ş û î
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
 """.trim()
 
 val layouts = listOf(
+    Layout(
+        name = "Arabic (101)",
+        layout = """
+            ض ص ث ق ف غ ع ه خ ح ج
+            ش س ي ب ل ا ت ن م ك ط
+            ذ ئ ء ر ة و ز ظ د
+        """.trimIndent(),
+        capsLayer = """
+            ◌َ ◌ً ◌ُ ◌ٌ لإ إ ‘ ÷ × ؛ <
+            ◌ِ ◌ٍ ] [ لأ أ ـ , / : "
+            ◌ّ ى ◌ْ آ ’ ؤ . ؟ >
+        """.trimIndent(),
+        comma = "،",
+        rightToLeft = true
+    ),
     Layout(
         name = "Armenian",
         layout = """
@@ -715,6 +875,21 @@ val layouts = listOf(
         bottomRowKey = Key(text = "ё", width = KeyWidth.FractionWidth(.1F))
     ),
     Layout(
+        name = "Bengali (InScript)",
+        layout = """
+            ◌ৌ ◌ৈ ◌া ◌ী ◌ূ ব হ গ দ জ ড
+            ◌ো ◌ে ◌্ ◌ি ◌ু প র ক ত চ ট
+            ◌় ◌ং ম ন ◌ৃ ল স শ য়
+        """.trimIndent(),
+        capsLayer = """
+            ঔ ঐ আ ঈ ঊ ভ ঙ ঘ ধ ঝ ঢ
+            ও এ ◌্ ই উ ফ ৎ খ থ ছ ঠ
+            ঞ ◌ঁ ণ ঃ ঋ . ॥ ষ য
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
         name = "Blackfoot (Syllabics)",
         layout = """
             ᑉ ᐤ ᐨ ᘁ ᐢ ᐡ ᔈ ᐟ ᐠ ᙿ
@@ -726,21 +901,39 @@ val layouts = listOf(
         hasShift = false,
         period = "᙮"
     ),
-    /*Layout(
+    Layout(
+        name = "Brahui (Arabic)",
+        layout = """
+            ض ص غ ڑ ٹ ث ح ئ ظ ط ذ
+            ق و ع ر ت ے ء ی ہ پ ڷ
+            آ ا س ڈ د ف گ ھ ج ک ل
+            ز ش خ چ ط ب ں ن م
+        """.trimIndent(),
+        capsLayer = """
+            ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠ ,
+            ◌ْ ؤ ◌ٰ ڑ ٹ ◌َ ئ ◌ِ ۃ ◌ُ ن٘
+            إ أ ص ڈ ؟ ◌ّ غ ح ض خ ◌ٔ
+            ذ ژ ـ ث ظ . ؛ ۓ ◌٘
+        """.trimIndent(),
+        comma = "،",
+        period = "۔",
+        rightToLeft = true
+    ),
+    Layout(
         name = "Burmese/Myanmar",
         layout = """
-            ဈ ဝ ဋ ုံ ော ဪ ရ ဂ ဟ ၏
+            ဈ ဝ ဋ ◌ုံ ော ဪ ရ ဂ ဟ ၏
             ဆ တ န မ အ ပ က င သ စ
-            ‌ေ ျ ိ ် ါ ့ ြ ု ူ း
-            ဖ ထ ခ လ ဘ ည ာ ယ
+            ‌ေ ◌ျ ◌ိ ◌် ◌ါ ◌့ ြ ◌ု ◌ူ ◌း
+            ဖ ထ ခ လ ဘ ည ◌ာ ယ
         """.trimIndent(),
         capsLayer = """
             ၁ ၂ ၃ ၄ ၅ ၆ ၇ ၈ ၉ ၀
             ဍ ဏ္ဍ ဣ ၎င်း ဤ ၌ ဥ ၍ ဿ ဏ
-            ဗ ှ ီ ္ ွ ံ ဲ ဒ ဓ ဏ္ဌ
+            ဗ ◌ှ ◌ီ ◌္ ◌ွ ◌ံ ◌ဲ ဒ ဓ ဏ္ဌ
             ဇ ဌ ဃ ဠ ဎ ဉ ဦ ဧ
         """.trimIndent()
-    ),*/
+    ),
     Layout(
         name = "Crimean Tatar (Latin)",
         layout = """
@@ -755,6 +948,79 @@ val layouts = listOf(
             A S D F G H J K L
             Z X C V B N M
         """.trimIndent()
+    ),
+    Layout(
+        name = "English (Dvorak)",
+        layout = """
+            ' , . p y f g c r l
+            a o e u i d h t n s
+            j k x b m w v z
+        """,
+        bottomRowKey = Key(text = "q", width = KeyWidth.FractionWidth(.1F))
+    ),
+    Layout(
+        name = "French (AZERTY)",
+        layout = """
+            à é è ê ç â û ¨ ô œ
+            a z e r t y u i o p
+            q s d f g h j k l m
+            w x c v b n ù
+        """.trimIndent(),
+        otherLayers = listOf("""
+            à é è ê ç â û ¨ ô œ
+            ä z ë r t ÿ ü ï ö p
+            q s d f g h j k l m
+            w x c v b n ù
+        """.trimIndent()),
+        moveLayerKeys = listOf("¨")
+    ),
+    Layout(
+        name = "French (BÉPO)",
+        layout = """
+            â ù ô û ¨ æ œ
+            b é p o è v d l j z w
+            a u i e c t s r n m ç
+            ê à y x k q g h f
+        """.trimIndent(),
+        otherLayers = listOf("""
+            â ù ô û ¨ æ œ
+            b é p ö è v d l j z w
+            ä ü ï ë c t s r n m ç
+            ê à ÿ x k q g h f
+        """.trimIndent()),
+        moveLayerKeys = listOf("¨")
+    ),
+    Layout(
+        name = "French (QWERTY)",
+        layout = """
+            à û è ê ç â ù ¨ ô œ
+            q w e r t y u i o p
+            a s d f g h j k l é
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            à û è ê ç â ù ¨ ô œ
+            q w ë r t ÿ ü ï ö p
+            ä s d f g h j k l é
+            z x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("¨")
+    ),
+    Layout(
+        name = "French (QWERTZ)",
+        layout = """
+            à û è ê ç â ù ¨ ô œ
+            q w e r t z u i o p
+            a s d f g h j k l é
+            y x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            à û è ê ç â ù ¨ ô œ
+            q w ë r t z ü ï ö p
+            ä s d f g h j k l é
+            ÿ x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("¨")
     ),
     Layout(
         name = "Gagauz",
@@ -797,6 +1063,39 @@ val layouts = listOf(
         bottomRowKey = Key(text = "წ", width = KeyWidth.FractionWidth(.1F))
     ),
     Layout(
+        name = "Guarani",
+        layout = """
+            ʼ ã ẽ g̃ ñ ỹ ũ ĩ õ ´
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ʼ ã́ ẽ́ g̃ ñ ỹ́ ṹ ĩ́ ṍ ´
+            q w é r t ý ú í ó p
+            á s d f g h j k l
+            z x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("´")
+    ),
+    Layout(
+        name = "Gujarati (InScript)",
+        layout = """
+            ◌ૉ ◌ૅ ◌ૃ ◌ૄ
+            ◌ૌ ◌ૈ ◌ા ◌ી ◌ૂ બ હ ગ દ જ ડ
+            ◌ો ◌ે ◌્ ◌િ ◌ુ પ ર ક ત ચ ટ
+            ◌઼ ◌ં મ ન વ લ સ શ ય
+        """.trimIndent(),
+        capsLayer = """
+            ઑ ઍ ઋ ૠ
+            ઔ ઐ આ ઈ ઊ ભ ઙ ઘ ધ ઝ ઢ
+            ઓ એ અ ઇ ઉ ફ ર ખ થ છ ઠ
+            ઞ ઁ ણ ન વ ળ ॥ ષ ◌ઃ
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
         name = "Hebrew",
         layout = """
             ' - ק ר א ט ו ן ם פ
@@ -805,6 +1104,54 @@ val layouts = listOf(
         """.trimIndent(),
         hasShift = false,
         rightToLeft = true
+    ),
+    Layout(
+        name = "Hindi (Alternate)",
+        layout = """
+            ट ◌ौ ◌े र त य ◌ु ◌ि ◌ो प ◌ी
+            ◌ा स द ◌ू ग ह ज क ल ◌ै ◌ं
+            श ड च व ब न म ◌्
+        """.trimIndent(),
+        capsLayer = """
+            ठ औ ए ◌ृ थ ञ उ इ ओ फ ई
+            आ ऋ ध ऊ घ ङ झ ख ळ ऐ ◌ँ
+            ष ढ छ ◌ः भ ण ़ अ
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Hindi (InScript)",
+        layout = """
+            ◌ॅ ऍ ◌ॉ ऑ ृ ऋ ़ ञ
+            ◌ौ ◌ै ◌ा ◌ी ◌ू ब ह ग द ज ड
+            ◌ो ◌े ◌् ि ◌ु प र क त च ट
+            ◌ँ ◌ं म न व ल स श य
+        """.trimIndent(),
+        capsLayer = """
+            ◌ॅ ऍ ◌ॉ ऑ ृ ऋ ़ ञ
+            औ ऐ आ ई ऊ भ ङ घ ध झ ढ
+            ओ ए अ इ उ फ ऱ ख थ छ ठ
+            ◌ः ◌़ ण ऩ ऴ ळ ॥ ष य़
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Kannada (InScript)",
+        layout = """
+            ◌ೄ ◌ಃ ಞ
+            ◌ೌ ◌ೈ ◌ಾ ◌ೀ ◌ೂ ಬ ಹ ಗ ದ ಜ ಡ
+            ◌ೋ ◌ೇ ◌್ ◌ಿ ◌ು ಪ ರ ಕ ತ ಚ ಟ
+            ◌ೊ ◌ೆ ◌ಂ ಮ ನ ವ ಲ ಸ ಯ
+        """.trimIndent(),
+        capsLayer = """
+            ೠ ◌ಃ ಞ
+            ಔ ಐ ಆ ಈ ಊ ಭ ಙ ಘ ಧ ಝ ಢ
+            ಓ ಏ ಅ ಇ ಉ ಫ ಱ ಖ ಥ ಛ ಠ
+            ಒ ಎ ೞ ಣ ◌ೃ ಋ ಳ ಶ ಷ
+        """.trimIndent(),
+        bottomRowKey = zwnjKey
     ),
     Layout(
         name = "Karakalpak (Latin)",
@@ -882,6 +1229,72 @@ val layouts = listOf(
         period = "꓿"
     ),
     Layout(
+        name = "Luxembourgish",
+        layout = """
+            ´ ` ^ ¨ ~
+            q w e r t z u i o p ë
+            a s d f g h j k l é ä
+            y x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ´ ` ^ ¨ ~
+            q w é r t z ú í ó p ë
+            á s d f g h j k l é ä
+            ý x c v b n m
+        """.trimIndent(), """
+            ´ ` ^ ¨ ~
+            q w è r t z ù ì ò p ë
+            à s d f g h j k l é ä
+            ỳ x c v b n m
+        """.trimIndent(), """
+            ´ ` ^ ¨ ~
+            q w ê r t z û î ô p ë
+            â s d f g h j k l é ä
+            ŷ x c v b n m
+        """.trimIndent(), """
+            ´ ` ^ ¨ ~
+            q w ë r t z ü ï ö p ë
+            ä s d f g h j k l é ä
+            ÿ x c v b n m
+        """.trimIndent(), """
+            ´ ` ^ ¨ ~
+            q w ẽ r t z ũ ĩ õ p ë
+            ã s d f g h j k l é ä
+            ỹ x c v b ñ m
+        """.trimIndent()),
+        moveLayerKeys = "´ ` ^ ¨ ~".split(' ')
+    ),
+    Layout(
+        name = "Malayalam (InScript)",
+        layout = """
+            ◌ൃ ◌ൄ ◌ഃ ർ ഞ ൽ ൿ ൾ റ്റ
+            ◌ൌ ◌ൈ ◌ാ ◌ീ ◌ൂ ബ ഹ ഗ ദ ജ ഡ
+            ◌ോ ◌േ ◌് ◌ി ◌ു പ ര ക ത ച ട
+            ◌ൊ ◌െ ◌ം മ ന വ ല സ യ
+        """.trimIndent(),
+        capsLayer = """
+            ഋ ൠ ◌ഃ ർ ഞ ൽ ൿ ൾ റ്റ
+            ഔ ഐ ആ ഈ ഊ ഭ ങ ഘ ധ ഝ ഢ
+            ഓ ഏ അ ഇ ഉ ഫ റ ഖ ഥ ഛ ഠ
+            ഒ എ ൺ ണ ൻ ഴ ള ശ ഷ
+        """.trimIndent(),
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Maltese",
+        layout = """
+            q w e r t y u i o p ġ
+            a s d f g h j k l ħ `
+            z x c v b n m ż ċ
+        """.trimIndent(),
+        otherLayers = listOf("""
+            q w è r t y ù ì ò p ġ
+            à s d f g h j k l ħ `
+            z x c v b n m ż ċ
+        """.trimIndent()),
+        moveLayerKeys = listOf("`")
+    ),
+    Layout(
         name = "Mansi (Northern) (Small)",
         layout = """
             ё ¯ ӈ ъ
@@ -930,6 +1343,47 @@ val layouts = listOf(
         decoupleRows = listOf(0)
     ),
     Layout(
+        name = "Naskapi (Syllabics)",
+        layout = """
+            ᐦ ᑉ ᑦ ᒃ ᒻ ᓐ ᔅ ᔾ ᒡ ᐟ ᐤ
+            ᐅ ᐳ ᑐ ᑯ ᒧ ᓄ ᓱ ᔪ ᒍ ᑴ :
+            ᐃ ᐱ ᑎ ᑭ ᒥ ᓂ ᓯ ᔨ ᒋ ᑶ ᔋ
+            ᐎ ᓪ ᓗ ᓕ ᓚ ᕐ ᕈ ᕆ ᕋ ᒄ ?
+            ᐊ ᐸ ᑕ ᑲ ᒪ ᓇ ᓴ ᔭ ᒐ ᑾ
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ᐦ ᑉ ᑦ ᒃ ᒻ ᓐ ᔅ ᔾ ᒡ ᐟ ᐤ
+            ᐖ ᐳ ᑐ ᑯ ᒧ ᓄ ᓱ ᔪ ᒍ ᑴ :
+            ᐃ ᐱ ᑎ ᑭ ᒥ ᓂ ᓯ ᔨ ᒋ ᑶ ᔋ
+            ᐎ ᓪ ᓗ ᓕ ᓚ ᕐ ᕈ ᕆ ᕋ ᒄ ?
+            ᐛ ᑈ ᑥ ᒂ ᒺ ᓏ ᔄ ᔽ ᒠ ᑾ
+        """.trimIndent(), """
+            ᐦ ᑉ ᑦ ᒃ ᒻ ᓐ ᔅ ᔾ ᒡ ᐟ ᐤ
+            ᐅ ᐳ ᑐ ᑯ ᒧ ᓄ ᓱ ᔪ ᒍ ᑴ :
+            ᐃ ᐱ ᑎ ᑭ ᒥ ᓂ ᓯ ᔨ ᒋ ᑶ ᔋ
+            ᐎ ᓪ ᓗ ᓕ ᓚ ᕐ ᕈ ᕆ ᕋ ᔊ ?
+            ᐊ ᔌ ᔍ ᔎ ᒪ ᓇ ᓴ ᔭ ᔏ ᑾ
+        """.trimIndent()),
+        moveLayerKeys = listOf(":", "ᔋ"),
+        hasShift = false
+    ),
+    Layout(
+        name = "Odia (InScript)",
+        layout = """
+            ◌ृ ◌ୄ ◌ଃ
+            ◌ୌ ◌ୈ ◌ା ◌ୀ ◌ୂ ବ ହ ଗ ଦ ଜ ଡ
+            ◌ୋ ◌େ ◌୍ ◌ି ◌ୁ ପ ର କ ତ ଚ ଟ
+            ◌଼ ◌ଂ ମ ନ ୱ ଲ ସ ଶ ୟ
+        """.trimIndent(),
+        capsLayer = """
+            ଋ ୠ ◌ଃ
+            ଔ ଐ ଆ ଈ ଊ ଭ ଙ ଘ ଧ ଝ ଢ
+            ଓ ଏ ଅ ଇ ଉ ଫ ଡ଼ ଖ ଥ ଛ ଠ
+            ଞ ◌ଁ ଣ ଢ଼ ଵ ଳ ॥ ଷ ଯ
+        """.trimIndent(),
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
         name = "Ojibwe (Syllabics a-finals)",
         layout = """
             ᐦ ᑉ ᑦ ᒃ ᒻ ᓐ ᔅ ᔾ ᒡ ᔥ ᐤ
@@ -949,6 +1403,75 @@ val layouts = listOf(
         hasShift = false
     ),
     Layout(
+        name = "Portuguese",
+        layout = """
+            ç ´ ` ^ ¨ ~
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ç ´ ` ^ ¨ ~
+            q w é r t ý ú í ó p
+            á s d f g h j k l
+            z x c v b n m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q w è r t ỳ ù ì ò p
+            à s d f g h j k l
+            z x c v b n m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q w ê r t ŷ û î ô p
+            â s d f g h j k l
+            z x c v b n m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q w ë r t ÿ ü ï ö p
+            ä s d f g h j k l
+            z x c v b n m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q w ẽ r t ỹ ũ ĩ õ p
+            ã s d f g h j k l
+            z x c v b ñ m
+        """.trimIndent()),
+        moveLayerKeys = "´ ` ^ ¨ ~".split(' ')
+    ),
+    Layout(
+        name = "Punjabi (Gurmukhi) (InScript)",
+        layout = """
+            ◌ੌ ◌ੈ ◌ਾ ◌ੀ ◌ੂ ਬ ਹ ਗ ਦ ਜ ਡ
+            ◌ੋ ◌ੇ ◌੍ ◌ਿ ◌ੁ ਪ ਰ ਕ ਤ ਚ ਟ
+            ◌਼ ◌ੰ ਮ ਨ ਵ ਲ ਸ ਸ਼ ਯ
+        """.trimIndent(),
+        capsLayer = """
+            ਔ ਐ ਆ ਈ ਊ ਭ ਙ ਘ ਧ ਝ ਢ
+            ਓ ਏ ਅ ਇ ਉ ਫ ੜ ਖ ਥ ਛ ਠ
+            ਞ ਂ ਣ ੲ ੳ ਲ਼ ॥ ੱ ?
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Punjabi (Shahmukhi)",
+        layout = """
+            ض ص غ ڑ ٹ ث ح ئ ظ ط ݨ
+            ق و ع ر ت ے ء ی ہ پ لؕ
+            آ ا س ڈ د ف گ ھ ج ک ل
+            ز ش خ چ ط ب ں ن م
+        """.trimIndent(),
+        capsLayer = """
+            ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠ ن٘
+            ◌ْ ؤ ◌ٰ ڑ ٹ ◌َ ئ ◌ِ ۃ ◌ُ ,
+            إ أ ص ڈ ؟ ◌ّ غ ح ض خ ◌ٔ
+            ذ ژ ـ ث ظ . ؛ ۓ ◌٘
+        """.trimIndent(),
+        comma = "،",
+        period = "۔",
+        rightToLeft = true
+    ),
+    Layout(
         name = "Rusyn (Pannonian)",
         layout = """
             й ц у к е н г ш щ з х
@@ -960,16 +1483,16 @@ val layouts = listOf(
     Layout(
         name = "Saanich",
         layout = """
-            Á W̱ Ⱥ Ć Ⱦ Ṯ Ȼ Í Ꞣ Ḵ Ś
+            Á W̱ Ⱥ Ŧ Ⱦ Ṯ Ȼ Í ₭ Ḵ Ḱ
             Q W E R T Y U I O P X̱
-            A S D F G H J K L Ƚ
-            Z X C V B N M Ṉ
+            A S D F G H J K L Ƚ Ś
+            Z X C V B N M Ṉ Ć
         """.trimIndent(),
         capsLayer = """
-            á w̱ ⱥ ć ⱦ ṯ ȼ í ꞣ ḵ ś
+            á w̱ ⱥ ŧ ⱦ ṯ ȼ í ꞣ ḵ ḱ
             q w e r t y u i o p x̱
-            a s d f g h j k l ƚ
-            z x c v b n m ṉ
+            a s d f g h j k l ƚ ś
+            z x c v b n m ṉ ć
         """.trimIndent()
     ),
     Layout(
@@ -1034,6 +1557,23 @@ val layouts = listOf(
         hasShift = false,
     ),
     Layout(
+        name = "Sindhi (Devanagari) (InScript)",
+        layout = """
+            ◌ॅ ◌ॉ ृ ़ ञ
+            ◌ौ ◌ै ◌ा ◌ी ◌ू ब ह ग द ज ड
+            ◌ो ◌े ◌् ि ◌ु प र क त च ट
+            ◌ँ ◌ं म न व ल स श य
+        """.trimIndent(),
+        capsLayer = """
+            ऍ ऑ ऋ ़ ॿ ञ ॻ ॼ ॾ
+            औ ऐ आ ई ऊ भ ङ घ ध झ ढ
+            ओ ए अ इ उ फ ऱ ख थ छ ठ
+            ◌ः ◌़ ण ऩ ऴ ळ ॥ ष य़
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey
+    ),
+    Layout(
         name = "Taiwanese Hokkien (POJ)",
         layout = """
             ´ ` ^ ¯ ˈ o͘ ⁿ ng -
@@ -1069,21 +1609,50 @@ val layouts = listOf(
         """.trimIndent()),
         moveLayerKeys = "´ ` ^ ¯ ˈ".split(' ')
     ),
-    /*Layout(
-        name = "Thai",
+    Layout(
+        name = "Tamil (InScript-like)",
         layout = """
-            ๅ / _ ภ ถ ุ ึ ค ต จ ข ช
-            ๆ ไ ำ พ ะ ั ี ร น ย บ ล
-            ฟ ห ก ด เ ้ ่ า ส ว ง ฃ
-            ผ ป แ อ ิ ื ท ม ใ ฝ
+            ◌ௌ ◌ை ◌ா ◌ீ ◌ூ ம ள ங ந ஞ ண
+            ◌ோ ◌ே ◌் ◌ி ◌ு ப ர க த ச ட
+            ◌ொ ◌ெ ழ ற ன வ ல ஸ ய
         """.trimIndent(),
         capsLayer = """
-            + ๑ ๒ ๓ ๔ ู ฿ ๕ ๖ ๗ ๘ ๙
-            ๐ " ฎ ฑ ธ ํ ๊ ณ ฯ ญ ฐ ,
-            ฤ ฆ ฏ โ ฌ ็ ๋ ษ ศ ซ . ฅ
-            ( ) ฉ ฮ ฺ ์ ? ฒ ฬ ฦ
+            ஔ ஐ ஆ ஈ ஊ ம ஹ ங ந ஜ ண
+            ஓ ஏ அ இ உ ப ர ஃ த ச க்ஷ
+            ஒ எ ழ ற ன வ ல ஷ ஶ
         """.trimIndent()
-    ),*/
+    ),
+    Layout(
+        name = "Thai",
+        layout = """
+            ๅ / _ ภ ถ ◌ุ ◌ึ ค ต จ ข ช
+            ๆ ไ ำ พ ะ ◌ั ◌ี ร น ย บ ล
+            ฟ ห ก ด เ ◌้ ◌่ า ส ว ง ฃ
+            ผ ป แ อ ◌ิ ◌ื ท ม ใ ฝ
+        """.trimIndent(),
+        capsLayer = """
+            + ๑ ๒ ๓ ๔ ◌ู ฿ ๕ ๖ ๗ ๘ ๙
+            ๐ " ฎ ฑ ธ ◌ํ ◌๊ ณ ฯ ญ ฐ ,
+            ฤ ฆ ฏ โ ฌ ◌็ ◌๋ ษ ศ ซ . ฅ
+            ( ) ฉ ฮ ◌ฺ ◌์ ? ฒ ฬ ฦ
+        """.trimIndent()
+    ),
+    Layout(
+        name = "Telugu (InScript)",
+        layout = """
+            ◌ౄ ◌ః ఞ
+            ◌ౌ ◌ై ◌ా ◌ీ ◌ూ బ హ గ ద జ డ
+            ◌ో ◌ే ◌్ ◌ి ◌ు ప ర క త చ ట
+            ◌ొ ◌ె ◌ం మ న వ ల స య
+        """.trimIndent(),
+        capsLayer = """
+            ౠ ◌ః ఞ
+            ఔ ఐ ఆ ఈ ఊ భ ఙ ఘ ధ ఝ ఢ
+            ఓ ఏ అ ఇ ఉ ఫ ఱ ఖ థ ఛ ఠ
+            ఒ ఎ ◌ఁ ణ ◌ృ ఋ ళ శ ష
+        """.trimIndent(),
+        bottomRowKey = zwnjKey
+    ),
     Layout(
         name = "Turkish",
         layout = """
@@ -1118,7 +1687,26 @@ val layouts = listOf(
             ф ы в а̂ п р о̂ л д ж э̂
             я ч с м и̂ т ь б ю
         """.trimIndent()),
-        moveLayerKeys = listOf("¯", "^")
+        moveLayerKeys = listOf("¯", "^"),
+        decoupleRows = listOf(0)
+    ),
+    Layout(
+        name = "Urdu",
+        layout = """
+            ض ص غ ڑ ٹ ث ح ئ ظ ط
+            ق و ع ر ت ے ء ی ہ پ ذ
+            آ ا س ڈ د ف گ ھ ج ک ل
+            ز ش خ چ ط ب ں ن م
+        """.trimIndent(),
+        capsLayer = """
+            ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠
+            ◌ْ ؤ ◌ٰ ڑ ٹ ◌َ ئ ◌ِ ۃ ◌ُ ,
+            إ أ ص ڈ ؟ ◌ّ غ ح ض خ ◌ٔ
+            ذ ژ ـ ث ظ . ؛ ۓ ◌٘
+        """.trimIndent(),
+        comma = "،",
+        period = "۔",
+        rightToLeft = true
     ),
     Layout(
         name = "Uyghur (Arabic)",
@@ -1135,6 +1723,42 @@ val layouts = listOf(
             ز ش غ ۈ ب ن م ؟
         """.trimIndent(),
         rightToLeft = true
+    ),
+    Layout(
+        name = "Vietnamese",
+        layout = """
+            â ´ ê ◌̉ ` ~ ư ơ ô .
+            q w e r t y u i o p
+            a s d f g h j k l đ
+            z x c v b n m ă
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ấ ´ ế ◌̉ ` ~ ứ ớ ố .
+            q w é r t ý ú í ó p
+            á s d f g h j k l đ
+            z x c v b n m ắ
+        """.trimIndent(), """
+            ẩ ´ ể ◌̉ ` ~ ử ở ổ .
+            q w ẻ r t ỷ ủ ỉ ỏ p
+            ả s d f g h j k l đ
+            z x c v b n m ẳ
+        """.trimIndent(), """
+            ầ ´ ề ◌̉ ` ~ ừ ờ ồ .
+            q w è r t ỳ ù ì ò p
+            à s d f g h j k l đ
+            z x c v b n m ằ
+        """.trimIndent(), """
+            ẫ ´ ễ ◌̉ ` ~ ữ ỡ ỗ .
+            q w ẽ r t ỹ ũ ĩ õ p
+            ã s d f g h j k l đ
+            z x c v b n m ẵ
+        """.trimIndent(), """
+            ậ ´ ệ ◌̉ ` ~ ự ợ ộ .
+            q w ẹ r t ỵ ụ ị ọ p
+            ạ s d f g h j k l đ
+            z x c v b n m ặ
+        """.trimIndent()),
+        moveLayerKeys = "´ ◌̉ ` ~ .".split(' ')
     )
 )
 

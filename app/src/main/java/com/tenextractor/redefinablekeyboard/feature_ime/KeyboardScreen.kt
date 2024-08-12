@@ -65,6 +65,7 @@ fun KeyboardScreen(selectedLayouts: List<CompiledLayout>, state: KeyboardState, 
 fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
     return layer.map { row -> row.map { key ->
         if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
+        else if (key.label != null) key.copy(text = key.text.uppercase(), label = key.label.uppercase())
         else key.copy(text = key.text.uppercase())
     } }
 }
@@ -72,6 +73,8 @@ fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
 fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
     return layer.map { row -> row.map { key ->
         if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
+        else if (key.label != null) key.copy(text = key.text.replaceFirstChar(Char::titlecase),
+            label = key.label.replaceFirstChar(Char::titlecase))
         else key.copy(text = key.text.replaceFirstChar(Char::titlecase))
     } }
 }
@@ -101,7 +104,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
         Text(
             text = key.label ?: key.text,
             color = Color.White,
-            fontSize = 20.sp,
+            fontSize = 22.sp,
             textAlign = TextAlign.Center
         )
     }
@@ -158,6 +161,8 @@ fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>
             else -> onPressKey(key, ctx, selectedLayouts, state, updateState)
         }
     } else if (key.text == "'") onPressKey(Key("\""), ctx, selectedLayouts, state, updateState)
+    else if (key.text == ",") onPressKey(Key("„"), ctx, selectedLayouts, state, updateState)
+    else if (key.text == ".") onPressKey(Key("“"), ctx, selectedLayouts, state, updateState)
     else onPressKey(key, ctx, selectedLayouts, state, updateState)
 }
 

@@ -63,7 +63,7 @@ fun HomeScreen() {
         ClickableText("Select Layouts") {
             isDialogOpen = true
         }
-        ClickableText("Settings") {}
+        //ClickableText("Settings") {}
 
         var text by remember { mutableStateOf("") }
         TextField(
