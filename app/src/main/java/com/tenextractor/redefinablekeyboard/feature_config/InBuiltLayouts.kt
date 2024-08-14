@@ -85,6 +85,12 @@ Bashkir
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Belarusian (Latin)
+ć č ź ž ń ŭ ś š ł
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Berber/Tamazight (AZERTY)
 č ẓ ɛ ṛ ṭ ɣ ǧ ḥ ř ṣ
 a z e r t y u i o p
@@ -92,9 +98,9 @@ q s d f g h j k l m
 w x c v b n ḍ
 
 Berber/Tamazight (QWERTY)
-č ḍ ɛ ṛ ṭ ɣ ǧ ḥ ř ṣ
+č ẓ ɛ ṛ ṭ ɣ ǧ ḥ ř ṣ
 q w e r t y u i o p
-a s d f g h j k l ẓ
+a s d f g h j k l ḍ
 z x c v b n m
 
 Brahui (Latin)
@@ -866,7 +872,7 @@ val layouts = listOf(
         """.trimIndent()
     ),
     Layout(
-        name = "Belarusian",
+        name = "Belarusian (Cyrillic)",
         layout = """
             й ц у к е н г ш ў з х
             ф ы в а п р о л д ж э
@@ -1548,13 +1554,21 @@ val layouts = listOf(
         decoupleRows = listOf(0)
     ),
     Layout(
-        name = "Sora",
+        name = "Shughni (Cyrillic)",
         layout = """
-            𑃧 𑃣 𑃝 𑃑 𑃜 𑃥 𑃤 𑃦 𑃛
-            𑃢 𑃐 𑃔 𑃗 𑃕 𑃞 𑃠 𑃟 𑃘
-            𑃨 𑃡 𑃓 𑃚 𑃒 𑃙 𑃖
+            ё а̄ у̊ ˇ ӗ в̌ ҙ ғ ӯ ъ
+            й қ у к е н г ш ҳ з х
+            ф ҷ в а п р о л д ж э
+            я ч с м и т ӣ б ю
         """.trimIndent(),
-        hasShift = false,
+        otherLayers = listOf("""
+            ё а̄ у̊ ˇ ӗ в̌ ҙ ғ ӯ ъ
+            й қ у к е н г̌ ш ҳ з х̌
+            ф ҷ в̌ а п р о л д̌ ж э
+            я ч с м и т̌ ӣ б ю
+        """.trimIndent()),
+        moveLayerKeys = listOf("ˇ"),
+        decoupleRows = listOf(0)
     ),
     Layout(
         name = "Sindhi (Devanagari) (InScript)",
@@ -1572,6 +1586,15 @@ val layouts = listOf(
         """.trimIndent(),
         period = "।",
         bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Sora",
+        layout = """
+            𑃧 𑃣 𑃝 𑃑 𑃜 𑃥 𑃤 𑃦 𑃛
+            𑃢 𑃐 𑃔 𑃗 𑃕 𑃞 𑃠 𑃟 𑃘
+            𑃨 𑃡 𑃓 𑃚 𑃒 𑃙 𑃖
+        """.trimIndent(),
+        hasShift = false,
     ),
     Layout(
         name = "Taiwanese Hokkien (POJ)",
