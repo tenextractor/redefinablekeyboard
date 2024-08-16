@@ -14,7 +14,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.inBuiltLayouts
 import com.tenextractor.redefinablekeyboard.feature_config.selectedLayoutNamesToSelectedLayouts
 
-class KeyboardView(context: Context, imeService: IMEService2, /*private val viewModel: KeyboardViewModel*/) : AbstractComposeView(context) {
+class KeyboardView(context: Context, /*imeService: IMEService2, private val viewModel: KeyboardViewModel*/) : AbstractComposeView(context) {
     /*private val viewModel by lazy {
         ViewModelProvider(imeService).get<KeyboardViewModel>()
     }*/

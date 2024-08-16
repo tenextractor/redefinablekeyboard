@@ -13,7 +13,7 @@ class IMEService2 : LifecycleInputMethodService(),
     SavedStateRegistryOwner {
 
     override fun onCreateInputView(): View {
-        val view = KeyboardView(this, this)
+        val view = KeyboardView(this/*, this*/)
 
         window?.window?.decorView?.let { decorView ->
             decorView.setViewTreeLifecycleOwner(this)

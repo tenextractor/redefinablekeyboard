@@ -636,6 +636,12 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
+Sami (Pite)
+á đ ŋ ŧ å ä
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Sami (Skolt)
 â č ʒ ǯ đ ǩ š ž å ä ʹ
 q w e r t y u i o p õ
