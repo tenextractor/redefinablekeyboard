@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,14 +27,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tenextractor.redefinablekeyboard.feature_config.domain.CompiledLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
+import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 import kotlinx.coroutines.delay
 
 @Composable
@@ -51,14 +55,16 @@ fun KeyboardScreen(selectedLayouts: List<CompiledLayout>, state: KeyboardState, 
     } // layer, after applying shift/caps if needed
 
     val defaultWidth = getDefaultWidth(layerAfterShift)
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .background(Color.Black)
-        .padding(bottom = 10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        layerAfterShift.map { row -> Row {
-            row.map { key -> KeyBox(key, screenWidth, defaultWidth, ctx, selectedLayouts, state, updateState) }
-        } }
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Black)
+            .padding(bottom = 10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            layerAfterShift.map { row -> Row {
+                row.map { key -> KeyBox(key, screenWidth, defaultWidth, ctx, selectedLayouts, state, updateState) }
+            } }
+        }
     }
 }
 
@@ -104,6 +110,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
         Text(
             text = key.label ?: key.text,
             color = Color.White,
+            fontFamily = notoFamily,
             fontSize = 22.sp,
             textAlign = TextAlign.Center
         )

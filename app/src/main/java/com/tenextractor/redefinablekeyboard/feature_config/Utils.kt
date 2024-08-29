@@ -63,3 +63,7 @@ fun selectedLayoutNamesToSelectedLayouts(selectedLayoutNames: List<String>,
                                          allLayouts: List<CompiledLayout>): List<CompiledLayout> {
     return allLayouts.filter { selectedLayoutNames.contains(it.name) }
 }
+
+val notoFamily = FontFamily(
+    Font(R.font.notosans_merged, FontWeight.Normal)
+)

@@ -12,7 +12,7 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
             Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
             Key(comma, width = KeyWidth.FractionWidth(.1F)),
             bottomRowKey,
-            Key(space, label = "␣", width = KeyWidth.FractionWidth(.25F)),
+            Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.25F)),
             Key("'", width = KeyWidth.FractionWidth(.1F)),
             Key(period, width = KeyWidth.FractionWidth(.1F)),
             Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
@@ -20,7 +20,7 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
     } else listOf(
         Key(comma, width = KeyWidth.FractionWidth(.1F)),
         Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
-        Key(space, label = "␣", width = KeyWidth.FractionWidth(.3F)),
+        Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F)),
         Key("'", width = KeyWidth.FractionWidth(.1F)),
         Key(period, width = KeyWidth.FractionWidth(.1F)),
         Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
@@ -36,7 +36,6 @@ fun backSpaceKey(weight: Float, rightToLeft: Boolean = false): Key {
     return Key(text = "", label = if (rightToLeft) "⌦" else "⌫", width = KeyWidth.WeightWidth(weight),
         specialKey = SpecialKey.BACKSPACE)
 }
-//val symbolsKey1 = Key(text = "", label = "?12", width = KeyWidth.FractionWidth(.15F), moveToLayer = 1)
 fun symbolsKey1(width: KeyWidth = KeyWidth.FractionWidth(.15F)): Key {
     return Key(text = "", label = "?12", width = width, moveToLayer = 1)
 }
@@ -67,11 +66,21 @@ q w e r t z u i o p
 a s d f g h j k l ë
 y x c v b n m ç
 
+Albanian(PC)
+q w e r t z u i o p ç
+a s d f g h j k l ë
+y x c v b n m
+
 Altai
 ё ј ҥ ӧ ӱ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Amis
+q w e r t y u i o p
+a s d f g h j k l ^
+z x c v b n m
 
 Arapaho
 3 é í ó ú
@@ -159,6 +168,12 @@ Chamorro
 q w e r t y u i o p
 a s d f g h j k l ñ
 z x c v b n m å
+
+Chechen (Latin)
+q̇ ä ə ċ ç ç̇ ü ġ ö ẋ ŋ
+q w e r t y u i o p ş
+a s d f g h j k l ƶ
+z x c v b n m
 
 Cheyenne
 á ȧ â é ė ê ó ȯ ô š
@@ -337,12 +352,6 @@ q w e r t y u i o p ƴ
 a s d f g h j k l ƙ
 z x c v b n m ɓ ɗ
 
-Ho
-𑣿 𑣛 𑣛 𑣆 𑣊 𑣍 𑣐
-𑣄 𑣒 𑣈 𑣜 𑣕 𑣅 𑣃 𑣂 𑣉 𑣉
-𑣁 𑣞 𑣔 𑣑 𑣋 𑣙 𑣎 𑣌 𑣚
-𑣀 𑣝 𑣏 𑣟 𑣗 𑣓 𑣖
-
 Ho-Chunk (Wisconsin)
 ą ǧ į š ų ž
 q w e r t y u i o p
@@ -365,6 +374,16 @@ Ingrian/Izhorian
 q w e r t y u i o p š
 a s d f g h j k l ö ä
 z x c v b n m ь ž
+
+Interslavic (Cyrillic)
+љ њ е р т ы у и о п ш
+а с д ф г х й к л ч ж
+з є ц в б н м
+
+Interslavic (Latin)
+q w e r t y u i o p š
+a s d f g h j k l č ž
+z x c v b n m ě
 
 Iñupiaq
 ġ ḷ ł ł̣ ñ ŋ r̂
@@ -600,6 +619,12 @@ q w e r t y u i o p ă
 a s d f g h j k l ș ț
 z x c v b n m î â
 
+Rumantsch
+à é ê è ï ö ü
+q w e r t z u i o p
+a s d f g h j k l
+y x c v b n m
+
 Russian
 ё ъ
 й ц у к е н г ш щ з х
@@ -700,6 +725,12 @@ y x c v b n m
 
 Spanish
 á é ñ ¿ ¡ ú í ó ü
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
+Squamish
+ḵ m̓ n̓ y̓ l̓ x̱ 7
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -832,12 +863,12 @@ val layouts = listOf(
         layout = """
             ض ص ث ق ف غ ع ه خ ح ج
             ش س ي ب ل ا ت ن م ك ط
-            ذ ئ ء ر ة و ز ظ د
+            ذ ء ر ئ ة و ز ظ د
         """.trimIndent(),
         capsLayer = """
             ◌َ ◌ً ◌ُ ◌ٌ لإ إ ‘ ÷ × ؛ <
-            ◌ِ ◌ٍ ] [ لأ أ ـ , / : "
-            ◌ّ ى ◌ْ آ ’ ؤ . ؟ >
+            ◌ِ ◌ٍ ] [ ◌ٰ أ ـ , / : "
+            ◌ّ ◌ْ آ ى ’ ؤ . ؟ >
         """.trimIndent(),
         comma = "،",
         rightToLeft = true
@@ -959,6 +990,21 @@ val layouts = listOf(
             Q W E R T Y U İ O P
             A S D F G H J K L
             Z X C V B N M
+        """.trimIndent()
+    ),
+    Layout(
+        name = "Dhivehi",
+        layout = """
+            ◌ާ ށ ◌ޭ ޅ ޑ ޏ ◌ޫ ◌ީ ◌ޯ ޱ
+            ◌ް އ ◌ެ ރ ތ ޔ ◌ު ◌ި ◌ޮ ޕ
+            ◌ަ ސ ދ ފ ގ ހ ޖ ކ ލ
+            ޒ ޓ ޗ ވ ބ ނ މ
+        """.trimIndent(),
+        capsLayer = """
+            ◌ާ ށ ◌ޭ ޅ ޑ ޏ ◌ޫ ◌ީ ◌ޯ ؟
+            ޤ ޢ ◌ޭ ޜ ޓ ޠ ◌ޫ ◌ީ ◌ޯ ÷
+            ◌ާ ށ ޑ ﷲ ޣ ޙ ޛ ޚ ޅ
+            ޡ ޘ ޝ ޥ ޞ ޏ ޟ
         """.trimIndent()
     ),
     Layout(
@@ -1118,7 +1164,7 @@ val layouts = listOf(
         rightToLeft = true
     ),
     Layout(
-        name = "Hindi (Alternate)",
+        name = "Hindi (QWERTY-like)",
         layout = """
             ट ◌ौ ◌े र त य ◌ु ◌ि ◌ो प ◌ी
             ◌ा स द ◌ू ग ह ज क ल ◌ै ◌ं
@@ -1148,6 +1194,21 @@ val layouts = listOf(
         """.trimIndent(),
         period = "।",
         bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Ho",
+        layout = """
+            𑣿 𑣛 𑣛 𑣆 𑣊 𑣍 𑣐
+            𑣄 𑣒 𑣈 𑣜 𑣕 𑣅 𑣃 𑣂 𑣉 𑣘
+            𑣁 𑣞 𑣔 𑣑 𑣋 𑣙 𑣎 𑣌 𑣚
+            𑣀 𑣝 𑣏 𑣟 𑣗 𑣓 𑣖
+        """.trimIndent(),
+        capsLayer = """
+            𑣿 𑢻 𑢻 𑢦 𑢪 𑢭 𑢰
+            𑢤 𑢲 𑢨 𑢼 𑢵 𑢥 𑢣 𑢢 𑢩 𑢸
+            𑢡 𑢾 𑢴 𑢱 𑢫 𑢹 𑢮 𑢬 𑢺
+            𑢠 𑢽 𑢯 𑢿 𑢷 𑢳 𑢶
+        """.trimIndent()
     ),
     Layout(
         name = "Kannada (InScript)",
@@ -1239,6 +1300,22 @@ val layouts = listOf(
         """.trimIndent(),
         comma = "꓾",
         period = "꓿"
+    ),
+    Layout(
+        name = "Livonian",
+        layout = """
+            ¯ ä ḑ ŗ ț ņ š ȯ õ ž
+            q w e r t y u i o p
+            a s d f g h j k l ļ
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ¯ ǟ ḑ ŗ ț ņ š ȱ ȭ ž
+            q w ē r t y ū ī ō p
+            ā s d f g h j k l ļ
+            z x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("¯")
     ),
     Layout(
         name = "Luxembourgish",
