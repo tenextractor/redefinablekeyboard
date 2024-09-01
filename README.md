@@ -4,11 +4,16 @@ A multilingual keyboard app. Under development, so please use it alongside anoth
 
 [**Download v0.3.0.20240816-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.3.0.20240816-alpha/redefinablekeyboard-v0.3.0.20240816.apk)
 
+Credit for IME service logic: https://github.com/THEAccess/compose-keyboard-ime
+Credit for abugida input logic: https://www.youtube.com/watch?v=kNwVybjm3h8
+
 Supported languages/layouts:
 
 * Abkhaz
 * Albanian
+* Albanian(PC)
 * Altai
+* Amis
 * Arabic (101)
 * Arapaho
 * Armenian
@@ -33,6 +38,7 @@ Supported languages/layouts:
 * Catalan
 * Caucasian
 * Chamorro
+* Chechen (Latin)
 * Cheyenne
 * Chukchi
 * Chulym
@@ -43,6 +49,7 @@ Supported languages/layouts:
 * Czech
 * Dagbani
 * Danish(/Norwegian)
+* Dhivehi
 * Dinka
 * Dungan
 * Efik
@@ -77,17 +84,20 @@ Supported languages/layouts:
 * Gĩkũyũ/Kikuyu
 * Hausa
 * Hebrew
-* Hindi (Alternate)
 * Hindi (InScript)
+* Hindi (QWERTY-like)
 * Ho
 * Ho-Chunk (Wisconsin)
 * Hungarian
 * Icelandic
 * Ingrian/Izhorian
+* Interslavic (Cyrillic)
+* Interslavic (Latin)
 * Italian
 * Iñupiaq
 * Javanese (Latin)
 * Kannada (InScript)
+* Kannada (Phonetic)
 * Karakalpak (Cyrillic)
 * Karakalpak (Latin)
 * Karelian
@@ -108,6 +118,7 @@ Supported languages/layouts:
 * Laz (Mkhedruli)
 * Lisu
 * Lithuanian
+* Livonian
 * Ludic/Veps
 * Luxembourgish
 * Macedonian
@@ -142,19 +153,20 @@ Supported languages/layouts:
 * Punjabi (Gurmukhi) (InScript)
 * Punjabi (Shahmukhi)
 * Romanian
+* Rumantsch
 * Russian
 * Russian (Phonetic)
 * Rusyn (All)
 * Rusyn (Pannonian)
 * Saanich
-* Sámi (Kildin) (Big)
-* Sámi (Kildin) (Small)
-* Sámi (Lule)
-* Sámi (Northern)
-* Sámi (Pite)
-* Sámi (Skolt)
-* Sámi (Southern)
-* Sámi (Ume)
+* Sami (Kildin) (Big)
+* Sami (Kildin) (Small)
+* Sami (Lule)
+* Sami (Northern)
+* Sami (Pite)
+* Sami (Skolt)
+* Sami (Southern)
+* Sami (Ume)
 * Santali
 * Selkup (Southern)
 * Serbo-Croatian (Cyrillic)
@@ -168,12 +180,15 @@ Supported languages/layouts:
 * Slovene
 * Sora
 * Spanish
+* Squamish
 * Sundanese (Latin)
 * Taiwanese Hokkien (POJ)
 * Tajik
 * Tamil (InScript-like)
+* Tamil (Phonetic)
 * Tatar (Cyrillic)
 * Telugu (InScript)
+* Telugu (Phonetic)
 * Thai
 * Tofa
 * Tsimshian (Coast)

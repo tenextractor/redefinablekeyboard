@@ -3,6 +3,8 @@ package com.tenextractor.redefinablekeyboard.feature_config.domain
 import com.tenextractor.redefinablekeyboard.feature_config.alphabetKey
 import com.tenextractor.redefinablekeyboard.feature_config.backSpaceKey
 import com.tenextractor.redefinablekeyboard.feature_config.bottomRow
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.Combiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.DefaultCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.compileLayer
 import com.tenextractor.redefinablekeyboard.feature_config.shiftKey
 import com.tenextractor.redefinablekeyboard.feature_config.symbols1
@@ -28,6 +30,7 @@ data class Layout(
     val currency: String = "¤",
     val period: String = ".",
     val space: String = " ",
+    val combiner: Combiner = DefaultCombiner,
 ) {
     fun compile(): CompiledLayout {
         val rowStrings = layout.split("\n").map { it.trim() }
@@ -54,7 +57,8 @@ data class Layout(
         return CompiledLayout(
             name = name,
             layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers,
-            capsLayer = compiledCapsLayer
+            capsLayer = compiledCapsLayer,
+            combiner = combiner
         )
     }
 }

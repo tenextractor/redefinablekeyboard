@@ -1,6 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
+import android.util.Log
 import android.view.MotionEvent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -44,6 +45,7 @@ import kotlinx.coroutines.delay
 fun KeyboardScreen(selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     val ctx = LocalContext.current
     val layout = selectedLayouts[state.layout % selectedLayouts.size]
+    updateState(state.copy(layoutName = layout.name))
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val layer = state.layer
     val capsLayer = layout.capsLayer ?: convertLayerToCaps(layout.layers[layer])
@@ -103,7 +105,6 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                 onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) }))
             .width(getKeyWidth(key.width, screenWidth, defaultWidth))
             .height(56.dp)
-            //.border(1.dp, Color.White)
         ,
         contentAlignment = Alignment.Center
     ) {
@@ -129,10 +130,19 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+    val layout = selectedLayouts[state.layout % selectedLayouts.size]
     val inputConnection = (ctx as IMEService2).currentInputConnection
+    if (key.moveToLayer != null)
+        updateState(state.copy(layer = key.moveToLayer))
+
+    if (state.shiftState == ShiftState.SHIFT && key.text != "")
+        updateState(state.copy(shiftState = ShiftState.OFF))
+
     if (key.specialKey != null) {
         when (key.specialKey) {
-            SpecialKey.BACKSPACE -> ctx.sendDownUpKeyEvents(0x43) //KEYCODE_DEL
+            SpecialKey.BACKSPACE -> {
+                layout.combiner.delete(ctx, inputConnection)
+            }
             SpecialKey.CHANGELAYOUT -> {
                 updateState(state.copy(shiftState = ShiftState.SHIFT))
                 updateState(state.copy(shiftState = ShiftState.OFF))
@@ -141,16 +151,13 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, st
             SpecialKey.ENTER -> ctx.sendKeyChar('\n')
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.SHIFT, shiftPressedAt = System.currentTimeMillis()))
             SpecialKey.UNSHIFT -> if (System.currentTimeMillis() - state.shiftPressedAt < 500) updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
-                                    else updateState(state.copy(shiftState = ShiftState.OFF))
+            else updateState(state.copy(shiftState = ShiftState.OFF))
         }
-    } else {
-        inputConnection.commitText(key.text, key.text.length)
     }
-    if (key.moveToLayer != null)
-        updateState(state.copy(layer = key.moveToLayer))
 
-    if (state.shiftState == ShiftState.SHIFT && key.text != "")
-        updateState(state.copy(shiftState = ShiftState.OFF))
+    if (key.text != "") {
+        layout.combiner.combine(key, inputConnection)
+    }
 }
 
 fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {

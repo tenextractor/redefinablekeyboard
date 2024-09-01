@@ -1,6 +1,9 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
 import android.util.Log
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.TeluguCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Layout
@@ -1227,6 +1230,23 @@ val layouts = listOf(
         bottomRowKey = zwnjKey
     ),
     Layout(
+        name = "Kannada (Phonetic)",
+        layout = """
+            ಶ್ ಣ್ ಏ ಳ್ ಔ ಐ ಊ ಈ ಓ ಷ್
+            ಆ ಟ್ ಎ ರ್ ತ್ ಯ್ ಉ ಇ ಒ ಪ್
+            ಅ ಸ್ ದ್ ಫ್ ಗ್ ಹ್ ಜ್ ಕ್ ಲ್
+            ಂ ಡ್ ಚ್ ವ್ ಬ್ ನ್ ಮ್
+        """.trimIndent(),
+        capsLayer = """
+            ₹ ಣ್ ೡ ೞ್ " ? ೠ ! ಓ ಁ
+            ಽ ಠ್ ಌ ಱ್ ಥ್ ಞ್ ಋ ಇ ಒ ಫ್
+            ಅ ಸ್ ಧ್ ಫ಼್ ಘ್ ಙ್ ಝ್ ಖ್ ಲ್
+            ಜ಼್ ಢ್ ಛ್ ಃ ಭ್ ೝ ಮ್
+        """.trimIndent(),
+        bottomRowKey = zwnjKey,
+        combiner = KannadaCombiner
+    ),
+    Layout(
         name = "Karakalpak (Latin)",
         layout = """
             á ǵ ı ń ó ú
@@ -1729,6 +1749,22 @@ val layouts = listOf(
         """.trimIndent()
     ),
     Layout(
+        name = "Tamil (Phonetic)",
+        layout = """
+            ஹ் ஷ் ஏ ற் ஶ் ஐ ஊ ஈ ஓ ஃ
+            ஆ ஔ எ ர் த் ய் உ இ ஒ ப்
+            அ ச் ட் ள் ங் ஞ் ஜ் க் ல்
+            ழ் ண் ஸ் வ் ன் ந் ம்
+        """.trimIndent(),
+        capsLayer = """
+            ௧ ௨ ௩ ௪ ௫ ௬ ௭ ௮ ௯ ௦
+            ஆ ஔ எ ௹ த் ய் உ இ ஒ ப்
+            அ ச் ட் ள் ங் ஞ் ஜ் க்ஷ் ல்
+            ழ் ண் ஸ்ரீ வ் ன் ந் ம்
+        """.trimIndent(),
+        combiner = TamilCombiner
+    ),
+    Layout(
         name = "Thai",
         layout = """
             ๅ / _ ภ ถ ◌ุ ◌ึ ค ต จ ข ช
@@ -1758,6 +1794,23 @@ val layouts = listOf(
             ఒ ఎ ◌ఁ ణ ◌ృ ఋ ళ శ ష
         """.trimIndent(),
         bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Telugu (Phonetic)",
+        layout = """
+            శ్ ణ్ ఏ ళ్ ఔ ఐ ఊ ఈ ఓ ష్
+            ఆ ట్ ఎ ర్ త్ య్ ఉ ఇ ఒ ప్
+            అ స్ ద్ ఫ్ గ్ హ్ జ్ క్ ల్
+            ం డ్ చ్ వ్ బ్ న్ మ్
+        """.trimIndent(),
+        capsLayer = """
+            ₹ ణ్ ౡ ఴ్ " ? ౠ ! ఓ ౙ్
+            ఽ ఠ్ ఌ ఱ్ థ్ ఞ్ ఋ ఇ ఒ ప్
+            అ స్ ధ్ ఫ్ ఘ్ ఙ్ ఝ్ క్ ల్
+            ఁ ఢ్ ఛ్ ః భ్ ౝ ౘ్
+        """.trimIndent(),
+        bottomRowKey = zwnjKey,
+        combiner = TeluguCombiner
     ),
     Layout(
         name = "Turkish",
@@ -1884,5 +1937,5 @@ val inBuiltLayouts = listOf(Layout(
         decoupleRows = if (splitLayoutString[1][0] == 'ё' || splitLayoutString[1][0] == 'е' || splitLayoutString[1][0] == 'ґ'
             || splitLayoutString[1].split('\n')[0].split(' ').size <= 6) listOf(0) else emptyList()
     )
-} + layouts).map { //Log.d("MyTag", it.name)
+} + layouts).map { Log.d("MyTag", it.name)
             it.compile() }.sortedBy { it.name }
