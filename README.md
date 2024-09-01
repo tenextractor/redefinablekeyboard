@@ -2,10 +2,10 @@
 
 A multilingual keyboard app. Under development, so please use it alongside another keyboard.
 
-[**Download v0.3.0.20240816-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.3.0.20240816-alpha/redefinablekeyboard-v0.3.0.20240816.apk)
+[**Download v0.4.0.20240901-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.4.0.20240901-alpha/redefinablekeyboard-v0.4.0.20240901.apk)
 
-Credit for IME service logic: https://github.com/THEAccess/compose-keyboard-ime
-Credit for abugida input logic: https://www.youtube.com/watch?v=kNwVybjm3h8
+* Credit for IME service logic: https://github.com/THEAccess/compose-keyboard-ime
+* Credit for abugida input logic: https://www.youtube.com/watch?v=kNwVybjm3h8
 
 Supported languages/layouts:
 
