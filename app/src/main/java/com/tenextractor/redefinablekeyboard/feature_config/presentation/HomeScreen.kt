@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -40,6 +41,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.inBuiltLayouts
 import com.tenextractor.redefinablekeyboard.feature_config.selectedLayoutNamesToLayoutToggles
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.layoutTogglesToSelectedLayoutNames
+import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,7 +71,8 @@ fun HomeScreen() {
         TextField(
             placeholder = { Text("Test keyboard here") },
             value = text,
-            onValueChange = { text = it }
+            onValueChange = { text = it },
+            textStyle = TextStyle.Default.copy(fontFamily = notoFamily)
         )
 
         if (isDialogOpen) SelectLangDialog({

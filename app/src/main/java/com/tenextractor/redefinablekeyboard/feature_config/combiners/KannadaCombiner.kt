@@ -30,14 +30,14 @@ object KannadaCombiner: Combiner {
         'ು', //u
         'ೂ', //uu
         'ೃ', //vocalic r
-        'ೢ', //vocalic l
+        'ೄ', //vocalic rr
         'ೆ', //e
         'ೇ', //ee
         'ೈ', //ai
         'ೊ', //o
         'ೋ', //oo
         'ೌ', //au
-        'ೄ', //vocalic rr
+        'ೢ', //vocalic l
         'ೣ', //vocalic ll
     )
     private val consonants = listOf(

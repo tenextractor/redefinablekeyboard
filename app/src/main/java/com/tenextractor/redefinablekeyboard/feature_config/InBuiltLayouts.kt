@@ -2,8 +2,10 @@ package com.tenextractor.redefinablekeyboard.feature_config
 
 import android.util.Log
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TeluguCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.TibetanCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Layout
@@ -1390,6 +1392,22 @@ val layouts = listOf(
         bottomRowKey = zwnjKey
     ),
     Layout(
+        name = "Malayalam (Phonetic)",
+        layout = """
+            ശ് ൺ ഏ ർ ഔ ഐ ഊ ഈ ഓ ഷ് ‍ഞ്
+            ആ ട് എ ര് ത് യ് ഉ ഇ ഒ പ് ങ്
+            അ സ് ദ് ് ഗ് ഹ് ജ് ക് ൽ ൾ ം
+            ഴ് ഡ് ച് വ് ബ് ൻ മ്
+        """.trimIndent(),
+        capsLayer = """
+            ₹ ഩ് ൡ ർ " ? ൠ ! ഓ ഷ് ഞ്
+            ഽ ഢ് ഌ ര് ഥ് ഞ് ഋ ഇ ഒ ഫ് ങ്
+            അ സ് ധ് ് ഘ് ങ് ഝ് ഖ് ൽ ൾ ം
+            ഺ് ഢ് ഛ് ഃ ഭ് ൻറ മ്
+        """.trimIndent(),
+        combiner = MalayalamCombiner
+    ),
+    Layout(
         name = "Maltese",
         layout = """
             q w e r t y u i o p ġ
@@ -1811,6 +1829,25 @@ val layouts = listOf(
         """.trimIndent(),
         bottomRowKey = zwnjKey,
         combiner = TeluguCombiner
+    ),
+    Layout(
+        name = "Tibetan",
+        layout = """
+            ↓ ཁ ཆ ཚ ཐ ཞ ཤ འ ? ཕ
+            ཨ ཝ ◌ེ ར ཏ ཡ ◌ུ ◌ི ◌ོ པ
+            ¦ ས ད ང ག ཧ ཇ ཀ ལ ཉ
+            ཟ ཛ ཅ ཙ བ ན མ
+        """.trimIndent(),
+        capsLayer = """
+            ↓ ཊ ཆ ཷ ཹ ཞ ཥ ྀ ? ཕ
+            ཱ ཝ ཻ ྲྀ ླྀ ཡ ཱུ ཱི ཽ པ
+            ¦ ས ཌྷ ང གྷ ཧ ཇ ཀྵ ལ ཉ
+            ཌ ཛྷ ཅ ཙ བྷ ཎ མ
+        """.trimIndent(),
+        bottomRowKey = Key(text = " ", label = "␣", width = KeyWidth.FractionWidth(.1F)),
+        space = "་",
+        period = "།",
+        combiner = TibetanCombiner
     ),
     Layout(
         name = "Turkish",
