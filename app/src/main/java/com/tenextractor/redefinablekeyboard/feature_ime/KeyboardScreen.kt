@@ -1,14 +1,10 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
-import android.util.Log
-import android.view.MotionEvent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -29,7 +26,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -38,7 +34,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tenextractor.redefinablekeyboard.feature_config.domain.CompiledLayout
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
+import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
@@ -46,7 +44,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 import kotlinx.coroutines.delay
 
 @Composable
-fun KeyboardScreen(selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     val ctx = LocalContext.current
     val layout = selectedLayouts[state.layout % selectedLayouts.size]
     updateState(state.copy(layoutName = layout.name))
@@ -72,6 +70,8 @@ fun KeyboardScreen(selectedLayouts: List<CompiledLayout>, state: KeyboardState, 
             } }
         }
     }
+
+    if (state.isDialogOpen) SelectActiveLayoutDialog { updateState(state.copy(isDialogOpen = false)) }
 }
 
 fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
@@ -93,7 +93,7 @@ fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     var pressed by remember { mutableStateOf(false) }
     Box(
         modifier = (if (key.specialKey == SpecialKey.BACKSPACE) {
@@ -135,7 +135,14 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
     }
 }
 
-fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+@Composable
+fun SelectActiveLayoutDialog(onDismissRequest: () -> Unit) {
+    Dialog(onDismissRequest = onDismissRequest) {
+        Card{Text("test")}
+    }
+}
+
+fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     val layout = selectedLayouts[state.layout % selectedLayouts.size]
     val inputConnection = (ctx as IMEService2).currentInputConnection
     if (key.moveToLayer != null)
@@ -149,11 +156,13 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, st
             SpecialKey.BACKSPACE -> {
                 layout.combiner.delete(ctx, inputConnection)
             }
+            //SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
+
             SpecialKey.CHANGELAYOUT -> {
                 updateState(state.copy(shiftState = ShiftState.SHIFT))
                 updateState(state.copy(shiftState = ShiftState.OFF))
                 updateState(KeyboardState(layout = (state.layout + 1) % selectedLayouts.size))
-            } //updateState(state.copy(isDialogOpen = true)) //
+            }
             SpecialKey.ENTER -> ctx.sendKeyChar('\n')
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.SHIFT, shiftPressedAt = System.currentTimeMillis()))
             SpecialKey.UNSHIFT -> if (System.currentTimeMillis() - state.shiftPressedAt < 500) updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
@@ -166,7 +175,7 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, st
     }
 }
 
-fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<CompiledLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     if (key.specialKey != null) {
         when (key.specialKey) {
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.CAPSLOCK))

@@ -13,7 +13,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.symbolsKey1
 import com.tenextractor.redefinablekeyboard.feature_config.symbolsKey2
 import com.tenextractor.redefinablekeyboard.feature_config.unShiftKey
 
-data class Layout(
+data class Layout( //"simple" description of layout, that gets compiled into KbLayout
     val name: String,
     val lang: String? = null,
     val layout: String,
@@ -32,7 +32,7 @@ data class Layout(
     val space: String = " ",
     val combiner: Combiner = DefaultCombiner,
 ) {
-    fun compile(): CompiledLayout {
+    fun compile(): KbLayout {
         val rowStrings = layout.split("\n").map { it.trim() }
         val maxNumberOfKeys = rowStrings.maxOf { it.split(' ').size }
         val shiftAndBackspaceSize = ((maxNumberOfKeys - rowStrings[rowStrings.size - 1].split(' ').size).toFloat() / if (hasShift) 2 else 1)
@@ -54,7 +54,7 @@ data class Layout(
                 symbolsKey1, bottomRow, emptyList())
         } else null
 
-        return CompiledLayout(
+        return KbLayout(
             name = name,
             layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers,
             capsLayer = compiledCapsLayer,

@@ -57,16 +57,6 @@ fun HomeScreen(onNavToSelectLayouts: () -> Unit) {
         ClickableText(stringResource(R.string.switch_to_redefinable_keyboard)) {
             (ctx.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).showInputMethodPicker()
         }
-
-        val sharedPrefsManager = SharedPrefsManager(ctx)
-        var isDialogOpen by remember { mutableStateOf(false) }
-        val layoutToggles = remember {
-            selectedLayoutNamesToLayoutToggles(sharedPrefsManager.readSelectedLayouts(),
-                inBuiltLayouts).toMutableStateList()
-        }
-        ClickableText("Select Layouts") {
-            isDialogOpen = true
-        }
         ClickableText(stringResource(R.string.select_layouts_to_use), onNavToSelectLayouts)
         //ClickableText("Settings") {}
 
@@ -77,12 +67,6 @@ fun HomeScreen(onNavToSelectLayouts: () -> Unit) {
             onValueChange = { text = it },
             textStyle = TextStyle.Default.copy(fontFamily = notoFamily)
         )
-
-        if (isDialogOpen) SelectLangDialog({
-            sharedPrefsManager.writeSelectedLayouts(
-                layoutTogglesToSelectedLayoutNames(layoutToggles, inBuiltLayouts))
-            isDialogOpen = false
-                                           }, layoutToggles)
     }
 }
 
@@ -92,43 +76,4 @@ fun ClickableText(text: String, onClick: () -> Unit) {
         .clickable(true, null, null, onClick)
         .fillMaxWidth()
         .padding(15.dp), fontSize = 20.sp)
-}
-
-@Composable
-fun SelectLangDialog(onDismissRequest: () -> Unit, selectedLayouts: MutableList<Boolean>) {
-    Dialog(onDismissRequest = onDismissRequest, properties = DialogProperties(usePlatformDefaultWidth = false)) {
-        Card(
-            modifier = Modifier
-                .width(LocalConfiguration.current.screenWidthDp.dp * 0.9F)
-                .height(LocalConfiguration.current.screenHeightDp.dp * 0.85F)
-                .padding(16.dp),
-        ) {
-            val scrollState = rememberScrollState()
-            Column (modifier = Modifier.verticalScroll(state = scrollState)) {
-                inBuiltLayouts.mapIndexed { i, layout ->
-                    Row {
-                        Text(layout.name,
-                            Modifier
-                                .padding(15.dp), fontSize = 20.sp)
-                        Spacer(Modifier.weight(1F))
-                        Switch(
-                            modifier = Modifier.semantics {
-                                contentDescription = "Toggle layout ${layout.name}" }
-                                .padding(top = 5.dp, end = 15.dp),
-                            checked = selectedLayouts[i],
-                            onCheckedChange = { onCheckedChange(i, it, selectedLayouts) }
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-fun onCheckedChange(index: Int, newValue: Boolean, layoutToggles: MutableList<Boolean>) {
-    // only update selectedLayouts if it would contain at least 1 true value after the operation
-    val updatedLayoutToggles = layoutToggles.slice(0..<index) + newValue +
-            layoutToggles.slice(index+1..<layoutToggles.size)
-    if (updatedLayoutToggles.reduce { acc, isSelected -> acc || isSelected })
-        layoutToggles[index] = newValue
 }

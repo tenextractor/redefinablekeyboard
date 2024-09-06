@@ -4,7 +4,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.tenextractor.redefinablekeyboard.R
-import com.tenextractor.redefinablekeyboard.feature_config.domain.CompiledLayout
+import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 
@@ -50,17 +50,17 @@ fun compileKey(text: String, width: KeyWidth = KeyWidth.WeightWidth(1F), moveLay
 }
 
 fun layoutTogglesToSelectedLayoutNames(layoutToggles: List<Boolean>,
-                                       allLayouts: List<CompiledLayout>): List<String> {
+                                       allLayouts: List<KbLayout>): List<String> {
     return allLayouts.filterIndexed { i, _ -> layoutToggles[i] }.map { it.name }
 }
 
 fun selectedLayoutNamesToLayoutToggles(selectedLayoutNames: List<String>,
-                                       allLayouts: List<CompiledLayout>): List<Boolean> {
+                                       allLayouts: List<KbLayout>): List<Boolean> {
     return allLayouts.map { selectedLayoutNames.contains(it.name) }
 }
 
 fun selectedLayoutNamesToSelectedLayouts(selectedLayoutNames: List<String>,
-                                         allLayouts: List<CompiledLayout>): List<CompiledLayout> {
+                                         allLayouts: List<KbLayout>): List<KbLayout> {
     return allLayouts.filter { selectedLayoutNames.contains(it.name) }
 }
 
