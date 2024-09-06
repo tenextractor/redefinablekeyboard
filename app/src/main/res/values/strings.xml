@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Redefinable Keyboard</string>
+    <string name="enable_redefinable_keyboard">Enable Redefinable Keyboard</string>
+    <string name="switch_to_redefinable_keyboard">Switch to Redefinable Keyboard</string>
+    <string name="settings">Settings</string>
+    <string name="select_layouts_to_use">Select layouts to use</string>
 </resources>

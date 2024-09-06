@@ -12,7 +12,7 @@ android {
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "0.4.0.20240901"
+        versionName = "0.5.0.20240905"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.service)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
     //implementation(libs.androidx.material3.android) /* this caused a duplicate class error */
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

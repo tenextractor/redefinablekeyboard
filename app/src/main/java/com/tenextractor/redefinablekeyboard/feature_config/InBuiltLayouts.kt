@@ -1833,16 +1833,16 @@ val layouts = listOf(
     Layout(
         name = "Tibetan",
         layout = """
-            ↓ ཁ ཆ ཚ ཐ ཞ ཤ འ ? ཕ
+            ↓ འ ཆ ཚ ཐ ཞ ཤ ཁ ཉ ཕ
             ཨ ཝ ◌ེ ར ཏ ཡ ◌ུ ◌ི ◌ོ པ
-            ¦ ས ད ང ག ཧ ཇ ཀ ལ ཉ
+            ¦ ས ད ང ག ཧ ཇ ཀ ལ
             ཟ ཛ ཅ ཙ བ ན མ
         """.trimIndent(),
         capsLayer = """
-            ↓ ཊ ཆ ཷ ཹ ཞ ཥ ྀ ? ཕ
-            ཱ ཝ ཻ ྲྀ ླྀ ཡ ཱུ ཱི ཽ པ
-            ¦ ས ཌྷ ང གྷ ཧ ཇ ཀྵ ལ ཉ
-            ཌ ཛྷ ཅ ཙ བྷ ཎ མ
+            ↓ ཊ ཾ ཷ ཹ ྃ ཥ ྀ ཿ ྆
+            ཱ ༜ ཻ ྲྀ ླྀ ཡ ཱུ ཱི ཽ ༔
+            ༺ ༄༅།། ཌྷ ༼ གྷ ༽ ༑ ཀྵ ༻
+            ཌ ཛྷ ༈ ༐ བྷ ཎ ༑
         """.trimIndent(),
         bottomRowKey = Key(text = " ", label = "␣", width = KeyWidth.FractionWidth(.1F)),
         space = "་",

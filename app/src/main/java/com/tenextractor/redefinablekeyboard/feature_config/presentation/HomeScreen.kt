@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.tenextractor.redefinablekeyboard.R
 import com.tenextractor.redefinablekeyboard.feature_config.inBuiltLayouts
 import com.tenextractor.redefinablekeyboard.feature_config.selectedLayoutNamesToLayoutToggles
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
@@ -45,14 +47,14 @@ import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onNavToSelectLayouts: () -> Unit) {
     Column() {
-        TopAppBar({ Text("Redefinable Keyboard") })
+        TopAppBar({ Text(stringResource(R.string.app_name)) })
         val ctx = LocalContext.current
-        ClickableText("Enable Redefinable Keyboard") {
+        ClickableText(stringResource(R.string.enable_redefinable_keyboard)) {
             ctx.startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
         }
-        ClickableText("Switch to Redefinable Keyboard") {
+        ClickableText(stringResource(R.string.switch_to_redefinable_keyboard)) {
             (ctx.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).showInputMethodPicker()
         }
 
@@ -65,6 +67,7 @@ fun HomeScreen() {
         ClickableText("Select Layouts") {
             isDialogOpen = true
         }
+        ClickableText(stringResource(R.string.select_layouts_to_use), onNavToSelectLayouts)
         //ClickableText("Settings") {}
 
         var text by remember { mutableStateOf("") }
