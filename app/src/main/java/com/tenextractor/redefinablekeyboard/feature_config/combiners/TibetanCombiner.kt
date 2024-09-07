@@ -146,13 +146,25 @@ object TibetanCombiner: Combiner {
         }
 
         val charsBefore = inputConnection.getTextBeforeCursor(2, 0)
-        if (charsBefore != null) if (charsBefore.length == 2) {
-            if (charsBefore[1] == NBSP) {
+        val charBefore = inputConnection.getTextBeforeCursor(1, 0)
+        if (charBefore != null) if (charBefore.length == 1) {
+            if (charBefore[0] == NBSP) {
                 inputConnection.deleteSurroundingText(1, 0)
                 inputConnection.commitText(key.text, key.text.length)
                 return
             }
+            if (charBefore[0] == HALANTA) if (xInY(key.text[0], consonants)) {
+                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.commitText(normalToSubjoined(key.text[0]).toString(), 1)
+                return
+            }
+            if (xInY(subjoinedToNormal(charBefore[0]), subscripts)) if (key.text[0] == 'ཝ') {
+                inputConnection.commitText("ྭ", 1)
+                return
+            }
+        }
 
+        if (charsBefore != null) if (charsBefore.length == 2) {
             if (prefixes.binarySearch(charsBefore[0]) >= 0)
                 if (xInY(abs(charsBefore[1].code-80).toChar(), superscripts))
                     if (consonants.binarySearch(key.text[0]) >= 0) {
@@ -169,18 +181,7 @@ object TibetanCombiner: Combiner {
             }
         }
 
-        val charBefore = inputConnection.getTextBeforeCursor(1, 0)
         if (charBefore != null) if (charBefore.length == 1) {
-            if (charBefore[0] == NBSP) {
-                inputConnection.deleteSurroundingText(1, 0)
-                inputConnection.commitText(key.text, key.text.length)
-                return
-            }
-            if (charBefore[0] == HALANTA) if (xInY(key.text[0], consonants)) {
-                inputConnection.deleteSurroundingText(1, 0)
-                inputConnection.commitText(normalToSubjoined(key.text[0]).toString(), 1)
-                return
-            }
             if (xInY(charBefore[0], superscripts)) if (xInY(key.text[0], consonants)) {
                 inputConnection.commitText(normalToSubjoined(key.text[0]).toString(), 1)
                 return
