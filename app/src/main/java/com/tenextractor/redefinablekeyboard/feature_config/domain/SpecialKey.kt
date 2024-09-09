@@ -1,5 +1,5 @@
 package com.tenextractor.redefinablekeyboard.feature_config.domain
 
 enum class SpecialKey {
-    BACKSPACE, CHANGELAYOUT, ENTER, SHIFT, UNSHIFT
+    BACKSPACE, CHANGELAYOUT, ENTER, SHIFT, UNSHIFT, SPACE
 }
