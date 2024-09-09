@@ -119,13 +119,10 @@ object KoreanCombiner: Combiner {
             } //if char before is an initial consonant and vowel is typed, merge them
 
             if (charBefore[0].code in 0xAC00..0xD7A3) {
-                val syllableNum = charBefore[0].code - GA_LOCATION
-                val initialNum = syllableNum/588
-                val initial = initials[initialNum]
-                val vowelNum = (syllableNum - initialNum*588)/28
-                val vowel = vowels[vowelNum]
-                val finalNum = syllableNum - initialNum*588 - vowelNum*28
-                val final = finals[finalNum]
+                val letters = toLetters(charBefore[0])
+                val initial = letters[0]!!
+                val vowel = letters[1]!!
+                val final = letters[2]
 
                 if (final == null) { //charBefore is Consonant + Vowel
                     if (mergedClusters.containsKey(vowel.toString() + key.text[0])) {
@@ -170,7 +167,8 @@ object KoreanCombiner: Combiner {
 
     override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
         val charBefore = inputConnection.getTextBeforeCursor(1, 0)
-        if (charBefore != null) if (charBefore.length == 1) {
+        if (charBefore != null) if (charBefore.length == 1)
+            if (charBefore[0].code in 0xAC00..0xD7A3) {
             val letters = toLetters(charBefore[0])
             inputConnection.deleteSurroundingText(1, 0)
             if (letters[2] != null) {
