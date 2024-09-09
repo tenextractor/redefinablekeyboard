@@ -7,7 +7,7 @@ import com.tenextractor.redefinablekeyboard.feature_ime.IMEService2
 fun southIndianCombine(indepToDepVowels: Map<Char, *>, virama: Char, others: List<Char>,
                        key: Key, inputConnection: InputConnection) {
     val charBeforeCursor = inputConnection.getTextBeforeCursor(1, 0)
-    if (charBeforeCursor != null) if (charBeforeCursor.length != 0) if (charBeforeCursor[0] == virama) {
+    if (charBeforeCursor != null) if (charBeforeCursor.isNotEmpty()) if (charBeforeCursor[0] == virama) {
         //if the char before cursor is a virama (which means that there is a consonant before the virama)
         if (indepToDepVowels.containsKey(key.text[0])) {
             inputConnection.deleteSurroundingText(1, 0)
@@ -24,12 +24,12 @@ fun southIndianCombine(indepToDepVowels: Map<Char, *>, virama: Char, others: Lis
 }
 
 fun southIndianDelete(depVowels: List<Char>, consonants: List<Char>,
-                      virama: Char, imeService2: IMEService2, inputConnection: InputConnection) {
+                      virama: Char, imeService: IMEService2, inputConnection: InputConnection) {
     val selectedText = inputConnection.getSelectedText(0)
-    if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService2, inputConnection)
+    if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService, inputConnection)
 
     val charBeforeCursor = inputConnection.getTextBeforeCursor(1, 0)
-    if (charBeforeCursor != null) if (charBeforeCursor.length != 0) {
+    if (charBeforeCursor != null) if (charBeforeCursor.isNotEmpty()) {
         if (charBeforeCursor[0] == virama) {
             inputConnection.deleteSurroundingText(2, 0)
             return
@@ -44,5 +44,5 @@ fun southIndianDelete(depVowels: List<Char>, consonants: List<Char>,
             return
         } //if there is a consonant letter, add a virama to remove the 'a' vowel
     }
-    DefaultCombiner.delete(imeService2, inputConnection) //else, fall back to default delete
+    DefaultCombiner.delete(imeService, inputConnection) //else, fall back to default delete
 }

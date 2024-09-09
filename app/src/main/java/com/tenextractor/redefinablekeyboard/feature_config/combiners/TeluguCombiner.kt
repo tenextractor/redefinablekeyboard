@@ -97,7 +97,7 @@ object TeluguCombiner: Combiner {
         southIndianCombine(indepToDepVowels, VIRAMA, others, key, inputConnection)
     }
 
-    override fun delete(imeService2: IMEService2, inputConnection: InputConnection) {
-        southIndianDelete(depVowels, consonants, VIRAMA, imeService2, inputConnection)
+    override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
+        southIndianDelete(depVowels, consonants, VIRAMA, imeService, inputConnection)
     }
 }

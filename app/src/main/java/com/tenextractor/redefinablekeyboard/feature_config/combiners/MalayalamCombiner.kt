@@ -118,7 +118,7 @@ object MalayalamCombiner: Combiner {
         'ൽ' to listOf('ൽ'), //l
         'ൾ' to listOf('ൾ'), //ll
     )
-    private val ZWNJ = '‌' //zero width non-joiner
+    private const val ZWNJ = '‌' //zero width non-joiner
     override fun combine(key: Key, inputConnection: InputConnection) {
         val charBeforeCursor = inputConnection.getTextBeforeCursor(1, 0)
         if (charBeforeCursor != null) if (charBeforeCursor.length == 1) {
@@ -170,9 +170,9 @@ object MalayalamCombiner: Combiner {
         southIndianCombine(indepToDepVowels, VIRAMA, others, key, inputConnection)
     }
 
-    override fun delete(imeService2: IMEService2, inputConnection: InputConnection) {
+    override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
         val selectedText = inputConnection.getSelectedText(0)
-        if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService2, inputConnection)
+        if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService, inputConnection)
 
         val charsBeforeCursor = inputConnection.getTextBeforeCursor(2, 0)
         if (charsBeforeCursor != null) if (charsBeforeCursor.length == 2)
@@ -194,6 +194,6 @@ object MalayalamCombiner: Combiner {
         } //if there is a consonant that has a chillu form before the cursor (with the unwritten
           //inherent vowel 'a', convert it to its chillu form to remove the inherent 'a'
 
-        southIndianDelete(depVowels, consonants, VIRAMA, imeService2, inputConnection)
+        southIndianDelete(depVowels, consonants, VIRAMA, imeService, inputConnection)
     }
 }

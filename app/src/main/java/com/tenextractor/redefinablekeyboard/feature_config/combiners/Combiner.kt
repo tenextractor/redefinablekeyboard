@@ -6,5 +6,5 @@ import com.tenextractor.redefinablekeyboard.feature_ime.IMEService2
 
 interface Combiner {
     fun combine(key: Key, inputConnection: InputConnection)
-    fun delete(imeService2: IMEService2, inputConnection: InputConnection)
+    fun delete(imeService: IMEService2, inputConnection: InputConnection)
 }

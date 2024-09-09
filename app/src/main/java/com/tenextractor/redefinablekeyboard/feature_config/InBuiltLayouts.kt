@@ -2,6 +2,7 @@ package com.tenextractor.redefinablekeyboard.feature_config
 
 import android.util.Log
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.KoreanCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TeluguCombiner
@@ -1279,6 +1280,23 @@ val layouts = listOf(
         """.trimIndent()
     ),
     Layout(
+        name = "Korean (Big)",
+        layout = """
+            ㅃ ㅉ ㄸ ㄲ ㅆ - ? " ㅒ ㅖ
+            ㅂ ㅈ ㄷ ㄱ ㅅ ㅛ ㅕ ㅑ ㅐ ㅔ
+            ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ
+            ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ
+        """.trimIndent(),
+        capsLayer = """
+            ㅃ ㅉ ㄸ ㄲ ㅆ - ? " ㅒ ㅖ
+            ㅃ ㅉ ㄸ ㄲ ㅆ ㅛ ㅕ ㅑ ㅒ ㅖ
+            ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ
+            ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ
+        """.trimIndent(),
+        currency = "₩",
+        combiner = KoreanCombiner
+    ),
+    Layout(
         name = "Kurdish (Arabic)",
         layout = """
             ع ش ڕ غ ڵ ێ چ ؟
@@ -1974,5 +1992,5 @@ val inBuiltLayouts = listOf(Layout(
         decoupleRows = if (splitLayoutString[1][0] == 'ё' || splitLayoutString[1][0] == 'е' || splitLayoutString[1][0] == 'ґ'
             || splitLayoutString[1].split('\n')[0].split(' ').size <= 6) listOf(0) else emptyList()
     )
-} + layouts).map { Log.d("MyTag", it.name)
+} + layouts).map { //Log.d("MyTag", it.name)
             it.compile() }.sortedBy { it.name }

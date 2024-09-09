@@ -63,7 +63,7 @@ object TamilCombiner: Combiner {
         southIndianCombine(indepToDepVowels, VIRAMA, emptyList(), key, inputConnection)
     }
 
-    override fun delete(imeService2: IMEService2, inputConnection: InputConnection) {
-        southIndianDelete(depVowels, consonants, VIRAMA, imeService2, inputConnection)
+    override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
+        southIndianDelete(depVowels, consonants, VIRAMA, imeService, inputConnection)
     }
 }
