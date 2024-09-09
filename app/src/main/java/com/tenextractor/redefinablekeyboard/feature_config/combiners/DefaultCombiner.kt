@@ -8,7 +8,7 @@ object DefaultCombiner: Combiner {
     override fun combine(key: Key, inputConnection: InputConnection) {
         inputConnection.commitText(key.text, key.text.length)
     }
-    override fun delete(imeService2: IMEService2, inputConnection: InputConnection) {
-        imeService2.sendDownUpKeyEvents(0x43) //KEYCODE_DEL
+    override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
+        imeService.sendDownUpKeyEvents(0x43) //KEYCODE_DEL
     }
 }

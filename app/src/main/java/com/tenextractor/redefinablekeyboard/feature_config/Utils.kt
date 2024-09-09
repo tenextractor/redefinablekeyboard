@@ -68,6 +68,6 @@ val notoFamily = FontFamily(
     Font(R.font.notosans_merged, FontWeight.Normal)
 )
 
-fun xInY(x: Char, y: List<Char>): Boolean {
+fun xInY(x: Char, y: List<Char?>): Boolean {
     return y.binarySearch(x) >= 0
 }

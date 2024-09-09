@@ -14,7 +14,6 @@ object TibetanCombiner: Combiner {
         'ོ', //o
         'ྀ', //reversed i
     )
-
     private val consonants = listOf(
         'ཀ', //ka
         'ཁ', //kha
@@ -64,56 +63,6 @@ object TibetanCombiner: Combiner {
 
         'ཧ', //ha
         'ཨ', //a
-    )
-    private val subjoined = listOf(
-        'ྐ', //ka
-        'ྑ', //kha
-        'ྒ', //ga
-        'ྒྷ', //gha
-        'ྔ', //nga
-
-        'ྕ', //ca
-        'ྖ', //cha
-        'ྗ', //ja
-        'ྙ', //nya
-
-        'ྚ', //tta
-        'ྛ', //ttha
-        'ྜ', //dda
-        'ྜྷ', //ddha
-        'ྞ', //nna
-
-        'ྟ', //ta
-        'ྠ', //tha
-        'ྡ', //da
-        'ྡྷ', //dha
-        'ྣ', //na
-
-        'ྤ', //pa
-        'ྥ', //pha
-        'ྦ', //ba
-        'ྦྷ', //bha
-        'ྨ', //ma
-
-        'ྩ', //tsa
-        'ྪ', //tsha
-        'ྫ', //dza
-        'ྫྷ', //dzha
-        'ྭ', //wa
-
-        'ྮ', //zha
-        'ྯ', //za
-        'ྰ', //-a
-        'ྱ', //ya
-
-        'ྲ', //ra
-        'ླ', //la
-        'ྴ', //sha
-        'ྵ', //ssa
-        'ྶ', //sa
-
-        'ྷ', //ha
-        'ྸ', //a
     )
     private val prefixes = listOf(
         'ག', //ga
@@ -195,9 +144,9 @@ object TibetanCombiner: Combiner {
         DefaultCombiner.combine(key, inputConnection)
     }
 
-    override fun delete(imeService2: IMEService2, inputConnection: InputConnection) {
+    override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
         val selectedText = inputConnection.getSelectedText(0)
-        if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService2, inputConnection)
+        if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService, inputConnection)
         inputConnection.deleteSurroundingText(1, 0)
     }
 }
