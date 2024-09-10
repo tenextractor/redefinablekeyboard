@@ -2,7 +2,7 @@
 
 A multilingual keyboard app. Under development, so please use it alongside another keyboard.
 
-[**Download v0.5.0.20240905-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.5.0.20240905-alpha/redefinablekeyboard-v0.5.0.20240905.apk)
+[**Download v0.6.0.20240910-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.6.0.20240910-alpha/redefinablekeyboard-v0.6.0.20240910.apk)
 
 * Credit for IME service logic: https://github.com/THEAccess/compose-keyboard-ime
 * Credit for abugida input logic: https://www.youtube.com/watch?v=kNwVybjm3h8
@@ -43,6 +43,7 @@ Supported languages/layouts:
 * Chukchi
 * Chulym
 * Chuvash
+* Comanche
 * Coptic
 * Cree (Latin)
 * Crimean Tatar (Latin)
@@ -98,6 +99,7 @@ Supported languages/layouts:
 * Javanese (Latin)
 * Kannada (InScript)
 * Kannada (Phonetic)
+* Kanuri
 * Karakalpak (Cyrillic)
 * Karakalpak (Latin)
 * Karelian
@@ -108,6 +110,7 @@ Supported languages/layouts:
 * Khakas
 * Khasi
 * Komi
+* Korean (Big)
 * Koryak
 * Kurdish (Arabic)
 * Kurdish (Kurmanji) (Latin)
@@ -160,14 +163,6 @@ Supported languages/layouts:
 * Rusyn (All)
 * Rusyn (Pannonian)
 * Saanich
-* Sami (Kildin) (Big)
-* Sami (Kildin) (Small)
-* Sami (Lule)
-* Sami (Northern)
-* Sami (Pite)
-* Sami (Skolt)
-* Sami (Southern)
-* Sami (Ume)
 * Santali
 * Selkup (Southern)
 * Serbo-Croatian (Cyrillic)
@@ -183,6 +178,15 @@ Supported languages/layouts:
 * Spanish
 * Squamish
 * Sundanese (Latin)
+* Sámi (Inari)
+* Sámi (Kildin) (Big)
+* Sámi (Kildin) (Small)
+* Sámi (Lule)
+* Sámi (Northern)
+* Sámi (Pite)
+* Sámi (Skolt)
+* Sámi (Southern)
+* Sámi (Ume)
 * Taiwanese Hokkien (POJ)
 * Tajik
 * Tamil (InScript-like)
@@ -212,6 +216,7 @@ Supported languages/layouts:
 * Votic
 * Wadul/Tundra Yukaghir
 * Welsh
+* Wolof
 * Yaghnobi
 * Yakut
 * Zazaki
