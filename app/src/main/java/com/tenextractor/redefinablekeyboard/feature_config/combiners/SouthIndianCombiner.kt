@@ -1,17 +1,21 @@
 package com.tenextractor.redefinablekeyboard.feature_config.combiners
 
+import android.view.KeyEvent
 import android.view.inputmethod.InputConnection
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
+import com.tenextractor.redefinablekeyboard.feature_config.xInY
 import com.tenextractor.redefinablekeyboard.feature_ime.IMEService2
 
 fun southIndianCombine(indepToDepVowels: Map<Char, *>, virama: Char, others: List<Char>,
                        key: Key, inputConnection: InputConnection) {
-    val charBeforeCursor = inputConnection.getTextBeforeCursor(1, 0)
-    if (charBeforeCursor != null) if (charBeforeCursor.isNotEmpty()) if (charBeforeCursor[0] == virama) {
+    val charBefore = inputConnection.getTextBeforeCursor(1, 0)
+
+    if (charBefore != null) if (charBefore.isNotEmpty()) if (charBefore[0] == virama) {
+
         //if the char before cursor is a virama (which means that there is a consonant before the virama)
         if (indepToDepVowels.containsKey(key.text[0])) {
             inputConnection.deleteSurroundingText(1, 0)
-            inputConnection.commitText(indepToDepVowels[key.text[0]].toString(), indepToDepVowels[key.text[0]].toString().length)
+            inputConnection.commitText(indepToDepVowels[key.text[0]].toString(), 1)
             return
         } //if a vowel is input, delete the virama and add the dependent form of the vowel
         if (others.binarySearch(key.text[0]) >= 0) {

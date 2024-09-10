@@ -6,7 +6,7 @@ import com.tenextractor.redefinablekeyboard.feature_ime.IMEService2
 
 object DefaultCombiner: Combiner {
     override fun combine(key: Key, inputConnection: InputConnection) {
-        inputConnection.commitText(key.text, key.text.length)
+        inputConnection.commitText(key.text, 1)
     }
     override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
         imeService.sendDownUpKeyEvents(0x43) //KEYCODE_DEL

@@ -134,17 +134,17 @@ object MalayalamCombiner: Combiner {
                 if (key.text[0] == VIRAMA) {
                     val toCommit = chilluToNormal[charBeforeCursor[0]].toString() + VIRAMA + ZWNJ
                     inputConnection.deleteSurroundingText(1, 0)
-                    inputConnection.commitText(toCommit, toCommit.length)
+                    inputConnection.commitText(toCommit, 1)
                     return
                 } //if virama is typed, convert the chillu to its normal version and add a virama
                 if (charBeforeCursor[0] == 'ൻ' && key.text[0] == 'ർ') {
-                    inputConnection.commitText(VIRAMA.toString() + 'റ' + VIRAMA, 3)
+                    inputConnection.commitText(VIRAMA.toString() + 'റ' + VIRAMA, 1)
                     return
                 } //handle the 'nd' cluster
                 if (chilluToCombining[charBeforeCursor[0]]!!.binarySearch(key.text[0]) >= 0) {
                     val toCommit = chilluToNormal[charBeforeCursor[0]].toString() + VIRAMA + key.text
                     inputConnection.deleteSurroundingText(1, 0)
-                    inputConnection.commitText(toCommit, toCommit.length)
+                    inputConnection.commitText(toCommit, 1)
                     return
                 } //if a letter is typed that would combine with the normal version of the chillu
                   //before cursor, convert the chillu to its normal version, add a virama to trigger
@@ -152,13 +152,13 @@ object MalayalamCombiner: Combiner {
                 if (indepToDepVowels.containsKey(key.text[0])) {
                     val toCommit = chilluToNormal[charBeforeCursor[0]].toString() + indepToDepVowels[key.text[0]]
                     inputConnection.deleteSurroundingText(1, 0)
-                    inputConnection.commitText(toCommit, toCommit.length)
+                    inputConnection.commitText(toCommit, 1)
                     return
                 } //if a vowel is typed, convert the chillu before the cursor to its normal version
                   //and add the dependent form of the vowel that was typed
             }
             if (depVowels.binarySearch(charBeforeCursor[0]) >= 0) if (key.text[0] == VIRAMA) {
-                inputConnection.commitText(key.text, key.text.length)
+                inputConnection.commitText(key.text, 1)
                 return
             } //if the character before cursor is a dependent vowel and a virama is typed, add it
             if (charBeforeCursor[0] == VIRAMA) if (key.text[0] == VIRAMA) {
@@ -179,7 +179,7 @@ object MalayalamCombiner: Combiner {
             if (normalToChillu.containsKey(charsBeforeCursor[0])) if (depVowels.binarySearch(charsBeforeCursor[1]) >= 0) {
                 val toCommit = normalToChillu[charsBeforeCursor[0]].toString()
                 inputConnection.deleteSurroundingText(2, 0)
-                inputConnection.commitText(toCommit, toCommit.length)
+                inputConnection.commitText(toCommit, 1)
                 return
         } //if there is a consonant that has a chillu form and a dependent vowel before the cursor,
           //delete the dependent vowel and convert the consonant to its chillu form
@@ -189,7 +189,7 @@ object MalayalamCombiner: Combiner {
             if (normalToChillu.containsKey(charBeforeCursor[0])) {
                 val toCommit = normalToChillu[charBeforeCursor[0]].toString()
                 inputConnection.deleteSurroundingText(1, 0)
-                inputConnection.commitText(toCommit, toCommit.length)
+                inputConnection.commitText(toCommit, 1)
                 return
         } //if there is a consonant that has a chillu form before the cursor (with the unwritten
           //inherent vowel 'a', convert it to its chillu form to remove the inherent 'a'

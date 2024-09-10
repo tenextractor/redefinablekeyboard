@@ -99,7 +99,7 @@ object TibetanCombiner: Combiner {
         if (charBefore != null) if (charBefore.length == 1) {
             if (charBefore[0] == NBSP) {
                 inputConnection.deleteSurroundingText(1, 0)
-                inputConnection.commitText(key.text, key.text.length)
+                inputConnection.commitText(key.text, 1)
                 return
             }
             if (charBefore[0] == HALANTA) if (xInY(key.text[0], consonants)) {
@@ -119,13 +119,13 @@ object TibetanCombiner: Combiner {
                     if (consonants.binarySearch(key.text[0]) >= 0) {
                         val toCommit = abs(charsBefore[1].code-80).toChar().toString() + normalToSubjoined(key.text[0])
                         inputConnection.deleteSurroundingText(1, 0)
-                        inputConnection.commitText(toCommit, toCommit.length)
+                        inputConnection.commitText(toCommit, 1)
                         return
             }
 
 
             if (xInY(charsBefore[0], vowels)||xInY(subjoinedToNormal(charsBefore[0]), consonants)) {
-                inputConnection.commitText(key.text, key.text.length)
+                inputConnection.commitText(key.text, 1)
                 return
             }
         }

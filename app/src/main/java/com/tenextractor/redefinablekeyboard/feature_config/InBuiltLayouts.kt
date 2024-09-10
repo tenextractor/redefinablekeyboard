@@ -205,6 +205,12 @@ Chuvash
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
+Comanche
+ʔ e̱ a̱ ʉ ʉ̱ u̱ i̱ o̱
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Coptic
 ⲋ ϥ ϩ ϫ ϭ ϯ ⳁ ◌̀
 ϧ ϣ ⲉ ⲣ ⲧ ⲩ ⲑ ⲓ ⲟ ⲡ
@@ -407,6 +413,11 @@ Javanese (Latin)
 q w e r t y u i o p
 a s d f g h j k l é
 z x c v b n m è
+
+Kanuri
+q w e r t y u i o p
+a s d f g h j k l ǝ
+z x c v b n m ɍ
 
 Karakalpak (Cyrillic)
 ё ў ү қ ә ң ғ ө ҳ ? ъ
@@ -649,42 +660,48 @@ Rusyn (All)
 ф і в а п р о л д ж є
 я ч с м и т ь б ю
 
-Sami (Kildin) (Big)
+Sámi (Inari)
+á â ä č đ ŋ š ž
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
+Sámi (Kildin) (Big)
 ё̄ ӊ ӈ о̄ ҏ ӯ э̄ ӭ ю̄ я̄ ҍ
 ё а̄ ӓ е̄ һ ӣ ј ҋ ӆ ӎ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
 
-Sami (Lule)
+Sámi (Lule)
 q w e r t y u i o p å
 a s d f g h j k l á ä
 z x c v b n m ŋ
 
-Sami (Northern)
+Sámi (Northern)
 á č đ ŋ š ŧ ž
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
-Sami (Pite)
+Sámi (Pite)
 á đ ŋ ŧ å ä
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
-Sami (Skolt)
+Sámi (Skolt)
 â č ʒ ǯ đ ǩ š ž å ä ʹ
 q w e r t y u i o p õ
 a s d f g h j k l ǧ ǥ
 z x c v b n m ŋ ž
 
-Sami (Southern)
+Sámi (Southern)
 q w e r t y u i o p å
 a s d f g h j k l ö æ
 z x c v b n m ï
 
-Sami (Ume)
+Sámi (Ume)
 á đ å ŧ ŋ ü ï ö ä
 q w e r t y u i o p
 a s d f g h j k l
@@ -840,6 +857,12 @@ Wadul/Tundra Yukaghir
 
 Welsh
 â ê î ô û ŵ ŷ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
+Wolof
+é ë à ñ ŋ ó
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -1641,7 +1664,7 @@ val layouts = listOf(
         """.trimIndent()
     ),
     Layout(
-        name = "Sami (Kildin) (Small)",
+        name = "Sámi (Kildin) (Small)",
         layout = """
             ё ј һ ¯, ӭ ӈ ӓ ъ ҍ
             й ц у к е н г ш щ з х
