@@ -24,6 +24,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -35,7 +37,6 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
@@ -111,7 +112,31 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                 onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) }))
             .width(getKeyWidth(key.width, screenWidth, defaultWidth))
             .height(56.dp)
-        ,
+            .then(
+                if (key.specialKey == SpecialKey.SPACE) {
+                    Modifier.drawWithContent {
+                        drawContent()
+                        val startY = size.height * 0.25f
+                        val endY = size.height * 0.75f
+                        val color = Color.DarkGray.copy(alpha = 0.75f)
+
+                        drawLine(
+                            color = color,
+                            start = Offset(0f, startY),
+                            end = Offset(0f, endY),
+                            strokeWidth = 1.dp.toPx()
+                        )
+                        drawLine(
+                            color = color,
+                            start = Offset(size.width, startY),
+                            end = Offset(size.width, endY),
+                            strokeWidth = 1.dp.toPx()
+                        )
+                    }
+                } else {
+                    Modifier
+                }
+            ),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -166,8 +191,10 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: K
             SpecialKey.ENTER -> ctx.sendKeyChar('\n')
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.SHIFT, shiftPressedAt = System.currentTimeMillis()))
             SpecialKey.UNSHIFT -> if (System.currentTimeMillis() - state.shiftPressedAt < 500) updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
-            else updateState(state.copy(shiftState = ShiftState.OFF))
+                else updateState(state.copy(shiftState = ShiftState.OFF))
+            else -> {}
         }
+
     }
 
     if (key.text != "") {

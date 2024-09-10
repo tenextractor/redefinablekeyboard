@@ -18,7 +18,7 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
             Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
             Key(comma, width = KeyWidth.FractionWidth(.1F)),
             bottomRowKey,
-            Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.25F)),
+            Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.25F), specialKey = SpecialKey.SPACE),
             Key("'", width = KeyWidth.FractionWidth(.1F)),
             Key(period, width = KeyWidth.FractionWidth(.1F)),
             Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
@@ -26,7 +26,7 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
     } else listOf(
         Key(comma, width = KeyWidth.FractionWidth(.1F)),
         Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
-        Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F)),
+        Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
         Key("'", width = KeyWidth.FractionWidth(.1F)),
         Key(period, width = KeyWidth.FractionWidth(.1F)),
         Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
