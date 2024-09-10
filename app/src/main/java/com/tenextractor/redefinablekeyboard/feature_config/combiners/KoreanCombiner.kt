@@ -149,14 +149,14 @@ object KoreanCombiner: Combiner {
                                     toBlock(splitClusters[final]!![1], key.text[0], null)
                             Log.d("mytag", "tocommit ${toCommit.length}")
                             inputConnection.deleteSurroundingText(1, 0)
-                            inputConnection.commitText(toCommit, 2)
+                            inputConnection.commitText(toCommit, 1)
                             return
                         } //if a vowel is entered and the final of the last block can be split,
                         //move the second part of the final to a new syllable block, along with the vowel
                         val toCommit = toBlock(initial, vowel, null).toString() +
                                 toBlock(final, key.text[0], null)
                         inputConnection.deleteSurroundingText(1, 0)
-                        inputConnection.commitText(toCommit, 2)
+                        inputConnection.commitText(toCommit, 1)
                         return
                     }
                 }
