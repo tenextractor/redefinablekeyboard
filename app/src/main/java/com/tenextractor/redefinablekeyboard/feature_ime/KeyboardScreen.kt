@@ -97,6 +97,8 @@ fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
 @Composable
 fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     var pressed by remember { mutableStateOf(false) }
+    val sharedPrefsManager = SharedPrefsManager(ctx)
+    val hapticFeedbackService = HapticFeedbackService(ctx)
     Box(
         modifier = (if (key.specialKey == SpecialKey.BACKSPACE) {
             Modifier.pointerInput(Unit) {
@@ -151,6 +153,11 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
 
     if (key.specialKey == SpecialKey.BACKSPACE) {
         LaunchedEffect(pressed) {
+            if (pressed) {
+                if (sharedPrefsManager.isHapticFeedbackEnabled()) {
+                    hapticFeedbackService.performHapticFeedback()
+                }
+            }
             var delay: Long = 400
             while (pressed) {
                 onPressKey(key, ctx, selectedLayouts, state, updateState)
@@ -171,8 +178,9 @@ fun SelectActiveLayoutDialog(onDismissRequest: () -> Unit) {
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     val sharedPrefsManager = SharedPrefsManager(ctx)
     val hapticFeedbackService = HapticFeedbackService(ctx)
-    // Perform haptic feedback
-    if (sharedPrefsManager.isHapticFeedbackEnabled()) {
+
+    // Perform haptic feedback for non-backspace keys
+    if (sharedPrefsManager.isHapticFeedbackEnabled() && key.specialKey != SpecialKey.BACKSPACE) {
         hapticFeedbackService.performHapticFeedback()
     }
 

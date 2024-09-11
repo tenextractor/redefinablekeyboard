@@ -42,18 +42,14 @@ fun SettingsScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "Haptic Feedback on Keypress")
+                Text(stringResource(R.string.haptic_feedback))
                 Switch(
                     checked = hapticFeedbackEnabled,
                     onCheckedChange = {
                         hapticFeedbackEnabled = it
                         sharedPrefsManager.setHapticFeedbackEnabled(it)
                         if (it) {
-                            try {
                                 hapticFeedbackService.performHapticFeedback()
-                            } catch (e: Exception) {
-                                errorMessage = "Failed to perform haptic feedback: ${e.message}"
-                            }
                         }
                     }
                 )

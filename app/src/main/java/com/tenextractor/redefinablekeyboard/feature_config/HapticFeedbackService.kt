@@ -28,8 +28,7 @@ class HapticFeedbackService(private val context: Context) {
                     it.vibrate(50)
                 }
             } ?: Log.e("HapticFeedbackService", "Vibrator is null")
-        } catch (e: Exception) {
-            Log.e("HapticFeedbackService", "Error performing haptic feedback", e)
+        } catch (_: Exception) {
         }
     }
 }
