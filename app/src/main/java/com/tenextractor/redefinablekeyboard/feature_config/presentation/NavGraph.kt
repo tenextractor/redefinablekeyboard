@@ -13,11 +13,15 @@ fun NavGraph(navController: NavHostController) {
     ) {
         composable("home") {
             HomeScreen(
-                onNavToSelectLayouts = { navController.navigate("select_layouts") }
+                onNavToSelectLayouts = { navController.navigate("select_layouts") },
+                onNavToSettings = { navController.navigate("settings") }
             )
         }
         composable("select_layouts") {
             SelectLayoutScreen()
+        }
+        composable("settings") {
+            SettingsScreen()
         }
     }
 }

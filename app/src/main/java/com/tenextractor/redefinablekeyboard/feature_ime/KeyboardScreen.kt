@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
+import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
@@ -167,6 +169,13 @@ fun SelectActiveLayoutDialog(onDismissRequest: () -> Unit) {
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+    val sharedPrefsManager = SharedPrefsManager(ctx)
+    val hapticFeedbackService = HapticFeedbackService(ctx)
+    // Perform haptic feedback
+    if (sharedPrefsManager.isHapticFeedbackEnabled()) {
+        hapticFeedbackService.performHapticFeedback()
+    }
+
     val layout = selectedLayouts[state.layout % selectedLayouts.size]
     val inputConnection = (ctx as IMEService2).currentInputConnection
     if (key.moveToLayer != null)

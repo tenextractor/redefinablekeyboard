@@ -2,11 +2,12 @@ package com.tenextractor.redefinablekeyboard.feature_config
 
 import android.content.Context
 
-class SharedPrefsManager (private val context: Context) {
+class SharedPrefsManager(private val context: Context) {
     private val sharedPrefsFile = "com.tenextractor.redefinablekeyboard.sharedpreferences"
     private val sharedPref = context.getSharedPreferences(sharedPrefsFile, Context.MODE_PRIVATE)
     private val selectedLayoutsKey = "selectedLayouts"
     private val currentLayoutKey = "currentLayout"
+    private val hapticFeedbackEnabledKey = "hapticFeedbackEnabled"
 
     fun readSelectedLayouts(): List<String> {
         val selectedLayoutsString = sharedPref.getString(selectedLayoutsKey, "")!!
@@ -40,6 +41,17 @@ class SharedPrefsManager (private val context: Context) {
     fun writeCurrentLayout(index: Int) {
         with (sharedPref.edit()) {
             putInt(currentLayoutKey, index)
+            apply()
+        }
+    }
+
+    fun isHapticFeedbackEnabled(): Boolean {
+        return sharedPref.getBoolean(hapticFeedbackEnabledKey, false)
+    }
+
+    fun setHapticFeedbackEnabled(enabled: Boolean) {
+        with (sharedPref.edit()) {
+            putBoolean(hapticFeedbackEnabledKey, enabled)
             apply()
         }
     }
