@@ -15,7 +15,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? = null): List<Key> {
     return if (bottomRowKey != null) {
         listOf(
-            Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
+            Key(text = "", label = "\uD83C\uDF10", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
             Key(comma, width = KeyWidth.FractionWidth(.1F)),
             bottomRowKey,
             Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.25F), specialKey = SpecialKey.SPACE),
@@ -25,7 +25,7 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
         )
     } else listOf(
         Key(comma, width = KeyWidth.FractionWidth(.1F)),
-        Key(text = "", label = "⛭", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
+        Key(text = "", label = "\uD83C\uDF10", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
         Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
         Key("'", width = KeyWidth.FractionWidth(.1F)),
         Key(period, width = KeyWidth.FractionWidth(.1F)),
