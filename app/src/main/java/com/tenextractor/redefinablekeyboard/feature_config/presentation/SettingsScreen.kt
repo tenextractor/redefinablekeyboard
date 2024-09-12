@@ -54,14 +54,6 @@ fun SettingsScreen() {
                     }
                 )
             }
-
-            errorMessage?.let {
-                Text(
-                    text = it,
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
-            }
         }
     }
 }
