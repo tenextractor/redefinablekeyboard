@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -35,7 +34,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
@@ -73,7 +71,7 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
         }
     }
 
-    if (state.isDialogOpen) SelectActiveLayoutDialog { updateState(state.copy(isDialogOpen = false)) }
+    if (state.isDialogOpen) SwitchLayoutPopup { updateState(state.copy(isDialogOpen = false)) }
 }
 
 fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
@@ -168,13 +166,6 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
     }
 }
 
-@Composable
-fun SelectActiveLayoutDialog(onDismissRequest: () -> Unit) {
-    Dialog(onDismissRequest = onDismissRequest) {
-        Card{Text("test")}
-    }
-}
-
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     val sharedPrefsManager = SharedPrefsManager(ctx)
     val hapticFeedbackService = HapticFeedbackService(ctx)
@@ -197,8 +188,6 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: K
             SpecialKey.BACKSPACE -> {
                 layout.combiner.delete(ctx, inputConnection)
             }
-            //SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
-
             SpecialKey.CHANGELAYOUT -> {
                 updateState(state.copy(shiftState = ShiftState.SHIFT))
                 updateState(state.copy(shiftState = ShiftState.OFF))
@@ -222,14 +211,7 @@ fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, stat
     if (key.specialKey != null) {
         when (key.specialKey) {
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
-            SpecialKey.CHANGELAYOUT -> {
-                if (selectedLayouts.size == 1) {
-                    updateState(state.copy(shiftState = ShiftState.SHIFT))
-                    updateState(state.copy(shiftState = ShiftState.OFF))
-                } // stupid hack, should be removed later
-                if (state.layout == 0) updateState(KeyboardState(layout = selectedLayouts.size - 1))
-                else updateState(KeyboardState(layout = (state.layout - 1) % selectedLayouts.size))
-            }
+            //SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
             else -> onPressKey(key, ctx, selectedLayouts, state, updateState)
         }
     } else if (key.text == "'") onPressKey(Key("\""), ctx, selectedLayouts, state, updateState)
