@@ -71,7 +71,9 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
         }
     }
 
-    if (state.isDialogOpen) SwitchLayoutPopup { updateState(state.copy(isDialogOpen = false)) }
+    if (state.isDialogOpen) SwitchLayoutPopup(selectedLayouts.map {it.name},
+        { updateState(state.copy(layout = it, isDialogOpen = false)) },
+        { updateState(state.copy(isDialogOpen = false)) })
 }
 
 fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
@@ -211,7 +213,7 @@ fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, stat
     if (key.specialKey != null) {
         when (key.specialKey) {
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
-            //SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
+            SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
             else -> onPressKey(key, ctx, selectedLayouts, state, updateState)
         }
     } else if (key.text == "'") onPressKey(Key("\""), ctx, selectedLayouts, state, updateState)

@@ -71,3 +71,8 @@ val notoFamily = FontFamily(
 fun xInY(x: Char, y: List<Char?>): Boolean {
     return y.binarySearch(x) >= 0
 }
+
+fun cycleLayout(currentLayout: Int, recentLayouts: Array<Int>): Int {
+    val currentLayoutIndex = recentLayouts.indexOf(currentLayout)
+    return (currentLayoutIndex + 1) % recentLayouts.size
+}
