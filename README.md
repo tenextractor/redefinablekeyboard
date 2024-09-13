@@ -4,6 +4,8 @@ A multilingual keyboard app. Under development, so please use it alongside anoth
 
 [**Download v0.6.0.20240910-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.6.0.20240910-alpha/redefinablekeyboard-v0.6.0.20240910.apk)
 
+[**Join our Discord**](https://discord.gg/K4nP2az7bt)
+
 * Credit for IME service logic: https://github.com/THEAccess/compose-keyboard-ime
 * Credit for abugida input logic: https://www.youtube.com/watch?v=kNwVybjm3h8
 
