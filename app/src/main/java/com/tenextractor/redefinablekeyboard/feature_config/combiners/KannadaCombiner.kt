@@ -104,7 +104,7 @@ object KannadaCombiner: Combiner {
         val charsBeforeCursor = inputConnection.getTextBeforeCursor(2, 0)
         if (charsBeforeCursor != null) if (charsBeforeCursor.length == 2)
             if (charsBeforeCursor[0] == NUQTA && charsBeforeCursor[1] == VIRAMA) {
-                inputConnection.deleteSurroundingText(3, 0)
+                inputConnection.deleteSurroundingTextInCodePoints(3, 0)
                 return
             } //if there is a consonant with nuqta and virama before the cursor, delete the consonant, nuqta and virama
         southIndianDelete(depVowels, consonants, VIRAMA, imeService, inputConnection)

@@ -98,12 +98,12 @@ object TibetanCombiner: Combiner {
         val charBefore = inputConnection.getTextBeforeCursor(1, 0)
         if (charBefore != null) if (charBefore.length == 1) {
             if (charBefore[0] == NBSP) {
-                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                 inputConnection.commitText(key.text, 1)
                 return
             }
             if (charBefore[0] == HALANTA) if (xInY(key.text[0], consonants)) {
-                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                 inputConnection.commitText(normalToSubjoined(key.text[0]).toString(), 1)
                 return
             }
@@ -118,7 +118,7 @@ object TibetanCombiner: Combiner {
                 if (xInY(abs(charsBefore[1].code-80).toChar(), superscripts))
                     if (consonants.binarySearch(key.text[0]) >= 0) {
                         val toCommit = abs(charsBefore[1].code-80).toChar().toString() + normalToSubjoined(key.text[0])
-                        inputConnection.deleteSurroundingText(1, 0)
+                        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                         inputConnection.commitText(toCommit, 1)
                         return
             }
@@ -147,6 +147,6 @@ object TibetanCombiner: Combiner {
     override fun delete(imeService: IMEService2, inputConnection: InputConnection) {
         val selectedText = inputConnection.getSelectedText(0)
         if (selectedText != null) if (selectedText.isNotEmpty()) DefaultCombiner.delete(imeService, inputConnection)
-        inputConnection.deleteSurroundingText(1, 0)
+        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
     }
 }

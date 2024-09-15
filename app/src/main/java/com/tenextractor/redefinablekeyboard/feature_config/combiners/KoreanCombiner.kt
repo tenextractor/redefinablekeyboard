@@ -107,13 +107,13 @@ object KoreanCombiner: Combiner {
         val charBefore = inputConnection.getTextBeforeCursor(1, 0)
         if (charBefore != null) if (charBefore.length == 1) {
             if (initialClusters.containsKey(charBefore[0]) && key.text[0] == charBefore[0]) {
-                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                 inputConnection.commitText(initialClusters[key.text[0]]!!, 1)
                 return
             }
             if (xInY(charBefore[0], initials) && xInY(key.text[0], vowels)) {
                 val toCommit = toBlock(charBefore[0], key.text[0], null).toString()
-                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                 inputConnection.commitText(toCommit, 1)
                 return
             } //if char before is an initial consonant and vowel is typed, merge them
@@ -127,19 +127,19 @@ object KoreanCombiner: Combiner {
                 if (final == null) { //charBefore is Consonant + Vowel
                     if (mergedClusters.containsKey(vowel.toString() + key.text[0])) {
                         val toCommit = toBlock(initial, mergedClusters[vowel.toString() + key.text[0]]!!, null).toString()
-                        inputConnection.deleteSurroundingText(1, 0)
+                        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                         inputConnection.commitText(toCommit, 1)
                         return
                     } //if no final and a vowel is added that can combine with the vowel of the block, merge them
                     if (xInY(key.text[0], finals)) {
-                        inputConnection.deleteSurroundingText(1, 0)
+                        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                         inputConnection.commitText(toBlock(initial, vowel, key.text[0]).toString(), 1)
                         return
                     } //if no final and a final is added, merge them
                 } else { //charBefore is Consonant + Vowel + Final
                     if (mergedClusters.containsKey(final.toString() + key.text[0])) {
                         val toCommit = toBlock(initial, vowel, mergedClusters[final.toString() + key.text[0]]).toString()
-                        inputConnection.deleteSurroundingText(1, 0)
+                        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                         inputConnection.commitText(toCommit, 1)
                         return
                     } //if the final of the last block can be merged with the typed character, merge them
@@ -148,14 +148,14 @@ object KoreanCombiner: Combiner {
                             val toCommit = toBlock(initial, vowel, splitClusters[final]!![0]).toString() +
                                     toBlock(splitClusters[final]!![1], key.text[0], null)
                             Log.d("mytag", "tocommit ${toCommit.length}")
-                            inputConnection.deleteSurroundingText(1, 0)
+                            inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                             inputConnection.commitText(toCommit, 1)
                             return
                         } //if a vowel is entered and the final of the last block can be split,
                         //move the second part of the final to a new syllable block, along with the vowel
                         val toCommit = toBlock(initial, vowel, null).toString() +
                                 toBlock(final, key.text[0], null)
-                        inputConnection.deleteSurroundingText(1, 0)
+                        inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                         inputConnection.commitText(toCommit, 1)
                         return
                     }
@@ -170,7 +170,7 @@ object KoreanCombiner: Combiner {
         if (charBefore != null) if (charBefore.length == 1)
             if (charBefore[0].code in 0xAC00..0xD7A3) {
             val letters = toLetters(charBefore[0])
-            inputConnection.deleteSurroundingText(1, 0)
+            inputConnection.deleteSurroundingTextInCodePoints(1, 0)
             if (letters[2] != null) {
                 inputConnection.commitText(toBlock(letters[0]!!, letters[1]!!, null).toString(), 1)
                 return

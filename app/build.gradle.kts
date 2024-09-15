@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tenextractor.redefinablekeyboard"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "0.6.0.20240910"
