@@ -7,7 +7,8 @@ data class KeyboardState(
     val layoutName: String = "",
     val shiftState: ShiftState = ShiftState.OFF,
     val shiftPressedAt: Long = 0,
-    val buffer: String = ""
+    val buffer: String = "",
+    val vibration: Boolean = false
 )
 
 enum class ShiftState {

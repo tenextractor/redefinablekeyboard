@@ -1,9 +1,12 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -82,7 +85,7 @@ fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
         else if (key.label != null) key.copy(text = key.text.uppercase(), label = key.label.uppercase())
         else key.copy(text = key.text.uppercase())
     } }
-}
+} //THIS NEEDS TO BE MOVED TO compileLayout()
 
 fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
     return layer.map { row -> row.map { key ->
@@ -91,30 +94,46 @@ fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
             label = key.label.replaceFirstChar(Char::titlecase))
         else key.copy(text = key.text.replaceFirstChar(Char::titlecase))
     } }
-}
+} //THIS NEEDS TO BE MOVED TO compileLayout()
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>,
+           state: KeyboardState, updateState: (KeyboardState) -> Unit) {
     var pressed by remember { mutableStateOf(false) }
+    var dragOffset by remember { mutableStateOf(Offset(0f, 0f)) }
+    var dragged by remember { mutableStateOf(false) }
     val sharedPrefsManager = SharedPrefsManager(ctx)
     val hapticFeedbackService = HapticFeedbackService(ctx)
     Box(
-        modifier = (if (key.specialKey == SpecialKey.BACKSPACE) {
-            Modifier.pointerInput(Unit) {
+        modifier =
+            Modifier/*.pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        pressed = true
                         tryAwaitRelease()
+                        pressed = true
                         pressed = false
                     }
                 )
-            }
-        } else Modifier
-            .combinedClickable(onClick = { onPressKey(key, ctx, selectedLayouts, state, updateState) },
-                onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) }))
+            }*/.then(if (key.swipeKeys != null) {
+                Modifier.pointerInput(Unit) {
+                    detectDragGestures(onDragEnd = {
+                        dragged = false
+                        dragOffset = Offset(0f, 0f)
+                    }) { change, dragAmount ->
+                        change.consume()
+                        dragged = true
+                        dragOffset = dragAmount
+                    }
+                }
+            } else Modifier)
+                /*.then(if (key.specialKey != SpecialKey.BACKSPACE) {
+                Modifier.combinedClickable(onClick = { onPressKey(key, ctx, selectedLayouts, state, updateState) },
+                    onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) })
+            } else Modifier)*/
+                .then(Modifier
             .width(getKeyWidth(key.width, screenWidth, defaultWidth))
-            .height(56.dp)
+            .height(56.dp))
             .then(
                 if (key.specialKey == SpecialKey.SPACE) {
                     Modifier.drawWithContent {
@@ -165,15 +184,29 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                 delay = 20
             }
         }
+    } else LaunchedEffect(pressed) {
+        //Log.d("mytag", "offset $dragOffset $pressed $dragged")
+        if (pressed && !dragged) onPressKey(key, ctx, selectedLayouts, state, updateState)
+    }
+
+    LaunchedEffect(dragged) {
+        if (dragged) {
+            Log.d("mytag", "offset $dragOffset $pressed $dragged")
+            if (dragOffset.x >= 0) {
+                onPressKey(key.swipeKeys?.right?:key, ctx, selectedLayouts, state, updateState)
+            }
+            if (dragOffset.x < 0) {
+                onPressKey(key.swipeKeys?.left?:key, ctx, selectedLayouts, state, updateState)
+            }
+        }
     }
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
-    val sharedPrefsManager = SharedPrefsManager(ctx)
     val hapticFeedbackService = HapticFeedbackService(ctx)
 
     // Perform haptic feedback for non-backspace keys
-    if (sharedPrefsManager.isHapticFeedbackEnabled() && key.specialKey != SpecialKey.BACKSPACE) {
+    if (state.vibration && key.specialKey != SpecialKey.BACKSPACE) {
         hapticFeedbackService.performHapticFeedback()
     }
 

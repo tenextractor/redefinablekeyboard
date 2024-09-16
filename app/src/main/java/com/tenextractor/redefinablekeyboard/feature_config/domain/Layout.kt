@@ -26,6 +26,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
     val rightToLeft: Boolean = false,
     val bottomRowKey: Key? = null,
     //val popups: List<Pair<String, String>>?,
+    val swipeList: List<Pair<String, SwipeKeys>>? = null,
     val comma: String = ",",
     val currency: String = "¤",
     val period: String = ".",
@@ -41,9 +42,10 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
         val bottomRow = bottomRow(comma, space, period, bottomRowKey)
 
         val baseLayer = compileLayer(layout, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
-            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, moveLayerKeys)
+            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, moveLayerKeys, swipeList = swipeList)
         val compiledOtherLayers = otherLayers.map { compileLayer(it, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
-            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, isOtherLayer = true) }
+            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, isOtherLayer = true
+            , swipeList = swipeList) }
 
         val symbolsLayer1 = compileLayer(symbols1, symbolsKey2,
             backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
@@ -51,7 +53,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
         val compiledCapsLayer = if (capsLayer != null) {
             compileLayer(capsLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
-                symbolsKey1, bottomRow, emptyList())
+                symbolsKey1, bottomRow, emptyList(), swipeList = swipeList)
         } else null
 
         return KbLayout(

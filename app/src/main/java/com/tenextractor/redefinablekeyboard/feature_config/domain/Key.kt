@@ -5,5 +5,6 @@ data class Key(
     val label: String? = null,
     val width: KeyWidth = KeyWidth.WeightWidth(1F),
     val specialKey: SpecialKey? = null,
-    val moveToLayer: Int? = null
+    val moveToLayer: Int? = null,
+    val swipeKeys: SwipeKeys? = null
 )

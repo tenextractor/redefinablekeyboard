@@ -24,7 +24,8 @@ class KeyboardView(context: Context, /*imeService: IMEService2, private val view
         val sharedPrefsManager = SharedPrefsManager(context)
         val selectedLayouts = selectedLayoutNamesToSelectedLayouts(
             sharedPrefsManager.readSelectedLayouts(), inBuiltLayouts)
-        var state by remember { mutableStateOf(KeyboardState(layout = sharedPrefsManager.readCurrentLayout() /*layout = viewModel.layout.value*/)) }
+        var state by remember { mutableStateOf(KeyboardState(layout = sharedPrefsManager.readCurrentLayout(),
+            vibration = sharedPrefsManager.isHapticFeedbackEnabled() /*layout = viewModel.layout.value*/)) }
         fun updateState(newState: KeyboardState) {
             if (newState.layout != state.layout) sharedPrefsManager.writeCurrentLayout(
                 newState.layout % sharedPrefsManager.readSelectedLayouts().size)
