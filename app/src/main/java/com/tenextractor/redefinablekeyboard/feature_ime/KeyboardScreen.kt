@@ -246,9 +246,12 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: K
                 updateState(KeyboardState(layout = (state.layout + 1) % selectedLayouts.size))
             }
             SpecialKey.LAYOUTLEFT -> {
-                updateState(state.copy(shiftState = ShiftState.SHIFT))
-                updateState(state.copy(shiftState = ShiftState.OFF))
-                updateState(KeyboardState(layout = (state.layout - 1) % selectedLayouts.size))
+                if (selectedLayouts.size == 1) {
+                    updateState(state.copy(shiftState = ShiftState.SHIFT))
+                    updateState(state.copy(shiftState = ShiftState.OFF))
+                } // stupid hack, should be removed later
+                if (state.layout == 0) updateState(KeyboardState(layout = selectedLayouts.size - 1))
+                else updateState(KeyboardState(layout = (state.layout - 1) % selectedLayouts.size))
             }
             SpecialKey.LAYOUTRIGHT -> {
                 updateState(state.copy(shiftState = ShiftState.SHIFT))

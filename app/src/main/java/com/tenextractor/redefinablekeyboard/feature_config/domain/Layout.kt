@@ -5,7 +5,6 @@ import com.tenextractor.redefinablekeyboard.feature_config.backSpaceKey
 import com.tenextractor.redefinablekeyboard.feature_config.bottomRow
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.Combiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.DefaultCombiner
-import com.tenextractor.redefinablekeyboard.feature_config.compileLayer
 import com.tenextractor.redefinablekeyboard.feature_config.shiftKey
 import com.tenextractor.redefinablekeyboard.feature_config.symbols1
 import com.tenextractor.redefinablekeyboard.feature_config.symbols2
@@ -42,10 +41,10 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
         val bottomRow = bottomRow(comma, space, period, bottomRowKey)
 
         val baseLayer = compileLayer(layout, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
-            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, moveLayerKeys, swipeList = swipeList)
+            backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows)
         val compiledOtherLayers = otherLayers.map { compileLayer(it, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
             backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, isOtherLayer = true
-            , swipeList = swipeList) }
+            ) }
 
         val symbolsLayer1 = compileLayer(symbols1, symbolsKey2,
             backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
@@ -53,7 +52,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
         val compiledCapsLayer = if (capsLayer != null) {
             compileLayer(capsLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
-                symbolsKey1, bottomRow, emptyList(), swipeList = swipeList)
+                symbolsKey1, bottomRow, emptyList())
         } else null
 
         return KbLayout(
@@ -62,5 +61,62 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             capsLayer = compiledCapsLayer,
             combiner = combiner
         )
+    }
+
+    private fun compileLayer(layerString: String, lowerLeftKey: Key?, lowerRightKey: Key?,
+                             bottomLeftKey: Key, bottomRow: List<Key>, decoupleRows: List<Int>,
+                             isOtherLayer: Boolean = false,
+    ): List<List<Key>> {
+        //NEED TO CUT DOWN ON THE NUMBER OF ARGUMENTS
+        /*
+        Creates this layout:
+        .   .   .   .   .   .   .   .   .   .   .   .
+        .   .   .   .   . layerString   .   .   .   .
+        .   .   .   .   .   .   .   .   .   .   .   .
+        lowerLeftKey.   .   .   .   .   lowerRightKey
+        bottomLeftKey <-         bottomRow         ->
+         */
+        val rowStrings = layerString.split('\n').map { it.trim() }
+        //return rowStrings.map { rowString -> rowString.split(' ').map { Key(text = it) } }
+        val layer = rowStrings.mapIndexed { i, rowString ->
+            if (i == rowStrings.size - 1) {
+                val row = rowString.split(' ').map {
+                    compileKey(it, isOtherLayer = isOtherLayer) }.toMutableList()
+                if (lowerLeftKey != null) row.add(0, lowerLeftKey)
+                if (lowerRightKey != null) row.add(lowerRightKey)
+                row
+                //for last row of layerString (second from bottom of the whole keyboard), insert lowerLeftKey
+                //and lowerRightKey
+            } else if (decoupleRows.contains(i)) {
+                val numberOfKeys = rowString.split(' ').size
+                rowString.split(' ').map {
+                    compileKey(it, KeyWidth.FractionWidth(1F/numberOfKeys), isOtherLayer) }
+                //decouple the rows that need to be decoupled
+            } else {
+                rowString.split(' ').map { compileKey(it, isOtherLayer = isOtherLayer) }
+            }
+        }.toMutableList()
+        layer.add(listOf(bottomLeftKey) + bottomRow)
+        return layer
+    }
+
+    private fun compileKey(text: String, width: KeyWidth = KeyWidth.WeightWidth(1F),
+                           isOtherLayer: Boolean = false): Key {
+        val hasDottedCircle = text.contains("◌")
+        val newText = text.replace("◌", "")
+
+        return Key(
+            text = if (text in moveLayerKeys) "" else newText,
+            label = if (text in moveLayerKeys || hasDottedCircle) text else null,
+            width = width,
+            moveToLayer = if (text in moveLayerKeys) 3 + moveLayerKeys.indexOf(text)
+            else if (isOtherLayer) 0 else null,
+            swipeKeys = swipeList?.find { it.first == text }?.second
+        )
+/*
+        return if (text in moveLayerKeys) {
+            Key(text = "", label = text, width = width, moveToLayer = 3 + moveLayerKeys.indexOf(text))
+        } else if (isOtherLayer) Key(text = newText, label = if (hasDottedCircle) text else null, width = width, moveToLayer = 0)
+        else Key(text = newText, label = if (hasDottedCircle) text else null, width = width)*/
     }
 }

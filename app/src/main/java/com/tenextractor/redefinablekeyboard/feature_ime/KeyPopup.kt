@@ -34,7 +34,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
 
     val swipeFontSize = 12.sp
 
-    Popup(offset = IntOffset(xOffset, -240)) {
+    Popup(alignment = Alignment.TopStart, offset = IntOffset(xOffset, -280)) {
         Box(
             Modifier
                 .background(Color.Black)
