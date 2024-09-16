@@ -14,12 +14,12 @@ fun southIndianCombine(indepToDepVowels: Map<Char, *>, virama: Char, others: Lis
 
         //if the char before cursor is a virama (which means that there is a consonant before the virama)
         if (indepToDepVowels.containsKey(key.text[0])) {
-            inputConnection.deleteSurroundingText(1, 0)
+            inputConnection.deleteSurroundingTextInCodePoints(1, 0)
             inputConnection.commitText(indepToDepVowels[key.text[0]].toString(), 1)
             return
         } //if a vowel is input, delete the virama and add the dependent form of the vowel
         if (others.binarySearch(key.text[0]) >= 0) {
-            inputConnection.deleteSurroundingText(1, 0)
+            inputConnection.deleteSurroundingTextInCodePoints(1, 0)
             inputConnection.commitText(key.text, 1)
             return
         } //if candrabindu etc is input, delete the virama and add it
@@ -35,11 +35,11 @@ fun southIndianDelete(depVowels: List<Char>, consonants: List<Char>,
     val charBeforeCursor = inputConnection.getTextBeforeCursor(1, 0)
     if (charBeforeCursor != null) if (charBeforeCursor.isNotEmpty()) {
         if (charBeforeCursor[0] == virama) {
-            inputConnection.deleteSurroundingText(2, 0)
+            inputConnection.deleteSurroundingTextInCodePoints(2, 0)
             return
         } //if there is a virama, delete it along with the attached letter
         if (depVowels.binarySearch(charBeforeCursor[0]) >= 0) {
-            inputConnection.deleteSurroundingText(1, 0)
+            inputConnection.deleteSurroundingTextInCodePoints(1, 0)
             inputConnection.commitText(virama.toString(), 1)
             return
         } //if there is a dependent vowel mark, delete it and add virama
