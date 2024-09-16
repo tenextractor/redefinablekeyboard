@@ -1,12 +1,10 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +12,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -29,14 +30,18 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
@@ -44,7 +49,10 @@ import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
+import com.tenextractor.redefinablekeyboard.feature_config.presentation.ClickableText
 import kotlinx.coroutines.delay
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
 @Composable
 fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
@@ -100,40 +108,48 @@ fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
 @Composable
 fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>,
            state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+    var pressEnd by remember { mutableStateOf(false) }
     var pressed by remember { mutableStateOf(false) }
     var dragOffset by remember { mutableStateOf(Offset(0f, 0f)) }
-    var dragged by remember { mutableStateOf(false) }
+    var dragging by remember { mutableStateOf(false) }
     val sharedPrefsManager = SharedPrefsManager(ctx)
     val hapticFeedbackService = HapticFeedbackService(ctx)
+    var xPosition by remember { mutableStateOf(0) }
+
     Box(
         modifier =
-            Modifier/*.pointerInput(Unit) {
+        Modifier
+            .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
-                        tryAwaitRelease()
                         pressed = true
+                        tryAwaitRelease()
                         pressed = false
+                        if (!dragging) pressEnd = true
                     }
                 )
-            }*/.then(if (key.swipeKeys != null) {
+            }
+            .then(if (key.swipeKeys != null) {
                 Modifier.pointerInput(Unit) {
                     detectDragGestures(onDragEnd = {
-                        dragged = false
+                        dragging = false
                         dragOffset = Offset(0f, 0f)
                     }) { change, dragAmount ->
+                        dragging = true
+                        dragOffset += dragAmount
                         change.consume()
-                        dragged = true
-                        dragOffset = dragAmount
                     }
                 }
             } else Modifier)
-                /*.then(if (key.specialKey != SpecialKey.BACKSPACE) {
+            /*.then(if (key.specialKey != SpecialKey.BACKSPACE) {
                 Modifier.combinedClickable(onClick = { onPressKey(key, ctx, selectedLayouts, state, updateState) },
                     onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) })
             } else Modifier)*/
-                .then(Modifier
-            .width(getKeyWidth(key.width, screenWidth, defaultWidth))
-            .height(56.dp))
+            .then(
+                Modifier
+                    .width(getKeyWidth(key.width, screenWidth, defaultWidth))
+                    .height(56.dp)
+            )
             .then(
                 if (key.specialKey == SpecialKey.SPACE) {
                     Modifier.drawWithContent {
@@ -157,6 +173,8 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                     }
                 } else {
                     Modifier
+                }.onGloballyPositioned { coordinates ->
+                    xPosition = coordinates.positionInRoot().x.roundToInt()
                 }
             ),
         contentAlignment = Alignment.Center
@@ -184,22 +202,20 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                 delay = 20
             }
         }
-    } else LaunchedEffect(pressed) {
-        //Log.d("mytag", "offset $dragOffset $pressed $dragged")
-        if (pressed && !dragged) onPressKey(key, ctx, selectedLayouts, state, updateState)
-    }
-
-    LaunchedEffect(dragged) {
-        if (dragged) {
-            Log.d("mytag", "offset $dragOffset $pressed $dragged")
-            if (dragOffset.x >= 0) {
-                onPressKey(key.swipeKeys?.right?:key, ctx, selectedLayouts, state, updateState)
-            }
-            if (dragOffset.x < 0) {
-                onPressKey(key.swipeKeys?.left?:key, ctx, selectedLayouts, state, updateState)
-            }
+    } else LaunchedEffect(pressEnd) {
+        if (pressEnd) {
+            onPressKey(key, ctx, selectedLayouts, state, updateState)
+            pressEnd = false
         }
     }
+
+    LaunchedEffect(dragging) {
+        if (dragging) {
+            onDragKey(key, dragOffset, ctx, selectedLayouts, state, updateState)
+        }
+    }
+
+    if (pressed) KeyPopup(key, xPosition)
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
@@ -223,12 +239,25 @@ fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: K
             SpecialKey.BACKSPACE -> {
                 layout.combiner.delete(ctx, inputConnection)
             }
-            SpecialKey.CHANGELAYOUT -> {
+            SpecialKey.ENTER -> ctx.sendKeyChar('\n')
+            SpecialKey.LAYOUTCYCLE -> {
                 updateState(state.copy(shiftState = ShiftState.SHIFT))
                 updateState(state.copy(shiftState = ShiftState.OFF))
                 updateState(KeyboardState(layout = (state.layout + 1) % selectedLayouts.size))
             }
-            SpecialKey.ENTER -> ctx.sendKeyChar('\n')
+            SpecialKey.LAYOUTLEFT -> {
+                updateState(state.copy(shiftState = ShiftState.SHIFT))
+                updateState(state.copy(shiftState = ShiftState.OFF))
+                updateState(KeyboardState(layout = (state.layout - 1) % selectedLayouts.size))
+            }
+            SpecialKey.LAYOUTRIGHT -> {
+                updateState(state.copy(shiftState = ShiftState.SHIFT))
+                updateState(state.copy(shiftState = ShiftState.OFF))
+                updateState(KeyboardState(layout = (state.layout + 1) % selectedLayouts.size))
+            }
+            SpecialKey.LAYOUTPOPUP -> {
+                updateState(state.copy(isDialogOpen = true))
+            }
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.SHIFT, shiftPressedAt = System.currentTimeMillis()))
             SpecialKey.UNSHIFT -> if (System.currentTimeMillis() - state.shiftPressedAt < 500) updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
                 else updateState(state.copy(shiftState = ShiftState.OFF))
@@ -246,13 +275,29 @@ fun onLongPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, stat
     if (key.specialKey != null) {
         when (key.specialKey) {
             SpecialKey.SHIFT -> updateState(state.copy(shiftState = ShiftState.CAPSLOCK))
-            SpecialKey.CHANGELAYOUT -> { updateState(state.copy(isDialogOpen = true)) }
+            SpecialKey.LAYOUTCYCLE -> { updateState(state.copy(isDialogOpen = true)) }
             else -> onPressKey(key, ctx, selectedLayouts, state, updateState)
         }
     } else if (key.text == "'") onPressKey(Key("\""), ctx, selectedLayouts, state, updateState)
     else if (key.text == ",") onPressKey(Key("„"), ctx, selectedLayouts, state, updateState)
     else if (key.text == ".") onPressKey(Key("“"), ctx, selectedLayouts, state, updateState)
     else onPressKey(key, ctx, selectedLayouts, state, updateState)
+}
+
+fun onDragKey(key: Key, dragOffset: Offset, ctx: Context, selectedLayouts: List<KbLayout>,
+              state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+    val x = dragOffset.x
+    val y = dragOffset.y
+    var keyToSend = key
+    if (abs(x) > abs(y)) {
+        if (x >= 0) keyToSend = key.swipeKeys?.right?:key
+        if (x < 0) keyToSend = key.swipeKeys?.left?:key
+    } else {
+        if (y >= 0) keyToSend = key.swipeKeys?.down?:key
+        if (y < 0) keyToSend = key.swipeKeys?.up?:key
+    }
+
+    onPressKey(keyToSend, ctx, selectedLayouts, state, updateState)
 }
 
 fun getKeyWidth(width: KeyWidth, screenWidth: Dp, defaultWidth: Float): Dp {

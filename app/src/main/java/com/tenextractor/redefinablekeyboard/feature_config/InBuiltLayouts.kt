@@ -1,6 +1,5 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
-import android.util.Log
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KoreanCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCombiner
@@ -16,7 +15,13 @@ import com.tenextractor.redefinablekeyboard.feature_config.domain.SwipeKeys
 fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? = null): List<Key> {
     return if (bottomRowKey != null) {
         listOf(
-            Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
+            Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F),
+                specialKey = SpecialKey.LAYOUTCYCLE,
+                swipeKeys = SwipeKeys(
+                    up = Key(text = "", label = "\uD83C\uDF10\uFE0E≡", specialKey = SpecialKey.LAYOUTPOPUP),
+                    left = Key(text = "", label = "<\uD83C\uDF10\uFE0E", specialKey = SpecialKey.LAYOUTLEFT),
+                    right = Key(text = "", label = "\uD83C\uDF10\uFE0E>", specialKey = SpecialKey.LAYOUTRIGHT)
+                )),
             Key(comma, width = KeyWidth.FractionWidth(.1F),
                 swipeKeys = SwipeKeys(left = Key("„"), right = Key("“"))),
             bottomRowKey,
@@ -30,9 +35,16 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
     } else listOf(
         Key(comma, width = KeyWidth.FractionWidth(.1F),
             swipeKeys = SwipeKeys(left = Key("„"), right = Key("“"))),
-        Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F), specialKey = SpecialKey.CHANGELAYOUT),
+        Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F),
+            specialKey = SpecialKey.LAYOUTCYCLE,
+            swipeKeys = SwipeKeys(
+                up = Key(text = "", label = "\uD83C\uDF10\uFE0E≡", specialKey = SpecialKey.LAYOUTPOPUP),
+                left = Key(text = "", label = "<\uD83C\uDF10\uFE0E", specialKey = SpecialKey.LAYOUTLEFT),
+                right = Key(text = "", label = "\uD83C\uDF10\uFE0E>", specialKey = SpecialKey.LAYOUTRIGHT)
+            )),
         Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
-        Key("'", width = KeyWidth.FractionWidth(.1F)),
+        Key("'", width = KeyWidth.FractionWidth(.1F),
+            swipeKeys = SwipeKeys(up = Key("\""), left = Key("«"), right = Key("»"))),
         Key(period, width = KeyWidth.FractionWidth(.1F)),
         Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
     )
@@ -470,6 +482,12 @@ Komi
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
+
+Komi (Molodtsov)
+ԃ ԉ ԋ ԅ ԇ
+ј ц у к е н г ш щ з х
+ф ы в а п р о л ԁ ж җ
+ԍ ч с м і т ԏ б ӧ
 
 Koryak
 ё вʼ гʼ ӄ ӈ ъ
