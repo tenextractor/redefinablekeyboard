@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.material3.Text
@@ -33,6 +34,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
         key.swipeKeys.down.label ?: key.swipeKeys.down.text else ""
 
     val swipeFontSize = 12.sp
+    val swipeHeight = 20.dp
 
     Popup(alignment = Alignment.TopStart, offset = IntOffset(xOffset, -280)) {
         Box(
@@ -44,6 +46,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = upText,
+                    modifier = Modifier.heightIn(0.dp, swipeHeight),
                     color = Color.White,
                     fontFamily = notoFamily,
                     fontSize = swipeFontSize,
@@ -52,7 +55,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = leftText,
-                        modifier = Modifier.requiredWidth(10.dp),
+                        modifier = Modifier.requiredWidth(10.dp).heightIn(0.dp, swipeHeight),
                         color = Color.White,
                         fontFamily = notoFamily,
                         fontSize = swipeFontSize,
@@ -60,7 +63,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
                     )
                     Text(
                         text = key.label ?: key.text,
-                        modifier = Modifier.requiredWidth(20.dp),
+                        modifier = Modifier.requiredWidth(20.dp).heightIn(0.dp, 40.dp),
                         color = Color.White,
                         fontFamily = notoFamily,
                         fontSize = 22.sp,
@@ -68,7 +71,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
                     )
                     Text(
                         text = rightText,
-                        modifier = Modifier.requiredWidth(10.dp),
+                        modifier = Modifier.requiredWidth(10.dp).heightIn(0.dp, swipeHeight),
                         color = Color.White,
                         fontFamily = notoFamily,
                         fontSize = swipeFontSize,
@@ -77,6 +80,7 @@ fun KeyPopup(key: Key, xOffset: Int) {
                 }
                 Text(
                     text = downText,
+                    modifier = Modifier.heightIn(0.dp, swipeHeight),
                     color = Color.White,
                     fontFamily = notoFamily,
                     fontSize = swipeFontSize,

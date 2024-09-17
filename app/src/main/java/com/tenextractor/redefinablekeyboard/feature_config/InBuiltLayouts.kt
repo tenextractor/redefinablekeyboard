@@ -1,6 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.KildinCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KoreanCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
@@ -477,18 +478,6 @@ q w e r t y u i o p
 a s d f g h j k l ñ
 z x c v b n m ï
 
-Komi
-ё і ӧ ъ
-й ц у к е н г ш щ з х
-ф ы в а п р о л д ж э
-я ч с м и т ь б ю
-
-Komi (Molodtsov)
-ԃ ԉ ԋ ԅ ԇ
-ј ц у к е н г ш щ з х
-ф ы в а п р о л ԁ ж җ
-ԍ ч с м і т ԏ б ӧ
-
 Koryak
 ё вʼ гʼ ӄ ӈ ъ
 й ц у к е н г ш щ з х
@@ -511,12 +500,6 @@ Lakota
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m ž
-
-Latvian (Big)
-ā č ē ģ ķ ņ ū ī š ž
-q w e r t y u i o p
-a s d f g h j k l ļ
-z x c v b n m
 
 Laz (Latin)
 ç ǧ ǩ p̌ ş t‌̌ ž ʒ ǯ
@@ -1326,6 +1309,48 @@ val layouts = listOf(
         """.trimIndent()
     ),
     Layout(
+        name = "Komi",
+        layout = """
+            ё і ӧ ъ
+            й ц у к е н г ш щ з х
+            ф ы в а п р о л д ж э
+            я ч с м и т ь б ю
+        """.trimIndent(),
+        decoupleRows = listOf(0),
+        swipeList = listOf(
+            Pair("й", SwipeKeys(Key("ј"))),
+            Pair("н", SwipeKeys(Key("ԋ"))),
+            Pair("з", SwipeKeys(up = Key("ԅ"), down = Key("ԇ"))),
+            Pair("о", SwipeKeys(Key("ӧ"))),
+            Pair("л", SwipeKeys(Key("ԉ"))),
+            Pair("ж", SwipeKeys(Key("җ"))),
+            Pair("д", SwipeKeys(up = Key("ԁ"), down = Key("ԃ"))),
+            Pair("с", SwipeKeys(Key("ԍ"))),
+            Pair("и", SwipeKeys(Key("і"))),
+            Pair("т", SwipeKeys(Key("ԏ")))
+        )
+    ),
+    Layout(
+        name = "Komi (Molodtsov)",
+        layout = """
+            ԃ ԉ ԋ ԅ ԇ
+            ј ц у к е н г ш щ з х
+            ф ы в а п р о л ԁ ж җ
+            ԍ ч с м і т ԏ б ӧ
+        """.trimIndent(),
+        decoupleRows = listOf(0),
+        swipeList = listOf(
+            Pair("ј", SwipeKeys(Key("й"))),
+            Pair("е", SwipeKeys(up = Key("э"), down = Key("ё"))),
+            Pair("ԁ", SwipeKeys(Key("д"))),
+            Pair("җ", SwipeKeys(Key("э"))),
+            Pair("ԍ", SwipeKeys(Key("я"))),
+            Pair("і", SwipeKeys(Key("и"))),
+            Pair("ԏ", SwipeKeys(up = Key("ь"), down = Key("ъ"))),
+            Pair("ӧ", SwipeKeys(Key("ю")))
+        )
+    ),
+    Layout(
         name = "Korean (Big)",
         layout = """
             ㅃ ㅉ ㄸ ㄲ ㅆ - ? " ㅒ ㅖ
@@ -1357,6 +1382,29 @@ val layouts = listOf(
             ض ص چ ظ ى ة ـ
         """.trimIndent(),
         rightToLeft = true
+    ),
+    Layout(
+        name = "Latvian (Big)",
+        layout = """
+            ā č ē ģ ķ ņ ū ī š ž
+            q w e r t y u i o p
+            a s d f g h j k l ļ
+            z x c v b n m
+        """.trimIndent(),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(up = Key("ā"))),
+            Pair("c", SwipeKeys(up = Key("č"))),
+            Pair("e", SwipeKeys(up = Key("ē"))),
+            Pair("g", SwipeKeys(up = Key("ģ"))),
+            Pair("k", SwipeKeys(up = Key("ķ"))),
+            Pair("l", SwipeKeys(up = Key("ļ"))),
+            Pair("n", SwipeKeys(up = Key("ņ"))),
+            Pair("o", SwipeKeys(up = Key("ō"))),
+            Pair("r", SwipeKeys(up = Key("ŗ"))),
+            Pair("s", SwipeKeys(up = Key("š"))),
+            Pair("u", SwipeKeys(up = Key("ū"))),
+            Pair("z", SwipeKeys(up = Key("ž"))),
+        )
     ),
     Layout(
         name = "Laz (Mkhedruli)",
@@ -1397,11 +1445,31 @@ val layouts = listOf(
         """.trimIndent(),
         otherLayers = listOf("""
             ¯ ǟ ḑ ŗ ț ņ š ȱ ȭ ž
-            q w ē r t y ū ī ō p
+            q w ē r t ȳ ū ī ō p
             ā s d f g h j k l ļ
             z x c v b n m
         """.trimIndent()),
-        moveLayerKeys = listOf("¯")
+        moveLayerKeys = listOf("¯"),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(up = Key("ā"), left = Key("ä"), right = Key("ǟ"))),
+            Pair("ä", SwipeKeys(Key("ǟ"))),
+            Pair("c", SwipeKeys(up = Key("č"))),
+            Pair("d", SwipeKeys(Key("ḑ"))),
+            Pair("e", SwipeKeys(up = Key("ē"))),
+            Pair("g", SwipeKeys(up = Key("ģ"))),
+            Pair("k", SwipeKeys(up = Key("ķ"))),
+            Pair("l", SwipeKeys(up = Key("ļ"))),
+            Pair("n", SwipeKeys(up = Key("ņ"))),
+            Pair("o", SwipeKeys(up = Key(text = "ō"), left = Key(text = "ö"),
+                right = Key(text = "ȫ"), down = Key(text = "ǭ"))),
+            Pair("õ", SwipeKeys(Key("ȭ"))),
+            Pair("ȯ", SwipeKeys(Key("ȱ"))),
+            Pair("r", SwipeKeys(up = Key("ŗ"))),
+            Pair("s", SwipeKeys(up = Key("š"))),
+            Pair("u", SwipeKeys(left = Key(text = "ü"), right = Key(text = "ǖ"))),
+            Pair("y", SwipeKeys(up = Key(text = "ȳ"))),
+            Pair("z", SwipeKeys(up = Key("ž"))),
+        )
     ),
     Layout(
         name = "Luxembourgish",
@@ -1701,7 +1769,68 @@ val layouts = listOf(
             я̄ ч с ӎ ӣ т ь б ю̄
         """.trimIndent()),
         moveLayerKeys = listOf("¯,"),
-        decoupleRows = listOf(0)
+        decoupleRows = listOf(0),
+        swipeList = listOf(
+            Pair("а", SwipeKeys(Key("а̄"))),
+            Pair("ӓ", SwipeKeys(Key("ӓ̄"))),
+            Pair("е", SwipeKeys(Key("е̄"))),
+            Pair("ё", SwipeKeys(Key("ё̄"))),
+            Pair("и", SwipeKeys(Key("ӣ"))),
+            Pair("й", SwipeKeys(up = Key("ҋ"), down = Key("ј"))),
+            Pair("л", SwipeKeys(Key("ӆ"))),
+            Pair("м", SwipeKeys(Key("ӎ"))),
+            Pair("н", SwipeKeys(up = Key("ӊ"), down = Key("ӈ"))),
+            Pair("р", SwipeKeys(Key("ҏ"))),
+            Pair("о", SwipeKeys(Key("о̄"))),
+            Pair("у", SwipeKeys(Key("ӯ"))),
+            Pair("х", SwipeKeys(Key("һ"))),
+            Pair("ы", SwipeKeys(Key("ы̄"))),
+            Pair("ь", SwipeKeys(Key("ҍ"))),
+            Pair("э", SwipeKeys(Key("э̄"))),
+            Pair("ӭ", SwipeKeys(Key("ӭ̄"))),
+            Pair("ю", SwipeKeys(Key("ю̄"))),
+            Pair("я", SwipeKeys(Key("я̄"))),
+        )
+    ),
+    Layout(
+        name = "Sámi (Kildin) 2",
+        layout = """
+            ё ј һ ¯, ӭ ӈ ӓ ъ ҍ
+            й ц у к е н г ш щ з х
+            ф ы в а п р о л д ж э
+            я ч с м и т ь б ю
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ё̄ ј һ ¯, ӭ̄ ӈ ӓ̄ ъ ҍ
+            ҋ ц ӯ к е̄ ӊ г ш щ з х
+            ф ы̄ в а̄ п ҏ о̄ ӆ д ж э̄
+            я̄ ч с ӎ ӣ т ь б ю̄
+        """.trimIndent()),
+        moveLayerKeys = listOf("¯,"),
+        decoupleRows = listOf(0),
+        bottomRowKey = Key(text = " ", label = "‹|›", width = KeyWidth.FractionWidth(.1F)),
+        combiner = KildinCombiner,
+        swipeList = listOf(
+            Pair("а", SwipeKeys(Key("а̄"))),
+            Pair("ӓ", SwipeKeys(Key("ӓ̄"))),
+            Pair("е", SwipeKeys(Key("е̄"))),
+            Pair("ё", SwipeKeys(Key("ё̄"))),
+            Pair("и", SwipeKeys(Key("ӣ"))),
+            Pair("й", SwipeKeys(up = Key("ҋ"), down = Key("ј"))),
+            Pair("л", SwipeKeys(Key("ӆ"))),
+            Pair("м", SwipeKeys(Key("ӎ"))),
+            Pair("н", SwipeKeys(up = Key("ӊ"), down = Key("ӈ"))),
+            Pair("р", SwipeKeys(Key("ҏ"))),
+            Pair("о", SwipeKeys(Key("о̄"))),
+            Pair("у", SwipeKeys(Key("ӯ"))),
+            Pair("х", SwipeKeys(Key("һ"))),
+            Pair("ы", SwipeKeys(Key("ы̄"))),
+            Pair("ь", SwipeKeys(Key("ҍ"))),
+            Pair("э", SwipeKeys(Key("э̄"))),
+            Pair("ӭ", SwipeKeys(Key("ӭ̄"))),
+            Pair("ю", SwipeKeys(Key("ю̄"))),
+            Pair("я", SwipeKeys(Key("я̄"))),
+        )
     ),
     Layout(
         name = "Santali",

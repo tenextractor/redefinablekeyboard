@@ -1,6 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -44,12 +45,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
+import com.tenextractor.redefinablekeyboard.feature_config.capitalizeSwipeKeys
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 import com.tenextractor.redefinablekeyboard.feature_config.presentation.ClickableText
+import com.tenextractor.redefinablekeyboard.feature_config.titleCaseSwipeKeys
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -90,17 +93,19 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
 fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
     return layer.map { row -> row.map { key ->
         if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else if (key.label != null) key.copy(text = key.text.uppercase(), label = key.label.uppercase())
-        else key.copy(text = key.text.uppercase())
+        else key.copy(text = key.text.uppercase(), label = key.label?.uppercase(),
+            swipeKeys = capitalizeSwipeKeys(key.swipeKeys)
+        )
     } }
 } //THIS NEEDS TO BE MOVED TO compileLayout()
 
 fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
     return layer.map { row -> row.map { key ->
         if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else if (key.label != null) key.copy(text = key.text.replaceFirstChar(Char::titlecase),
-            label = key.label.replaceFirstChar(Char::titlecase))
-        else key.copy(text = key.text.replaceFirstChar(Char::titlecase))
+        else key.copy(text = key.text.replaceFirstChar(Char::titlecase),
+            label = key.label?.replaceFirstChar(Char::titlecase),
+            swipeKeys = titleCaseSwipeKeys(key.swipeKeys)
+        )
     } }
 } //THIS NEEDS TO BE MOVED TO compileLayout()
 
@@ -124,13 +129,14 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                     onPress = {
                         pressed = true
                         tryAwaitRelease()
+                        if (!dragging) {
+                            pressEnd = true
+                        }
                         pressed = false
-                        if (!dragging) pressEnd = true
                     }
                 )
             }
-            .then(if (key.swipeKeys != null) {
-                Modifier.pointerInput(Unit) {
+            .then(Modifier.pointerInput(Unit) {
                     detectDragGestures(onDragEnd = {
                         dragging = false
                         dragOffset = Offset(0f, 0f)
@@ -139,8 +145,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
                         dragOffset += dragAmount
                         change.consume()
                     }
-                }
-            } else Modifier)
+            })
             /*.then(if (key.specialKey != SpecialKey.BACKSPACE) {
                 Modifier.combinedClickable(onClick = { onPressKey(key, ctx, selectedLayouts, state, updateState) },
                     onLongClick = { onLongPressKey(key, ctx, selectedLayouts, state, updateState) })
