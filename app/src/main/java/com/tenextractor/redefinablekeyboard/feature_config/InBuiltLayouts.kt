@@ -40,8 +40,8 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
             specialKey = SpecialKey.LAYOUTCYCLE,
             swipeKeys = SwipeKeys(
                 up = Key(text = "", label = "\uD83C\uDF10\uFE0E≡", specialKey = SpecialKey.LAYOUTPOPUP),
-                left = Key(text = "", label = "<\uD83C\uDF10\uFE0E", specialKey = SpecialKey.LAYOUTLEFT),
-                right = Key(text = "", label = "\uD83C\uDF10\uFE0E>", specialKey = SpecialKey.LAYOUTRIGHT)
+                left = Key(text = "", label = "<", specialKey = SpecialKey.LAYOUTLEFT),
+                right = Key(text = "", label = ">", specialKey = SpecialKey.LAYOUTRIGHT)
             )),
         Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
         Key("'", width = KeyWidth.FractionWidth(.1F),
