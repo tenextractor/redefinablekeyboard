@@ -1773,7 +1773,7 @@ val layouts = listOf(
         swipeList = listOf(
             Pair("а", SwipeKeys(Key("а̄"))),
             Pair("ӓ", SwipeKeys(Key("ӓ̄"))),
-            Pair("е", SwipeKeys(Key("е̄"))),
+            Pair("е", SwipeKeys(up = Key("е̄"), right = Key("ё̄"), down = Key("ё"))),
             Pair("ё", SwipeKeys(Key("ё̄"))),
             Pair("и", SwipeKeys(Key("ӣ"))),
             Pair("й", SwipeKeys(up = Key("ҋ"), down = Key("ј"))),
@@ -1813,7 +1813,7 @@ val layouts = listOf(
         swipeList = listOf(
             Pair("а", SwipeKeys(Key("а̄"))),
             Pair("ӓ", SwipeKeys(Key("ӓ̄"))),
-            Pair("е", SwipeKeys(Key("е̄"))),
+            Pair("е", SwipeKeys(up = Key("е̄"), right = Key("ё̄"), down = Key("ё"))),
             Pair("ё", SwipeKeys(Key("ё̄"))),
             Pair("и", SwipeKeys(Key("ӣ"))),
             Pair("й", SwipeKeys(up = Key("ҋ"), down = Key("ј"))),

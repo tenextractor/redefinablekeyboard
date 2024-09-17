@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -109,7 +110,6 @@ fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
     } }
 } //THIS NEEDS TO BE MOVED TO compileLayout()
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>,
            state: KeyboardState, updateState: (KeyboardState) -> Unit) {
@@ -117,9 +117,8 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
     var pressed by remember { mutableStateOf(false) }
     var dragOffset by remember { mutableStateOf(Offset(0f, 0f)) }
     var dragging by remember { mutableStateOf(false) }
-    val sharedPrefsManager = SharedPrefsManager(ctx)
-    val hapticFeedbackService = HapticFeedbackService(ctx)
-    var xPosition by remember { mutableStateOf(0) }
+    //val hapticFeedbackService = HapticFeedbackService(ctx)
+    var xPosition by remember { mutableIntStateOf(0) }
 
     Box(
         modifier =
@@ -195,11 +194,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
 
     if (key.specialKey == SpecialKey.BACKSPACE) {
         LaunchedEffect(pressed) {
-            if (pressed) {
-                if (sharedPrefsManager.isHapticFeedbackEnabled()) {
-                    hapticFeedbackService.performHapticFeedback()
-                }
-            }
+            //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
             var delay: Long = 400
             while (pressed) {
                 onPressKey(key, ctx, selectedLayouts, state, updateState)
@@ -210,6 +205,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
     } else LaunchedEffect(pressEnd) {
         if (pressEnd) {
             onPressKey(key, ctx, selectedLayouts, state, updateState)
+            //if (state.vibration) hapticFeedbackService.performHapticFeedback()
             pressEnd = false
         }
     }
@@ -224,12 +220,12 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {
-    val hapticFeedbackService = HapticFeedbackService(ctx)
+    /*val hapticFeedbackService = HapticFeedbackService(ctx)
 
     // Perform haptic feedback for non-backspace keys
     if (state.vibration && key.specialKey != SpecialKey.BACKSPACE) {
         hapticFeedbackService.performHapticFeedback()
-    }
+    }*/
 
     val layout = selectedLayouts[state.layout % selectedLayouts.size]
     val inputConnection = (ctx as IMEService2).currentInputConnection

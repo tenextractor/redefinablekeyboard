@@ -40,7 +40,7 @@ fun HomeScreen(onNavToSelectLayouts: () -> Unit, onNavToSettings: () -> Unit) {
             (ctx.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).showInputMethodPicker()
         }
         ClickableText(stringResource(R.string.select_layouts_to_use), onNavToSelectLayouts)
-        ClickableText(stringResource(R.string.settings), onNavToSettings)
+        //ClickableText(stringResource(R.string.settings), onNavToSettings)
 
         var text by remember { mutableStateOf("") }
         TextField(
