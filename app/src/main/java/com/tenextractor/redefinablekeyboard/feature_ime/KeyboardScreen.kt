@@ -192,6 +192,28 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
         )
     }
 
+    LaunchedEffect(pressed) {
+        if (key.specialKey == SpecialKey.BACKSPACE) {
+            //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
+            var delay: Long = 400
+            while (pressed) {
+                onPressKey(key, ctx, selectedLayouts, state, updateState)
+                delay(delay)
+                delay = 20
+            }
+        }
+    }
+    LaunchedEffect(pressEnd) {
+        if (key.specialKey != SpecialKey.BACKSPACE) {
+            if (pressEnd) {
+                onPressKey(key, ctx, selectedLayouts, state, updateState)
+                //if (state.vibration) hapticFeedbackService.performHapticFeedback()
+                pressEnd = false
+            }
+        }
+    }
+
+/*
     if (key.specialKey == SpecialKey.BACKSPACE) {
         LaunchedEffect(pressed) {
             //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
@@ -209,7 +231,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
             pressEnd = false
         }
     }
-
+*/
     LaunchedEffect(dragging) {
         if (dragging) {
             onDragKey(key, dragOffset, ctx, selectedLayouts, state, updateState)
