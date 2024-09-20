@@ -18,6 +18,7 @@ object KildinCombiner: Combiner {
         'ӭ' to "ӭ̄",
         'ю' to "ю̄",
         'я' to "я̄",
+        'ь' to "ҍ",
 
         'А' to "А̄",
         'Ӓ' to "Ӓ̄",
@@ -31,6 +32,7 @@ object KildinCombiner: Combiner {
         'Ӭ' to "Ӭ̄",
         'Ю' to "Ю̄",
         'Я' to "Я̄",
+        'Ь' to "Ҍ"
     )
 
     private const val NBSP = ' '

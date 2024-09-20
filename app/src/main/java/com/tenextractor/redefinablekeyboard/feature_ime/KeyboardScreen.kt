@@ -191,8 +191,26 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
             textAlign = TextAlign.Center
         )
     }
+    LaunchedEffect(pressed, pressEnd) {
+        if (key.specialKey == SpecialKey.BACKSPACE) {
+            //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
+            var delay: Long = 400
+            while (pressed) {
+                delay(delay)
+                onPressKey(key, ctx, selectedLayouts, state, updateState)
+                delay = 20
+            }
+        }
 
+        if (pressEnd) {
+            onPressKey(key, ctx, selectedLayouts, state, updateState)
+            //if (state.vibration) hapticFeedbackService.performHapticFeedback()
+            pressEnd = false
+        }
+    }
+/*
     LaunchedEffect(pressed) {
+        Log.d("mytag", "lpress $key")
         if (key.specialKey == SpecialKey.BACKSPACE) {
             //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
             var delay: Long = 400
@@ -204,31 +222,13 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
         }
     }
     LaunchedEffect(pressEnd) {
+        Log.d("mytag", "end $key")
         if (key.specialKey != SpecialKey.BACKSPACE) {
             if (pressEnd) {
                 onPressKey(key, ctx, selectedLayouts, state, updateState)
                 //if (state.vibration) hapticFeedbackService.performHapticFeedback()
                 pressEnd = false
             }
-        }
-    }
-
-/*
-    if (key.specialKey == SpecialKey.BACKSPACE) {
-        LaunchedEffect(pressed) {
-            //if (pressed) if (state.vibration) hapticFeedbackService.performHapticFeedback()
-            var delay: Long = 400
-            while (pressed) {
-                onPressKey(key, ctx, selectedLayouts, state, updateState)
-                delay(delay)
-                delay = 20
-            }
-        }
-    } else LaunchedEffect(pressEnd) {
-        if (pressEnd) {
-            onPressKey(key, ctx, selectedLayouts, state, updateState)
-            //if (state.vibration) hapticFeedbackService.performHapticFeedback()
-            pressEnd = false
         }
     }
 */
@@ -238,7 +238,9 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
         }
     }
 
-    if (pressed) KeyPopup(key, xPosition)
+    if (pressed) {
+        KeyPopup(key, xPosition)
+    }
 }
 
 fun onPressKey(key: Key, ctx: Context, selectedLayouts: List<KbLayout>, state: KeyboardState, updateState: (KeyboardState) -> Unit) {

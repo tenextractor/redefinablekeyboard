@@ -30,7 +30,8 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
                 specialKey = SpecialKey.SPACE),
             Key("'", width = KeyWidth.FractionWidth(.1F),
                 swipeKeys = SwipeKeys(up = Key("\""), left = Key("«"), right = Key("»"))),
-            Key(period, width = KeyWidth.FractionWidth(.1F)),
+            Key(period, width = KeyWidth.FractionWidth(.1F),
+                swipeKeys = SwipeKeys(up = Key("?"), down = Key("!"), right = Key("—"))),
             Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
         )
     } else listOf(
@@ -46,7 +47,8 @@ fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? =
         Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
         Key("'", width = KeyWidth.FractionWidth(.1F),
             swipeKeys = SwipeKeys(up = Key("\""), left = Key("«"), right = Key("»"))),
-        Key(period, width = KeyWidth.FractionWidth(.1F)),
+        Key(period, width = KeyWidth.FractionWidth(.1F),
+            swipeKeys = SwipeKeys(up = Key("?"), down = Key("!"), right = Key("—"))),
         Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
     )
 }
@@ -1155,6 +1157,17 @@ val layouts = listOf(
         hasShift = false,
         bottomRowKey = Key(text = "წ", width = KeyWidth.FractionWidth(.1F))
     ),
+    /*Layout(
+        name = "Greek",
+        layout = """
+            ; ς ε ρ τ υ θ ι ο π
+            α σ δ φ γ η ξ λ
+            ζ χ ψ ω β ν μ
+        """.trimIndent(),
+        swipeList = listOf(
+
+        )
+    ),*/
     Layout(
         name = "Guarani",
         layout = """
@@ -1382,6 +1395,75 @@ val layouts = listOf(
             ض ص چ ظ ى ة ـ
         """.trimIndent(),
         rightToLeft = true
+    ),
+    Layout(
+        name = "Latin International",
+        layout = """
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ́ w é ŕ t́ ý ú í ó ṕ
+            á ś d́ f ǵ h j ḱ ĺ
+            ź x ć v b ń ḿ
+        """.trimIndent(), """
+            ̀ ẁ è r t ỳ ù ì ò p
+            à s d f g h j k l
+            z x c v b ǹ m
+        """.trimIndent(), """
+            ̂ ŵ ê r ṱ ŷ û î ô p
+            â ŝ ḓ f ĝ ĥ ĵ k ḽ
+            ẑ x ĉ v b n m
+        """.trimIndent(), """
+            ̄ w ē ṟ ṯ ȳ ū ī ō p
+            ā s ḏ ꞙ ḡ ẖ j ḵ ḻ
+            ẕ x c v ḇ ṉ m
+        """.trimIndent(), """
+            ̆ ȗ ĕ ȓ t ȋ ŭ ĭ ŏ p
+            ă s d f ğ ḫ j k l
+            z x c v b n m̐
+        """.trimIndent(), """
+            ̃ w ẽ ᵲ ᵵ ỹ ũ ĩ õ ᵱ
+            ã ᵴ ᵭ ᵮ g h j k ɫ
+            ᵶ x c v b ñ ᵯ
+        """.trimIndent(), """
+            ̈ ẅ ë r ẗ ÿ ü ï ö p
+            ä s d f g ḧ j k l
+            z x c v b n m
+        """.trimIndent(), """
+            ̇ ẇ ė ṙ ṫ ẏ u ı ȯ ṗ
+            ȧ ṡ ḋ ḟ ġ ḣ ȷ k l
+            ż ẋ ċ v ḃ ṅ ṁ
+        """.trimIndent(), """
+            ̣ ẉ ẹ ṛ ṭ ỵ ụ ị ọ p
+            ạ ṣ ḍ f g ḥ j ḳ ḷ
+            ẓ x c ṿ ḅ ṇ ṃ
+        """.trimIndent(), """
+            ̌ w ě ř ť y ǔ ǐ ǒ p
+            ǎ š ď f ǧ ȟ ǰ ǩ ľ
+            ž ǯ č v b ň m
+        """.trimIndent(), """
+            ̧ w ȩ ŗ ţ y u i o p
+            a ş ḑ f ģ ḩ j ķ ļ
+            z x ç v b ņ m̧
+        """.trimIndent()
+        ),
+        swipeList = listOf(
+            Pair("q", SwipeKeys(up = Key("", label = "´", moveToLayer = 3),
+                down = Key("", label = "`", moveToLayer = 4))),
+            Pair("w", SwipeKeys(up = Key("", label = "¯", moveToLayer = 6),
+                down = Key("", label = "˘", moveToLayer = 7),
+                right = Key("", "~", moveToLayer = 8))
+            ),
+            Pair("e", SwipeKeys(up = Key("", label = "˙", moveToLayer = 10),
+                down = Key("", label = ".", moveToLayer = 11),
+                right = Key("", label = "¨", moveToLayer = 9))
+            ),
+            Pair("r", SwipeKeys(up = Key("", label = "^", moveToLayer = 5),
+                down = Key("", label = "ˇ", moveToLayer = 12))),
+            Pair("t", SwipeKeys(up = Key("", label = "¸", moveToLayer = 13)))
+        )
     ),
     Layout(
         name = "Latvian (Big)",
