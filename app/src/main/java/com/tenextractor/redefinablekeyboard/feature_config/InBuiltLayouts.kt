@@ -1,5 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.BengaliCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.InuktitutCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KildinCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KoreanCombiner
@@ -383,6 +385,12 @@ Hausa
 q w e r t y u i o p ƴ
 a s d f g h j k l ƙ
 z x c v b n m ɓ ɗ
+
+Hawaiian
+ā ē ī ō ū ʻ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
 
 Ho-Chunk (Wisconsin)
 ą ǧ į š ų ž
@@ -922,6 +930,27 @@ val layouts = listOf(
         period = "։"
     ),
     Layout(
+        name = "Assamese (Phonetic)",
+        layout = """
+            শ্ ণ্ য়্ ড়্ ঔ ঐ ঊ ঈ ◌ঁ ষ্
+            আ ট্ এ ৰ্ ত্ য্ উ ই ও প্
+            অ চ্ দ্ ফ্ গ্ হ্ ◌ং ক্ ল্
+            জ্ স্ ড্ ৱ্ ব্ ন্ ম্
+        """.trimIndent(),
+        capsLayer = """
+            ৳ ণ্ ৡ ঢ়্ " ? ৠ ! ◌ঁ ষ্
+            ঽ ঠ্ ঌ ৰ্ থ্ ঞ্ ঋ ই ও প্
+            অ্যা ছ্ ধ্ ফ্ ঘ্ হ্ ◌ঃ খ্ ল্
+            ঝ্ স্ ঢ্ ভ্ ভ্ ঙ্ ম্
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey.copy(label = "◌্"),
+        combiner = BengaliCombiner,
+        swipeList = listOf(
+            Pair("ত্", SwipeKeys(up = Key("থ্"), down = Key("ৎ")))
+        )
+    ),
+    Layout(
         name = "Azerbaijani (Cyrillic)",
         layout = """
             ј ү у к е н г ш һ з х
@@ -968,6 +997,27 @@ val layouts = listOf(
         """.trimIndent(),
         period = "।",
         bottomRowKey = zwnjKey
+    ),
+    Layout(
+        name = "Bengali (Phonetic)",
+        layout = """
+            শ্ ণ্ য়্ ড়্ ঔ ঐ ঊ ঈ ◌ঁ ষ্
+            আ ট্ এ র্ ত্ য্ উ ই ও প্
+            অ স্ দ্ ফ্ গ্ হ্ জ্ ক্ ল্
+            ◌ং ড্ চ্ ভ্ ব্ ন্ ম্
+        """.trimIndent(),
+        capsLayer = """
+            ৳ ণ্ ৡ ঢ়্ " ? ৠ ! ◌ঁ ষ্
+            ঽ ঠ্ ঌ ৰ্ থ্ ঞ্ ঋ ই ও প্
+            অ্যা স্ ধ্ ফ্ ঘ্ হ্ ঝ্ খ্ ল্
+            ◌ঃ ঢ্ ছ্ ₹ ৱ্ ঙ্ ম্
+        """.trimIndent(),
+        period = "।",
+        bottomRowKey = zwnjKey.copy(label = "◌্"),
+        combiner = BengaliCombiner,
+        swipeList = listOf(
+            Pair("ত্", SwipeKeys(up = Key("থ্"), down = Key("ৎ")))
+        )
     ),
     Layout(
         name = "Blackfoot (Syllabics)",
@@ -1053,6 +1103,21 @@ val layouts = listOf(
         """,
         bottomRowKey = Key(text = "q", width = KeyWidth.FractionWidth(.1F))
     ),
+    /*
+    Layout(
+        name = "Farsi/Persian",
+        layout = """
+            ض ص ث ق ف غ ع ه خ ح ج
+            ش س ی ب ل ا ت ن م ک گ
+            ظ ط ژ ز ر ذ د پ و چ
+        """.trimIndent(),
+        hasShift = false,
+        rightToLeft = true,
+        bottomRowKey = zwnjKey,
+        swipeList = listOf(
+            Pair("ا", SwipeKeys(Key("آ"), Key(""), Key("")))
+        )
+    ),*/
     Layout(
         name = "French (AZERTY)",
         layout = """
@@ -1212,7 +1277,7 @@ val layouts = listOf(
         rightToLeft = true
     ),
     Layout(
-        name = "Hindi (QWERTY-like)",
+        name = "Hindi (Alternate)",
         layout = """
             ट ◌ौ ◌े र त य ◌ु ◌ि ◌ो प ◌ी
             ◌ा स द ◌ू ग ह ज क ल ◌ै ◌ं
@@ -1257,6 +1322,21 @@ val layouts = listOf(
             𑢡 𑢾 𑢴 𑢱 𑢫 𑢹 𑢮 𑢬 𑢺
             𑢠 𑢽 𑢯 𑢿 𑢷 𑢳 𑢶
         """.trimIndent()
+    ),
+    Layout(
+        name = "Inuktitut (ᖃᓂᐅᔮᖅᐸᐃᑦ)",
+        layout = """
+            ᖅ ᖕ ᐁ ᕐ ᑦ ᐄ ᐅ ᐃ ᐆ ᑉ
+            ᐊ ᔅ ᖦ ᖮ ᒡ ᕻ ᔾ ᒃ ᓪ
+            ᐋ 𑪺 ᕼ ᕝ ᖯ ᓐ ᒻ
+        """.trimIndent(),
+        capsLayer = """
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        bottomRowKey = Key("\uD806\uDEB4"),
+        combiner = InuktitutCombiner
     ),
     Layout(
         name = "Kannada (InScript)",
@@ -1466,6 +1546,21 @@ val layouts = listOf(
         )
     ),
     Layout(
+        name = "Lao",
+        layout = """
+            ຢ ຟ ໂ ຖ ◌ຸ ◌ູ ຄ ຕ ຈ ຂ ຊ ◌ໍ
+            ◌ົ ໄ ຳ ພ ະ ◌ິ ◌ີ ຮ ນ ຍ ບ ລ
+            ◌ັ ຫ ກ ດ ເ ◌້ ◌່ າ ສ ວ ງ “
+            ຜ ປ ແ ອ ◌ຶ ◌ື ທ ມ ໃ ຝ
+        """.trimIndent(),
+        capsLayer = """
+            ໑ ໒ ໓ ໔ ◌໌ ◌ຼ ໕ ໖ ໗ ໘ ໙ ◌ໍ່
+            ◌ົ້ ໐ ຳ້ _ + ◌ິ້ ◌ີ້ ຣ ໜ ຽ ຫຼ ”
+            ◌ັ້ ; . , : ◌໊ ◌໋ ! ? % = “
+            ₭ ( ຯ @ ◌ຶ້ ◌ື້ ໆ ໝ $ )
+        """.trimIndent()
+    ),
+    Layout(
         name = "Latvian (Big)",
         layout = """
             ā č ē ģ ķ ņ ū ī š ž
@@ -1661,6 +1756,27 @@ val layouts = listOf(
             ჲ ზ ხ ც ვ ბ ნ მ
         """.trimIndent(),
         hasShift = false
+    ),
+    Layout(
+        name = "Mizo",
+        layout = """
+            â ê î ô û ṭ
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(Key("ả"), Key("ą"), Key("ạ"))),
+            Pair("â", SwipeKeys(Key("á"), Key("ä"), Key("à"))),
+            Pair("e", SwipeKeys(Key("ẻ"), Key("ę"), Key("ẹ"))),
+            Pair("ê", SwipeKeys(Key("é"), Key("ë"), Key("è"))),
+            Pair("i", SwipeKeys(Key("ỉ"), Key("į"), Key("ị"))),
+            Pair("î", SwipeKeys(Key("í"), Key("ï"), Key("ì"))),
+            Pair("o", SwipeKeys(Key("ỏ"), Key("ǫ"), Key("ọ"))),
+            Pair("ô", SwipeKeys(Key("ó"), Key("ö"), Key("ò"))),
+            Pair("u", SwipeKeys(Key("ủ"), Key("ų"), Key("ụ"))),
+            Pair("û", SwipeKeys(Key("ú"), Key("ü"), Key("ù")))
+        ),
     ),
     /*Layout(
         name = "Mongolian (Mongolian Script)",
@@ -2099,7 +2215,7 @@ val layouts = listOf(
         capsLayer = """
             ₹ ణ్ ౡ ఴ్ " ? ౠ ! ఓ ౙ్
             ఽ ఠ్ ఌ ఱ్ థ్ ఞ్ ఋ ఇ ఒ ప్
-            అ స్ ధ్ ఫ్ ఘ్ ఙ్ ఝ్ క్ ల్
+            అ స్ ధ్ ఫ్ ఘ్ ఙ్ ఝ్ ఖ్ ల్
             ఁ ఢ్ ఛ్ ః భ్ ౝ ౘ్
         """.trimIndent(),
         bottomRowKey = zwnjKey,
