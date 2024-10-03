@@ -47,6 +47,8 @@ import androidx.compose.ui.window.Popup
 import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
 import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
 import com.tenextractor.redefinablekeyboard.feature_config.capitalizeSwipeKeys
+import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToCaps
+import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToShift
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
@@ -65,12 +67,15 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
     updateState(state.copy(layoutName = layout.name))
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val layer = state.layer
-    val capsLayer = layout.capsLayer ?: convertLayerToCaps(layout.layers[layer])
-    val shiftLayer = layout.shiftLayer ?: layout.capsLayer ?: convertLayerToShift(layout.layers[layer])
+    //val capsLayer = layout.capsLayer ?: convertLayerToCaps(layout.layers[layer])
+    //val shiftLayer = layout.shiftLayer ?: layout.capsLayer ?: convertLayerToShift(layout.layers[layer])
+    val capsLayer = layout.capsLayers?.get(layer)
+    val shiftLayer = layout.shiftLayers?.get(layer)
+
     val layerAfterShift = when (state.shiftState) {
         ShiftState.OFF -> layout.layers[layer]
-        ShiftState.SHIFT -> shiftLayer
-        ShiftState.CAPSLOCK -> capsLayer
+        ShiftState.SHIFT -> shiftLayer!!
+        ShiftState.CAPSLOCK -> capsLayer!!
     } // layer, after applying shift/caps if needed
 
     val defaultWidth = getDefaultWidth(layerAfterShift)
@@ -91,28 +96,12 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
         { updateState(state.copy(isDialogOpen = false)) })
 }
 
-fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
-    return layer.map { row -> row.map { key ->
-        if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else key.copy(text = key.text.uppercase(), label = key.label?.uppercase(),
-            swipeKeys = capitalizeSwipeKeys(key.swipeKeys)
-        )
-    } }
-} //THIS NEEDS TO BE MOVED TO compileLayout()
 
-fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
-    return layer.map { row -> row.map { key ->
-        if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else key.copy(text = key.text.replaceFirstChar(Char::titlecase),
-            label = key.label?.replaceFirstChar(Char::titlecase),
-            swipeKeys = titleCaseSwipeKeys(key.swipeKeys)
-        )
-    } }
-} //THIS NEEDS TO BE MOVED TO compileLayout()
 
 @Composable
 fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selectedLayouts: List<KbLayout>,
            state: KeyboardState, updateState: (KeyboardState) -> Unit) {
+    //composable that contains a single key
     var pressEnd by remember { mutableStateOf(false) }
     var pressed by remember { mutableStateOf(false) }
     var dragOffset by remember { mutableStateOf(Offset(0f, 0f)) }

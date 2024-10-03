@@ -5,6 +5,8 @@ import com.tenextractor.redefinablekeyboard.feature_config.backSpaceKey
 import com.tenextractor.redefinablekeyboard.feature_config.bottomRow
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.Combiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.DefaultCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToCaps
+import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToShift
 import com.tenextractor.redefinablekeyboard.feature_config.shiftKey
 import com.tenextractor.redefinablekeyboard.feature_config.symbols1
 import com.tenextractor.redefinablekeyboard.feature_config.symbols2
@@ -55,9 +57,29 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
                 symbolsKey1, bottomRow, emptyList())
         } else null
 
+        val compiledShiftLayer = if (hasShift) {
+            if (shiftLayer != null) {
+                compileLayer(shiftLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
+                    symbolsKey1, bottomRow, emptyList())
+            } else convertLayerToShift(baseLayer)
+        } else null
+
+        val layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers
+        val capsLayers = if (capsLayer != null)
+            listOf(compiledCapsLayer!!, symbolsLayer1, symbolsLayer2) + compiledOtherLayers.map(
+                ::convertLayerToCaps)
+            else listOf(convertLayerToCaps(baseLayer), symbolsLayer1, symbolsLayer2) + compiledOtherLayers.map(
+            ::convertLayerToCaps)
+
+        val shiftLayers = if (hasShift) listOf(compiledShiftLayer!!, symbolsLayer1, symbolsLayer2) +
+                compiledOtherLayers.map(::convertLayerToShift)
+        else null
+
         return KbLayout(
             name = name,
             layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers,
+            capsLayers = capsLayers,
+            shiftLayers = shiftLayers,
             capsLayer = compiledCapsLayer,
             combiner = combiner
         )
