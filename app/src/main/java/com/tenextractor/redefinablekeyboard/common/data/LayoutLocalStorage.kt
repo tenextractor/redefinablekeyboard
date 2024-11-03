@@ -1,7 +1,6 @@
 package com.tenextractor.redefinablekeyboard.common.data
-
+/*
 import android.content.Context
-import com.google.gson.Gson
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
@@ -54,4 +53,4 @@ class LayoutLocalStorage @Inject constructor(
             e.printStackTrace()
         }
     }
-}
+}*/

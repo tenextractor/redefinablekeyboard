@@ -1,6 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.BengaliCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.GreekCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.InuktitutCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KildinCombiner
@@ -1070,7 +1071,7 @@ val layouts = listOf(
             ဇ ဌ ဃ ဠ ဎ ဉ ဦ ဧ
         """.trimIndent()
     ),
-    Layout(
+    /*Layout(
         name = "Cree (Western syllabics)",
         layout = """
             ᕽ ᐤ ᐁ ᕒ ᐟ ᕀ ᐆ ᐃ ᐅ ᑊ
@@ -1078,7 +1079,7 @@ val layouts = listOf(
             ᐋ ᐝ ᐨ c v ᐣ ᒼ
         """.trimIndent(),
         combiner = InuktitutCombiner
-    ),
+    ),*/
     Layout(
         name = "Crimean Tatar (Latin)",
         layout = """
@@ -1267,17 +1268,32 @@ val layouts = listOf(
         hasShift = false,
         bottomRowKey = Key(text = "წ", width = KeyWidth.FractionWidth(.1F))
     ),
-    /*Layout(
+    Layout(
         name = "Greek",
         layout = """
-            ; ς ε ρ τ υ θ ι ο π
-            α σ δ φ γ η ξ λ
+            ε ρ τ υ θ ι ο π ´
+            α σ δ φ γ η ξ κ λ
             ζ χ ψ ω β ν μ
         """.trimIndent(),
+        otherLayers = listOf("""
+            έ ρ τ ύ θ ί ό π ´
+            ά σ δ φ γ ή ξ κ λ
+            ζ χ ψ ώ β ν μ
+        """.trimIndent()
+        ),
+        moveLayerKeys = listOf("´"),
         swipeList = listOf(
-
-        )
-    ),*/
+            Pair("α", SwipeKeys(Key("ά"))),
+            Pair("ε", SwipeKeys(Key("έ"), Key(";"))),
+            Pair("η", SwipeKeys(Key("ή"))),
+            Pair("ι", SwipeKeys(Key("ί"), Key("ϊ"), Key("ΐ"))),
+            Pair("ο", SwipeKeys(Key("ό"))),
+            Pair("σ", SwipeKeys(Key("ς"))),
+            Pair("υ", SwipeKeys(Key("ύ"), Key("ϋ"), Key("ΰ"))),
+            Pair("ω", SwipeKeys(Key("ώ")))
+        ),
+        combiner = GreekCombiner
+    ),
     Layout(
         name = "Guarani",
         layout = """
@@ -1319,7 +1335,17 @@ val layouts = listOf(
             ז ס ב ה נ מ צ ת ץ
         """.trimIndent(),
         hasShift = false,
-        rightToLeft = true
+        rightToLeft = true,
+        swipeList = listOf(
+            Pair("'", SwipeKeys(Key("׳"), Key("״"))),
+            Pair("ו", SwipeKeys(Key("וֹ"))),
+            Pair("ב", SwipeKeys(Key("בּ"))),
+            Pair("ג", SwipeKeys(Key("גּ"))),
+            Pair("ד", SwipeKeys(Key("דּ"))),
+            Pair("כ", SwipeKeys(Key("כֿ"))),
+            Pair("ך", SwipeKeys(Key("ךּ"))),
+            Pair("ף", SwipeKeys(Key("ףּ")))
+        )
     ),
     Layout(
         name = "Hindi (Alternate)",
@@ -1696,35 +1722,35 @@ val layouts = listOf(
     Layout(
         name = "Luxembourgish",
         layout = """
-            ´ ` ^ ¨ ~
-            q w e r t z u i o p ë
-            a s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w e r t z u i o p
+            a s d f g h j k l
             y x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            ´ ` ^ ¨ ~
-            q w é r t z ú í ó p ë
-            á s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w é r t z ú í ó p
+            á s d f g h j k l
             ý x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w è r t z ù ì ò p ë
-            à s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w è r t z ù ì ò p
+            à s d f g h j k l
             ỳ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ê r t z û î ô p ë
-            â s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ê r t z û î ô p
+            â s d f g h j k l
             ŷ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ë r t z ü ï ö p ë
-            ä s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ë r t z ü ï ö p
+            ä s d f g h j k l
             ÿ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ẽ r t z ũ ĩ õ p ë
-            ã s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ẽ r t z ũ ĩ õ p
+            ã s d f g h j k l
             ỹ x c v b ñ m
         """.trimIndent()),
         moveLayerKeys = "´ ` ^ ¨ ~".split(' ')
@@ -1764,14 +1790,16 @@ val layouts = listOf(
     Layout(
         name = "Maltese",
         layout = """
-            q w e r t y u i o p ġ
-            a s d f g h j k l ħ `
-            z x c v b n m ż ċ
+            ċ ġ ħ ż `
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            q w è r t y ù ì ò p ġ
-            à s d f g h j k l ħ `
-            z x c v b n m ż ċ
+            ċ ġ ħ ż `
+            q w è r t y ù ì ò p
+            à s d f g h j k l
+            z x c v b n m
         """.trimIndent()),
         moveLayerKeys = listOf("`")
     ),
@@ -2439,7 +2467,29 @@ val layouts = listOf(
             z x c v b n m ặ
         """.trimIndent()),
         moveLayerKeys = "´ ◌̉ ` ~ .".split(' ')
-    )
+    ),
+    Layout(
+        name = "Yiddish",
+        layout = """
+            יִ שׂ בֿ אַ אָ תּ וּ ײַ כּ פֿ
+            ' פּ ק ר א ט ו ן ם פ
+            ש ד ג כ ע י ח ל ך ף
+            ז ס ב ה נ מ צ ת ץ
+        """.trimIndent(),
+        hasShift = false,
+        rightToLeft = true,
+        swipeList = listOf(
+            Pair("'", SwipeKeys(Key("׳"), Key("״"))),
+            Pair("ו", SwipeKeys(Key("וֹ"))),
+            Pair("ב", SwipeKeys(Key("בּ"))),
+            Pair("ג", SwipeKeys(Key("גּ"))),
+            Pair("ד", SwipeKeys(Key("דּ"))),
+            Pair("כ", SwipeKeys(Key("כֿ"))),
+            Pair("ך", SwipeKeys(Key("ךּ"))),
+            Pair("ף", SwipeKeys(Key("ףּ"))),
+            Pair("פּ", SwipeKeys(Key("-")))
+        )
+    ),
 )
 
 val inBuiltLayouts = listOf(Layout(

@@ -61,7 +61,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             if (shiftLayer != null) {
                 compileLayer(shiftLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
                     symbolsKey1, bottomRow, emptyList())
-            } else convertLayerToShift(baseLayer)
+            } else if (capsLayer != null) compiledCapsLayer else convertLayerToShift(baseLayer)
         } else null
 
         val layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers
@@ -80,7 +80,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers,
             capsLayers = capsLayers,
             shiftLayers = shiftLayers,
-            capsLayer = compiledCapsLayer,
+            //capsLayer = compiledCapsLayer,
             combiner = combiner
         )
     }

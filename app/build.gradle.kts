@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 
-    kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    kotlin("kapt")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -40,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -75,8 +76,8 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.gson)
     kapt(libs.androidx.hilt.compiler)
+    implementation(libs.kotlinx.serialization.json)
 }
 
 kapt {

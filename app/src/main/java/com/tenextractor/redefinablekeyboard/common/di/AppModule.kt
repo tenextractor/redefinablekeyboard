@@ -1,9 +1,8 @@
 package com.tenextractor.redefinablekeyboard.common.di
-
+/*
 import android.content.Context
 import com.google.gson.Gson
 import com.tenextractor.redefinablekeyboard.common.data.KbLayoutStorage
-import com.tenextractor.redefinablekeyboard.common.data.LayoutLocalStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +24,4 @@ object AppModule {
     fun provideLayoutStorage(@ApplicationContext appContext: Context, gson: Gson): KbLayoutStorage {
         return LayoutLocalStorage(appContext, gson)
     }
-}
+}*/

@@ -83,7 +83,7 @@ object InuktitutCombiner: Combiner {
                 inputConnection.deleteSurroundingTextInCodePoints(1, 0)
                 inputConnection.commitText(singleToDouble[charBefore[0]], 1)
                 return
-            }
+            } //if q or ng is typed twice, combine them into the required double consonant char
 
             if (finalsToSyllables.containsKey(charBefore[0].toString()))
                 if (vowels.containsKey(keyText)) {
@@ -92,7 +92,7 @@ object InuktitutCombiner: Combiner {
                         finalsToSyllables[charBefore[0].toString()]!![vowels[keyText]!!].toString(),
                         1)
                     return
-            }
+            } //convert consonant + vowel to syllable
         }
         DefaultCombiner.combine(key, inputConnection)
     }
