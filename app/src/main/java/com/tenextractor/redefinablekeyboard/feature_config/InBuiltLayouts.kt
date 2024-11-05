@@ -1,6 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_config
 
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.BengaliCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.combiners.GreekCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.InuktitutCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KannadaCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.KildinCombiner
@@ -180,6 +181,12 @@ q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
 
+Carrier/Dakelh (Latin)
+s̱ t͟s ẕ d͟z
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
+
 Catalan
 à ç é ï ŀ ü ú í ó ò
 q w e r t y u i o p
@@ -239,8 +246,8 @@ Coptic
 ⲁ ⲥ ⲇ ⲫ ⲅ ⲏ ⲝ ⲕ ⲗ
 ⲍ ⲭ ⲯ ⲱ ⲃ ⲛ ⲙ
 
-Cree (Latin)
-ê š ð â û î ô
+Cree/Atikamekw (Latin)
+â ê š s̀ ð û î ô
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -414,6 +421,12 @@ Ingrian/Izhorian
 q w e r t y u i o p š
 a s d f g h j k l ö ä
 z x c v b n m ь ž
+
+Innu-Aimun
+ā ī ū ᵘ
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m
 
 Interslavic (Cyrillic)
 љ њ е р т ы у и о п ш
@@ -762,7 +775,7 @@ q w e r t z u i o p š
 a s d f g h j k l č ž
 y x c v b n m
 
-Spanish
+Spanish (Big)
 á é ñ ¿ ¡ ú í ó ü
 q w e r t y u i o p
 a s d f g h j k l
@@ -829,12 +842,6 @@ Udege (Petersburg)
 ё ԝ ә ӡ њ ӈ ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
-я ч с м и т ь б ю
-
-Ukrainian
-ґ ₴ ї
-й ц у к е н г ш щ з х
-ф і в а п р о л д ж є
 я ч с м и т ь б ю
 
 Ute
@@ -1064,6 +1071,15 @@ val layouts = listOf(
             ဇ ဌ ဃ ဠ ဎ ဉ ဦ ဧ
         """.trimIndent()
     ),
+    /*Layout(
+        name = "Cree (Western syllabics)",
+        layout = """
+            ᕽ ᐤ ᐁ ᕒ ᐟ ᕀ ᐆ ᐃ ᐅ ᑊ
+            ᐊ ᐢ ᙾ f g ᐦ ᐄ ᐠ ᓬ
+            ᐋ ᐝ ᐨ c v ᐣ ᒼ
+        """.trimIndent(),
+        combiner = InuktitutCombiner
+    ),*/
     Layout(
         name = "Crimean Tatar (Latin)",
         layout = """
@@ -1078,6 +1094,36 @@ val layouts = listOf(
             A S D F G H J K L
             Z X C V B N M
         """.trimIndent()
+    ),
+    Layout(
+        name = "Dënesųłinë́ (Latin)",
+        layout = """
+            ą ę ë ę̈ ł ų į ǫ ´
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ą́ ę́ ë́ ę̈́ ł ų́ į́ ǫ́ ´
+            q w é r t y ú í ó p
+            á s d f g h j k l
+            z x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("´"),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(Key("á"))),
+            Pair("ą", SwipeKeys(Key("ą́"))),
+            Pair("e", SwipeKeys(Key("é"))),
+            Pair("ë", SwipeKeys(Key("ë́"))),
+            Pair("ę", SwipeKeys(Key("ę́"))),
+            Pair("ę̈", SwipeKeys(Key("ę̈́"))),
+            Pair("i", SwipeKeys(Key("í"))),
+            Pair("į", SwipeKeys(Key("į́"))),
+            Pair("o", SwipeKeys(Key("ó"))),
+            Pair("ǫ", SwipeKeys(Key("ǫ́"))),
+            Pair("u", SwipeKeys(Key("ú"))),
+            Pair("ų", SwipeKeys(Key("ų́"))),
+        )
     ),
     Layout(
         name = "Dhivehi",
@@ -1222,17 +1268,32 @@ val layouts = listOf(
         hasShift = false,
         bottomRowKey = Key(text = "წ", width = KeyWidth.FractionWidth(.1F))
     ),
-    /*Layout(
+    Layout(
         name = "Greek",
         layout = """
-            ; ς ε ρ τ υ θ ι ο π
-            α σ δ φ γ η ξ λ
+            ε ρ τ υ θ ι ο π ´
+            α σ δ φ γ η ξ κ λ
             ζ χ ψ ω β ν μ
         """.trimIndent(),
+        otherLayers = listOf("""
+            έ ρ τ ύ θ ί ό π ´
+            ά σ δ φ γ ή ξ κ λ
+            ζ χ ψ ώ β ν μ
+        """.trimIndent()
+        ),
+        moveLayerKeys = listOf("´"),
         swipeList = listOf(
-
-        )
-    ),*/
+            Pair("α", SwipeKeys(Key("ά"))),
+            Pair("ε", SwipeKeys(Key("έ"), Key(";"))),
+            Pair("η", SwipeKeys(Key("ή"))),
+            Pair("ι", SwipeKeys(Key("ί"), Key("ϊ"), Key("ΐ"))),
+            Pair("ο", SwipeKeys(Key("ό"))),
+            Pair("σ", SwipeKeys(Key("ς"))),
+            Pair("υ", SwipeKeys(Key("ύ"), Key("ϋ"), Key("ΰ"))),
+            Pair("ω", SwipeKeys(Key("ώ")))
+        ),
+        combiner = GreekCombiner
+    ),
     Layout(
         name = "Guarani",
         layout = """
@@ -1274,7 +1335,17 @@ val layouts = listOf(
             ז ס ב ה נ מ צ ת ץ
         """.trimIndent(),
         hasShift = false,
-        rightToLeft = true
+        rightToLeft = true,
+        swipeList = listOf(
+            Pair("'", SwipeKeys(Key("׳"), Key("״"))),
+            Pair("ו", SwipeKeys(Key("וֹ"))),
+            Pair("ב", SwipeKeys(Key("בּ"))),
+            Pair("ג", SwipeKeys(Key("גּ"))),
+            Pair("ד", SwipeKeys(Key("דּ"))),
+            Pair("כ", SwipeKeys(Key("כֿ"))),
+            Pair("ך", SwipeKeys(Key("ךּ"))),
+            Pair("ף", SwipeKeys(Key("ףּ")))
+        )
     ),
     Layout(
         name = "Hindi (Alternate)",
@@ -1651,35 +1722,35 @@ val layouts = listOf(
     Layout(
         name = "Luxembourgish",
         layout = """
-            ´ ` ^ ¨ ~
-            q w e r t z u i o p ë
-            a s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w e r t z u i o p
+            a s d f g h j k l
             y x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            ´ ` ^ ¨ ~
-            q w é r t z ú í ó p ë
-            á s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w é r t z ú í ó p
+            á s d f g h j k l
             ý x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w è r t z ù ì ò p ë
-            à s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w è r t z ù ì ò p
+            à s d f g h j k l
             ỳ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ê r t z û î ô p ë
-            â s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ê r t z û î ô p
+            â s d f g h j k l
             ŷ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ë r t z ü ï ö p ë
-            ä s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ë r t z ü ï ö p
+            ä s d f g h j k l
             ÿ x c v b n m
         """.trimIndent(), """
-            ´ ` ^ ¨ ~
-            q w ẽ r t z ũ ĩ õ p ë
-            ã s d f g h j k l é ä
+            ´ ` ^ ¨ ~ ë é ä
+            q w ẽ r t z ũ ĩ õ p
+            ã s d f g h j k l
             ỹ x c v b ñ m
         """.trimIndent()),
         moveLayerKeys = "´ ` ^ ¨ ~".split(' ')
@@ -1719,14 +1790,16 @@ val layouts = listOf(
     Layout(
         name = "Maltese",
         layout = """
-            q w e r t y u i o p ġ
-            a s d f g h j k l ħ `
-            z x c v b n m ż ċ
+            ċ ġ ħ ż `
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            q w è r t y ù ì ò p ġ
-            à s d f g h j k l ħ `
-            z x c v b n m ż ċ
+            ċ ġ ħ ż `
+            q w è r t y ù ì ò p
+            à s d f g h j k l
+            z x c v b n m
         """.trimIndent()),
         moveLayerKeys = listOf("`")
     ),
@@ -1765,6 +1838,7 @@ val layouts = listOf(
             a s d f g h j k l
             z x c v b n m
         """.trimIndent(),
+        decoupleRows = listOf(0),
         swipeList = listOf(
             Pair("a", SwipeKeys(Key("ả"), Key("ą"), Key("ạ"))),
             Pair("â", SwipeKeys(Key("á"), Key("ä"), Key("à"))),
@@ -1777,6 +1851,23 @@ val layouts = listOf(
             Pair("u", SwipeKeys(Key("ủ"), Key("ų"), Key("ụ"))),
             Pair("û", SwipeKeys(Key("ú"), Key("ü"), Key("ù")))
         ),
+    ),
+    Layout(
+        name = "Mohawk",
+        layout = """
+            ì á è é ṉ ù ú í ó :
+            q w e r t y u i o p
+            a s d f g h j k l
+            z x c v b n m
+        """.trimIndent(),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(Key("á"), down = Key("à"))),
+            Pair("e", SwipeKeys(Key("é"), down = Key("è"))),
+            Pair("i", SwipeKeys(Key("í"), down = Key("ì"))),
+            Pair("n", SwipeKeys(Key("ṉ"))),
+            Pair("o", SwipeKeys(Key("ó"), down = Key("ò"))),
+            Pair("u", SwipeKeys(Key("ú"), down = Key("ù"))),
+        )
     ),
     /*Layout(
         name = "Mongolian (Mongolian Script)",
@@ -1869,30 +1960,31 @@ val layouts = listOf(
         """.trimIndent(),
         otherLayers = listOf("""
             ç ´ ` ^ ¨ ~
-            q w é r t ý ú í ó p
-            á s d f g h j k l
-            z x c v b n m
+            q w é ŕ t́ ý ú í ó ṕ
+            á ś d́ f ǵ h j ḱ ĺ
+            ź x ć v b ń ḿ
         """.trimIndent(), """
             ç ´ ` ^ ¨ ~
-            q w è r t ỳ ù ì ò p
+            q ẁ è r t ỳ ù ì ò p
             à s d f g h j k l
+            z x c v b ǹ m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q ŵ ê r ṱ ŷ û î ô p
+            â ŝ ḓ f ĝ ĥ ĵ k ḽ
+            ẑ x ĉ v b n m
+        """.trimIndent(), """
+            ç ´ ` ^ ¨ ~
+            q ẅ ë r ẗ ÿ ü ï ö p
+            ä s d f g ḧ j k l
             z x c v b n m
         """.trimIndent(), """
             ç ´ ` ^ ¨ ~
-            q w ê r t ŷ û î ô p
-            â s d f g h j k l
-            z x c v b n m
-        """.trimIndent(), """
-            ç ´ ` ^ ¨ ~
-            q w ë r t ÿ ü ï ö p
-            ä s d f g h j k l
-            z x c v b n m
-        """.trimIndent(), """
-            ç ´ ` ^ ¨ ~
-            q w ẽ r t ỹ ũ ĩ õ p
-            ã s d f g h j k l
-            z x c v b ñ m
+            q w ẽ ᵲ ᵵ ỹ ũ ĩ õ ᵱ
+            ã ᵴ ᵭ ᵮ g h j k ɫ
+            ᵶ x c v b ñ ᵯ
         """.trimIndent()),
+        decoupleRows = listOf(0),
         moveLayerKeys = "´ ` ^ ¨ ~".split(' ')
     ),
     Layout(
@@ -2109,6 +2201,23 @@ val layouts = listOf(
         hasShift = false,
     ),
     Layout(
+        name = "Spanish (Small)",
+        layout = """
+            q w e r t y u i o p
+            a s d f g h j k l ñ
+            z x c v b n m
+        """.trimIndent(),
+        swipeList = listOf(
+            Pair("a", SwipeKeys(Key("á"))),
+            Pair("e", SwipeKeys(Key("é"))),
+            Pair("i", SwipeKeys(Key("í"))),
+            Pair("m", SwipeKeys(Key("¿"), down = Key("¡"))),
+            Pair("n", SwipeKeys(Key("ñ"))),
+            Pair("o", SwipeKeys(Key("ó"))),
+            Pair("u", SwipeKeys(Key("ú"), down = Key("ü"))),
+        )
+    ),
+    Layout(
         name = "Taiwanese Hokkien (POJ)",
         layout = """
             ´ ` ^ ¯ ˈ o͘ ⁿ ng -
@@ -2278,6 +2387,18 @@ val layouts = listOf(
         decoupleRows = listOf(0)
     ),
     Layout(
+        name = "Ukrainian (Small)",
+        layout = """
+            й ц у к е н г ш щ з х
+            ф і в а п р о л д ж є
+            я ч с м и т ь б ю
+        """.trimIndent(),
+        bottomRowKey = Key("ї", width = KeyWidth.FractionWidth(.1F)),
+        swipeList = listOf(
+            Pair("г", SwipeKeys(Key("ґ"), down = Key("₴")))
+        )
+    ),
+    Layout(
         name = "Urdu",
         layout = """
             ض ص غ ڑ ٹ ث ح ئ ظ ط
@@ -2346,7 +2467,29 @@ val layouts = listOf(
             z x c v b n m ặ
         """.trimIndent()),
         moveLayerKeys = "´ ◌̉ ` ~ .".split(' ')
-    )
+    ),
+    Layout(
+        name = "Yiddish",
+        layout = """
+            יִ שׂ בֿ אַ אָ תּ וּ ײַ כּ פֿ
+            ' פּ ק ר א ט ו ן ם פ
+            ש ד ג כ ע י ח ל ך ף
+            ז ס ב ה נ מ צ ת ץ
+        """.trimIndent(),
+        hasShift = false,
+        rightToLeft = true,
+        swipeList = listOf(
+            Pair("'", SwipeKeys(Key("׳"), Key("״"))),
+            Pair("ו", SwipeKeys(Key("וֹ"))),
+            Pair("ב", SwipeKeys(Key("בּ"))),
+            Pair("ג", SwipeKeys(Key("גּ"))),
+            Pair("ד", SwipeKeys(Key("דּ"))),
+            Pair("כ", SwipeKeys(Key("כֿ"))),
+            Pair("ך", SwipeKeys(Key("ךּ"))),
+            Pair("ף", SwipeKeys(Key("ףּ"))),
+            Pair("פּ", SwipeKeys(Key("-")))
+        )
+    ),
 )
 
 val inBuiltLayouts = listOf(Layout(
@@ -2358,12 +2501,12 @@ val inBuiltLayouts = listOf(Layout(
     """.trimIndent()
 ).compile()) +
         (inBuiltSimpleLayoutsString.split("\n\n").map {
-    val splitLayoutString = it.split("\n", limit = 2)
-    Layout(
-        name = splitLayoutString[0],
-        layout = splitLayoutString[1],
-        decoupleRows = if (splitLayoutString[1][0] == 'ё' || splitLayoutString[1][0] == 'е' || splitLayoutString[1][0] == 'ґ'
-            || splitLayoutString[1].split('\n')[0].split(' ').size <= 6) listOf(0) else emptyList()
-    )
-} + layouts).map { //Log.d("MyTag", it.name)
+            val splitLayoutString = it.split("\n", limit = 2)
+            Layout(
+                name = splitLayoutString[0],
+                layout = splitLayoutString[1],
+                decoupleRows = if (splitLayoutString[1][0] == 'ё' || splitLayoutString[1][0] == 'е' || splitLayoutString[1][0] == 'ґ'
+                    || splitLayoutString[1].split('\n')[0].split(' ').size <= 6) listOf(0) else emptyList()
+            )
+        } + layouts).map { //Log.d("MyTag", it.name)
             it.compile() }.sortedBy { it.name }
