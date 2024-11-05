@@ -87,7 +87,7 @@ fun KeyboardScreen(selectedLayouts: List<KbLayout>, state: KeyboardState, update
     }
 
     if (state.isDialogOpen) SwitchLayoutPopup(selectedLayouts.map {it.name},
-        { updateState(state.copy(layout = it, isDialogOpen = false)) },
+        { updateState(KeyboardState(layout = it)) },
         { updateState(state.copy(isDialogOpen = false)) })
 }
 
