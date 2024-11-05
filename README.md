@@ -2,7 +2,7 @@
 
 A multilingual keyboard app. Under development, so please use it alongside another keyboard.
 
-[**Download v0.8.0.20240920-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.8.0.20240920-alpha/redefinablekeyboard-v0.8.0.20240920.apk)
+[**Download v0.9.0.20241105-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.9.0.20241105-alpha/redefinablekeyboard-v0.9.0.20241105.apk)
 
 [**Join our Discord**](https://discord.gg/K4nP2az7bt)
 
@@ -19,12 +19,14 @@ Supported languages/layouts:
 * Arabic (101)
 * Arapaho
 * Armenian
+* Assamese (Phonetic)
 * Azerbaijani (Cyrillic)
 * Azerbaijani (Latin)
 * Bashkir
 * Belarusian (Cyrillic)
 * Belarusian (Latin)
 * Bengali (InScript)
+* Bengali (Phonetic)
 * Berber/Tamazight (AZERTY)
 * Berber/Tamazight (QWERTY)
 * Blackfoot (Syllabics)
@@ -37,6 +39,7 @@ Supported languages/layouts:
 * Buryat (Mongolia)
 * Buryat (Russia)
 * Cahuilla
+* Carrier/Dakelh (Latin)
 * Catalan
 * Caucasian
 * Chamorro
@@ -47,7 +50,7 @@ Supported languages/layouts:
 * Chuvash
 * Comanche
 * Coptic
-* Cree (Latin)
+* Cree/Atikamekw (Latin)
 * Crimean Tatar (Latin)
 * Czech
 * Dagbani
@@ -55,6 +58,7 @@ Supported languages/layouts:
 * Dhivehi
 * Dinka
 * Dungan
+* Dënesųłinë́ (Latin)
 * Efik
 * Enets
 * English (Colemak)
@@ -81,21 +85,25 @@ Supported languages/layouts:
 * German (Neo 2)
 * German (Switzerland)
 * Gitxsan
+* Greek
 * Guarani
 * Guaymí/Ngäbere
 * Gujarati (InScript)
 * Gĩkũyũ/Kikuyu
 * Hausa
+* Hawaiian
 * Hebrew
+* Hindi (Alternate)
 * Hindi (InScript)
-* Hindi (QWERTY-like)
 * Ho
 * Ho-Chunk (Wisconsin)
 * Hungarian
 * Icelandic
 * Ingrian/Izhorian
+* Innu-Aimun
 * Interslavic (Cyrillic)
 * Interslavic (Latin)
+* Inuktitut (ᖃᓂᐅᔮᖅᐸᐃᑦ)
 * Italian
 * Iñupiaq
 * Javanese (Latin)
@@ -119,6 +127,8 @@ Supported languages/layouts:
 * Kurdish (Kurmanji) (Latin)
 * Kyrgyz
 * Lakota
+* Lao
+* Latin International
 * Latvian (Big)
 * Laz (Latin)
 * Laz (Mkhedruli)
@@ -139,6 +149,8 @@ Supported languages/layouts:
 * Menominee
 * Mi'kmaq
 * Mingrelian
+* Mizo
+* Mohawk
 * Mongolian (Cyrillic)
 * Mro/Mru
 * Māori
@@ -178,7 +190,8 @@ Supported languages/layouts:
 * Slovak (Big)
 * Slovene
 * Sora
-* Spanish
+* Spanish (Big)
+* Spanish (Small)
 * Squamish
 * Sundanese (Latin)
 * Sámi (Inari)
@@ -209,7 +222,7 @@ Supported languages/layouts:
 * Tłı̨chǫ (Big)
 * Udege (Khabarovsk)
 * Udege (Petersburg)
-* Ukrainian
+* Ukrainian (Small)
 * Urdu
 * Ute
 * Uyghur (Arabic)
@@ -223,4 +236,5 @@ Supported languages/layouts:
 * Wolof
 * Yaghnobi
 * Yakut
+* Yiddish
 * Zazaki
