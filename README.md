@@ -2,7 +2,7 @@
 
 A multilingual keyboard app. Under development, so please use it alongside another keyboard.
 
-[**Download v0.9.0.20241105-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.9.0.20241105-alpha/redefinablekeyboard-v0.9.0.20241105.apk)
+[**Download v0.10.0.20241117-alpha**](https://github.com/tenextractor/redefinablekeyboard/releases/download/v0.10.0.20241117-alpha/redefinablekeyboard-v0.10.0.20241117.apk)
 
 [**Join our Discord**](https://discord.gg/K4nP2az7bt)
 
