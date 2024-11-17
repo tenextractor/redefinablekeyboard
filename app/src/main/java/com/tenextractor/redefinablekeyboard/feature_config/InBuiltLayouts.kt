@@ -1149,6 +1149,22 @@ val layouts = listOf(
         """,
         bottomRowKey = Key(text = "q", width = KeyWidth.FractionWidth(.1F))
     ),
+    Layout(
+        name = "Erzya (Latin)",
+        layout = """
+            ´ˇ ä ě ś ť ž ü š ö č
+            q w e r t y u i o p
+            a s d f g h j k l ń
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            ´ˇ ä ě ś ť ž ű š ő č
+            q w é ŕ ť ý ú í ó ṕ
+            á ś ď f́ ǵ h j ḱ ĺ ń
+            ź x ć v́ b́ ń ḿ
+        """.trimIndent()),
+        moveLayerKeys = listOf("´ˇ")
+    ),
     /*
     Layout(
         name = "Farsi/Persian",
@@ -2283,7 +2299,7 @@ val layouts = listOf(
         combiner = TamilCombiner
     ),
     Layout(
-        name = "Thai",
+        name = "Thai (Big)",
         layout = """
             ๅ / _ ภ ถ ◌ุ ◌ึ ค ต จ ข ช
             ๆ ไ ำ พ ะ ◌ั ◌ี ร น ย บ ล
