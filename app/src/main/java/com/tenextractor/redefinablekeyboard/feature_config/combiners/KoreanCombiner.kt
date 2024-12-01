@@ -13,7 +13,9 @@ object KoreanCombiner: Combiner {
         'ㅃ' /*bb*/, 'ㅅ' /*s*/,  'ㅆ' /*ss*/, 'ㅇ' /*ng*/,
         'ㅈ' /*j*/,  'ㅉ' /*jj*/, 'ㅊ' /*ch*/, 'ㅋ' /*k*/,
         'ㅌ' /*t*/,  'ㅍ' /*p*/,  'ㅎ' /*h*/
-    )
+    ) // Only these characters can appear at the START of a Hangul syllable,
+    // and any syllable MUST have only one of these
+
     private val vowels = listOf(
         'ㅏ' /*a*/,   'ㅐ' /*ae*/,  'ㅑ' /*ya*/,   'ㅒ' /*yae*/,
         'ㅓ' /*eo*/,  'ㅔ' /*e*/,   'ㅕ' /*yeo*/,  'ㅖ' /*ye*/,
@@ -21,7 +23,9 @@ object KoreanCombiner: Combiner {
         'ㅛ' /*yo*/,  'ㅜ' /*u*/,   'ㅝ' /*u+eo*/, 'ㅞ' /*u+e*/,
         'ㅟ' /*u+i*/, 'ㅠ' /*yu*/,  'ㅡ' /*eu*/,   'ㅢ' /*eu+i*/,
         'ㅣ' /*i*/
-    )
+    ) // Only these characters can appear in the MIDDLE (as a vowel) of a Hangul syllable,
+    // and any syllable MUST have only one of these
+
     private val finals = listOf(
         null,       'ㄱ' /*g*/,  'ㄲ' /*gg*/, 'ㄳ' /*gs*/,
         'ㄴ' /*n*/,  'ㄵ' /*nj*/, 'ㄶ' /*nh*/, 'ㄷ' /*d*/,
@@ -30,15 +34,24 @@ object KoreanCombiner: Combiner {
         'ㅁ' /*m*/,  'ㅂ' /*b*/,  'ㅄ' /*bs*/, 'ㅅ' /*s*/,
         'ㅆ' /*ss*/, 'ㅇ' /*ng*/, 'ㅈ' /*j*/,  'ㅊ' /*ch*/,
         'ㅋ' /*k*/,  'ㅌ' /*t*/,  'ㅍ' /*p*/,  'ㅎ' /*h*/
-    )
+    ) // Only these characters can appear at the END of a Hangul syllable.
+    // These are optional, and any syllable can only have either zero or one of these.
+
     private const val GA_LOCATION = '가'.code //44032
+    // This value is important because, it is the start of the Unicode Hangul Syllables block,
+    // and the Unicode codepoint (U+XXXX number) for any Hangul syllable is given by the formula:
+    // syllable = [(initial) × 588 + (vowel) × 28 + (final)] + 44032
+    // where `initial`, `vowel` and `final` are the indices of the initial, vowel,
+    // and final (0 if no final) character in the above lists.
+
     private val initialClusters = mapOf(
         'ㄱ' to "ㄲ",
         'ㄷ' to "ㄸ",
         'ㅂ' to "ㅃ",
         'ㅅ' to "ㅆ",
         'ㅈ' to "ㅉ"
-    )
+    ) // When the user presses ㄱ twice, ㄲ needs to be outputted, and so on
+
     private val mergedClusters = mapOf(
         "ㅗㅏ" to 'ㅘ',
         "ㅗㅐ" to 'ㅙ',

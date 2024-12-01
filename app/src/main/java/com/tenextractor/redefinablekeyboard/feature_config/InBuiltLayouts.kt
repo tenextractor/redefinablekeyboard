@@ -10,6 +10,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCo
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TeluguCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TibetanCombiner
+import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Layout
@@ -124,7 +125,7 @@ Bashkir
 я ч с м и т ь б ю
 
 Belarusian (Latin)
-ć č ź ž ń ŭ ś š ł
+ź ž ś š ć č ŭ ĺ ł ń 
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -389,9 +390,9 @@ a s d f g h j k l ñ ä
 z x c v b n m ö
 
 Hausa
-q w e r t y u i o p ƴ
-a s d f g h j k l ƙ
-z x c v b n m ɓ ɗ
+q w e r t y u i o p ƙ
+a s d f g h j k l ɗ
+z x c v b n m ɓ ƴ
 
 Hawaiian
 ā ē ī ō ū ʻ
@@ -512,8 +513,14 @@ q w e r t y u i o p û
 a s d f g h j k l ê î
 z x c v b n m ç ş
 
+Kwak'wala
+ʼ a̱ ł g̱ t̓ k̓ ḵ ḵ̓  x̱ p̓
+q w e r t y u i o p
+a s d f g h j k l
+z x c v b n m ž
+
 Kyrgyz
-ё ң ө ү ъ
+ё ү ң ө ъ
 й ц у к е н г ш щ з х
 ф ы в а п р о л д ж э
 я ч с м и т ь б ю
@@ -833,7 +840,7 @@ a s d f g h j k l ŵ
 z x c v b n m
 
 Turkmen
-ä ş ç ž ň ý ü ö
+ä ş ç ž ý ü ň ö
 q w e r t y u i o p
 a s d f g h j k l
 z x c v b n m
@@ -1094,6 +1101,23 @@ val layouts = listOf(
             A S D F G H J K L
             Z X C V B N M
         """.trimIndent()
+    ),
+    Layout(
+        name = "Czech (Small)",
+        layout = """
+            q w e r t y u i o p
+            a s d f g h j k l ´
+            z x c v b n m ˇ
+        """.trimIndent(),
+        otherLayers = listOf("""
+            q w é ŕ t́ ý ú í ó ṕ
+            á ś d́ f ǵ h j ḱ ĺ ´
+            ź x ć v b ń ḿ ˇ
+        """.trimIndent(), """
+            q w ě ř ť y ǔ ǐ ǒ p
+            ǎ š ď f ǧ ȟ ǰ ǩ ľ ´
+            ž x č v b ň m ˇ
+        """)
     ),
     Layout(
         name = "Dënesųłinë́ (Latin)",
@@ -1566,55 +1590,80 @@ val layouts = listOf(
     Layout(
         name = "Latin International",
         layout = """
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
             q w e r t y u i o p
             a s d f g h j k l
             z x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            ́ w é ŕ t́ ý ú í ó ṕ
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌́ w é ŕ t́ ý ú í ó ṕ
             á ś d́ f ǵ h j ḱ ĺ
             ź x ć v b ń ḿ
         """.trimIndent(), """
-            ̀ ẁ è r t ỳ ù ì ò p
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̀ ẁ è r t ỳ ù ì ò p
             à s d f g h j k l
             z x c v b ǹ m
         """.trimIndent(), """
-            ̂ ŵ ê r ṱ ŷ û î ô p
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̂ ŵ ê r ṱ ŷ û î ô p
             â ŝ ḓ f ĝ ĥ ĵ k ḽ
             ẑ x ĉ v b n m
         """.trimIndent(), """
-            ̄ w ē ṟ ṯ ȳ ū ī ō p
-            ā s ḏ ꞙ ḡ ẖ j ḵ ḻ
-            ẕ x c v ḇ ṉ m
+            . ¯̥ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̄ ◌̱ ē ṟ ṯ ȳ ū ī ō p
+            ā s ḏ ꞙ ḡ ẖ ɟ ḵ ḻ
+            ẕ ǣ c v ḇ ṉ m
         """.trimIndent(), """
-            ̆ ȗ ĕ ȓ t ȋ ŭ ĭ ŏ p
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̆ ȗ ĕ ȓ t ȋ ŭ ĭ ŏ p
             ă s d f ğ ḫ j k l
-            z x c v b n m̐
+            z x c v m̆ n̆ m̐
         """.trimIndent(), """
-            ̃ w ẽ ᵲ ᵵ ỹ ũ ĩ õ ᵱ
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̃ w ẽ ᵲ ᵵ ỹ ũ ĩ õ ᵱ
             ã ᵴ ᵭ ᵮ g h j k ɫ
             ᵶ x c v b ñ ᵯ
         """.trimIndent(), """
-            ̈ ẅ ë r ẗ ÿ ü ï ö p
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̈ ẅ ë r ẗ ÿ ü ï ö p
             ä s d f g ḧ j k l
-            z x c v b n m
+            z æ c v b n m
         """.trimIndent(), """
-            ̇ ẇ ė ṙ ṫ ẏ u ı ȯ ṗ
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̇ ẇ ė ṙ ṫ ẏ u ı ȯ ṗ
             ȧ ṡ ḋ ḟ ġ ḣ ȷ k l
             ż ẋ ċ v ḃ ṅ ṁ
         """.trimIndent(), """
-            ̣ ẉ ẹ ṛ ṭ ỵ ụ ị ọ p
+            ˚ ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̣ ẉ ẹ ṛ ṭ ỵ ụ ị ọ p
             ạ ṣ ḍ f g ḥ j ḳ ḷ
             ẓ x c ṿ ḅ ṇ ṃ
         """.trimIndent(), """
-            ̌ w ě ř ť y ǔ ǐ ǒ p
+            . ¯ ´ ` ˙ ^ ¨ ˘ ~ ¸
+            ◌̌ w ě ř ť y ǔ ǐ ǒ p
             ǎ š ď f ǧ ȟ ǰ ǩ ľ
             ž ǯ č v b ň m
         """.trimIndent(), """
-            ̧ w ȩ ŗ ţ y u i o p
-            a ş ḑ f ģ ḩ j ķ ļ
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̧ ę ȩ ŗ ţ y ų į ǫ p
+            ą ş ḑ f ģ ḩ j ķ ļ
             z x ç v b ņ m̧
+        """.trimIndent(), """
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ◌̊ ◌̥ ɛ r̥ ʈ y ů ɪ ɔ ʊ
+            å ʃ ɗ f ɠ ɦ ʄ ƙ ɭ
+            ʒ χ æ v ɓ ŋ m
+        """.trimIndent(), """
+            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            q w ṝ r̥̄ t y u i o p
+            a s d f g h j ḹ l̥̄
+            z x c v b n m
         """.trimIndent()
+        ),
+        moveLayerKeys = listOf(
+            "´", "`", "^", "¯", "˘", "~", "¨", "˙", ".", "ˇ", "¸", "˚", "¯̥"
         ),
         swipeList = listOf(
             Pair("q", SwipeKeys(up = Key("", label = "´", moveToLayer = 3),
@@ -1835,6 +1884,20 @@ val layouts = listOf(
         """.trimIndent()),
         moveLayerKeys = listOf("¯"),
         decoupleRows = listOf(0)
+    ),
+    Layout(
+        name = "Māori (Small)",
+        layout = """
+            q w e r t y u i o p
+            a s d f g h j k l ¯
+            z x c v b n m
+        """.trimIndent(),
+        otherLayers = listOf("""
+            q w ē r t ȳ ū ī ō p
+            ā s d f g h j k l
+            z x c v b n m
+        """.trimIndent()),
+        moveLayerKeys = listOf("¯")
     ),
     Layout(
         name = "Mingrelian",
@@ -2435,16 +2498,16 @@ val layouts = listOf(
     Layout(
         name = "Uyghur (Arabic)",
         layout = """
-            ژ ف گ خ ج ۆ لا ؟
+            ج ف ئ ژ گ خ ۆ لا ؟
             چ ۋ ې ر ت ي ۇ ڭ و پ
             ھ س د ا ە ى ق ك ل
-            ز ش غ ۈ ب ن م ئ
+            ز ش غ ۈ ب ن م
         """.trimIndent(),
         capsLayer = """
-            ژ ف گ خ ج ۆ لا ؟
+            ج ف ئ ژ گ خ ۆ لا ؟
             چ ۋ ې ر ت ي ۇ ڭ و پ
             ھ س ژ ف گ خ ج ۆ لا
-            ز ش غ ۈ ب ن م ؟
+            ز ش غ ۈ ب ن م
         """.trimIndent(),
         rightToLeft = true
     ),
