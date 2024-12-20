@@ -1590,95 +1590,108 @@ val layouts = listOf(
     Layout(
         name = "Latin International",
         layout = """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             q w e r t y u i o p
             a s d f g h j k l
             z x c v b n m
         """.trimIndent(),
         otherLayers = listOf("""
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌́ w é ŕ t́ ý ú í ó ṕ
             á ś d́ f ǵ h j ḱ ĺ
             ź x ć v b ń ḿ
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̀ ẁ è r t ỳ ù ì ò p
             à s d f g h j k l
             z x c v b ǹ m
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̂ ŵ ê r ṱ ŷ û î ô p
             â ŝ ḓ f ĝ ĥ ĵ k ḽ
             ẑ x ĉ v b n m
         """.trimIndent(), """
-            . ¯̥ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̄ ◌̱ ē ṟ ṯ ȳ ū ī ō p
             ā s ḏ ꞙ ḡ ẖ ɟ ḵ ḻ
             ẕ ǣ c v ḇ ṉ m
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̆ ȗ ĕ ȓ t ȋ ŭ ĭ ŏ p
             ă s d f ğ ḫ j k l
             z x c v m̆ n̆ m̐
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̃ w ẽ ᵲ ᵵ ỹ ũ ĩ õ ᵱ
             ã ᵴ ᵭ ᵮ g h j k ɫ
             ᵶ x c v b ñ ᵯ
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̈ ẅ ë r ẗ ÿ ü ï ö p
             ä s d f g ḧ j k l
             z æ c v b n m
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̇ ẇ ė ṙ ṫ ẏ u ı ȯ ṗ
             ȧ ṡ ḋ ḟ ġ ḣ ȷ k l
             ż ẋ ċ v ḃ ṅ ṁ
         """.trimIndent(), """
-            ˚ ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            ˚ ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̣ ẉ ẹ ṛ ṭ ỵ ụ ị ọ p
             ạ ṣ ḍ f g ḥ j ḳ ḷ
             ẓ x c ṿ ḅ ṇ ṃ
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˘ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˘ ˜ ¸
             ◌̌ w ě ř ť y ǔ ǐ ǒ p
             ǎ š ď f ǧ ȟ ǰ ǩ ľ
             ž ǯ č v b ň m
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̧ ę ȩ ŗ ţ y ų į ǫ p
             ą ş ḑ f ģ ḩ j ķ ļ
             z x ç v b ņ m̧
         """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
+            . ¯ ´ ˋ ˙ ˆ ¨ ˇ ˜ ¸
             ◌̊ ◌̥ ɛ r̥ ʈ y ů ɪ ɔ ʊ
             å ʃ ɗ f ɠ ɦ ʄ ƙ ɭ
             ʒ χ æ v ɓ ŋ m
-        """.trimIndent(), """
-            . ¯ ´ ` ˙ ^ ¨ ˇ ~ ¸
-            q w ṝ r̥̄ t y u i o p
-            a s d f g h j ḹ l̥̄
-            z x c v b n m
         """.trimIndent()
         ),
         moveLayerKeys = listOf(
-            "´", "`", "^", "¯", "˘", "~", "¨", "˙", ".", "ˇ", "¸", "˚", "¯̥"
+            "´", "ˋ", "ˆ", "¯", "˘", "˜", "¨", "˙", ".", "ˇ", "¸", "˚"
         ),
         swipeList = listOf(
+            Pair(".", SwipeKeys(up = Key("!"))),
+            Pair("¯", SwipeKeys(up = Key("-"), down = Key("_"), right = Key("+"),
+                left = Key("="))),
+            Pair("´", SwipeKeys(up = Key("#"))),
+            Pair("ˋ", SwipeKeys(up = Key("$"))),
+            Pair("˙", SwipeKeys(up = Key("%"))),
+            Pair("ˆ", SwipeKeys(up = Key("^"), left = Key("<"), right = Key(">"))),
+            Pair("¨", SwipeKeys(up = Key("&"), left = Key(";"), right = Key(":"))),
+            Pair("ˇ", SwipeKeys(up = Key("*"))),
+
             Pair("q", SwipeKeys(up = Key("", label = "´", moveToLayer = 3),
                 down = Key("", label = "`", moveToLayer = 4))),
             Pair("w", SwipeKeys(up = Key("", label = "¯", moveToLayer = 6),
                 down = Key("", label = "˘", moveToLayer = 7),
                 right = Key("", "~", moveToLayer = 8))
             ),
-            Pair("e", SwipeKeys(up = Key("", label = "˙", moveToLayer = 10),
+            Pair("e", SwipeKeys(up = Key("ə"),
                 down = Key("", label = ".", moveToLayer = 11),
                 right = Key("", label = "¨", moveToLayer = 9))
             ),
-            Pair("r", SwipeKeys(up = Key("", label = "^", moveToLayer = 5),
-                down = Key("", label = "ˇ", moveToLayer = 12))),
-            Pair("t", SwipeKeys(up = Key("", label = "¸", moveToLayer = 13)))
+            Pair("r", SwipeKeys(up = Key("r̥̄"), down = Key("ṝ"))),
+            Pair("t", SwipeKeys(up = Key("", label = "¸", moveToLayer = 13))),
+            Pair("i", SwipeKeys(up = Key("|"), left = Key("\\"), right = Key("/"))),
+
+            Pair("a", SwipeKeys(up = Key("@"))),
+            Pair("h", SwipeKeys(left = Key("("), right = Key(")"))),
+            Pair("j", SwipeKeys(left = Key("["), right = Key("]"))),
+            Pair("k", SwipeKeys(left = Key("{"), right = Key("}"))),
+            Pair("l", SwipeKeys(up = Key("l̥̄"), down = Key("ḹ"))),
+
+            Pair("n", SwipeKeys(up = Key("ⁿ")))
         )
     ),
     Layout(
