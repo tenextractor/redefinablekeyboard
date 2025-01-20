@@ -6,7 +6,6 @@ import androidx.compose.ui.text.font.FontWeight
 import com.tenextractor.redefinablekeyboard.R
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
-import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SwipeKeys
 
 fun layoutTogglesToSelectedLayoutNames(layoutToggles: List<Boolean>,
@@ -44,8 +43,8 @@ fun capitalizeKey(key: Key?): Key? {
 fun capitalizeSwipeKeys(swipeKeys: SwipeKeys?): SwipeKeys? {
     return if (swipeKeys != null)
         SwipeKeys(up = capitalizeKey(swipeKeys.up), right = capitalizeKey(swipeKeys.right),
-            down = capitalizeKey(swipeKeys.down), left = capitalizeKey(swipeKeys.left))
-    else null
+        down = capitalizeKey(swipeKeys.down), left = capitalizeKey(swipeKeys.left))
+        else null
 }
 
 fun titleCaseKey(key: Key?): Key? {
@@ -57,23 +56,4 @@ fun titleCaseSwipeKeys(swipeKeys: SwipeKeys?): SwipeKeys? {
         SwipeKeys(up = titleCaseKey(swipeKeys.up), right = titleCaseKey(swipeKeys.right),
             down = titleCaseKey(swipeKeys.down), left = titleCaseKey(swipeKeys.left))
     else null
-}
-
-fun convertLayerToCaps(layer: List<List<Key>>): List<List<Key>> {
-    return layer.map { row -> row.map { key ->
-        if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else key.copy(text = key.text.uppercase(), label = key.label?.uppercase(),
-            swipeKeys = capitalizeSwipeKeys(key.swipeKeys)
-        )
-    } }
-}
-
-fun convertLayerToShift(layer: List<List<Key>>): List<List<Key>> {
-    return layer.map { row -> row.map { key ->
-        if (key.specialKey == SpecialKey.SHIFT) key.copy(label = "⌄", specialKey = SpecialKey.UNSHIFT)
-        else key.copy(text = key.text.replaceFirstChar(Char::titlecase),
-            label = key.label?.replaceFirstChar(Char::titlecase),
-            swipeKeys = titleCaseSwipeKeys(key.swipeKeys)
-        )
-    } }
 }

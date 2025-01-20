@@ -5,8 +5,6 @@ import com.tenextractor.redefinablekeyboard.feature_config.backSpaceKey
 import com.tenextractor.redefinablekeyboard.feature_config.bottomRow
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.Combiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.DefaultCombiner
-import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToCaps
-import com.tenextractor.redefinablekeyboard.feature_config.convertLayerToShift
 import com.tenextractor.redefinablekeyboard.feature_config.shiftKey
 import com.tenextractor.redefinablekeyboard.feature_config.symbols1
 import com.tenextractor.redefinablekeyboard.feature_config.symbols2
@@ -46,7 +44,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows)
         val compiledOtherLayers = otherLayers.map { compileLayer(it, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
             backSpaceKey(shiftAndBackspaceSize, rightToLeft), symbolsKey1, bottomRow, decoupleRows, isOtherLayer = true
-        ) }
+            ) }
 
         val symbolsLayer1 = compileLayer(symbols1, symbolsKey2,
             backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
@@ -57,38 +55,10 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
                 symbolsKey1, bottomRow, emptyList())
         } else null
 
-        val compiledShiftLayer = if (hasShift) {
-            if (shiftLayer != null) {
-                compileLayer(shiftLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
-                    symbolsKey1, bottomRow, emptyList())
-            } else if (capsLayer != null) compiledCapsLayer else convertLayerToShift(baseLayer)
-        } else null
-
-        val layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers
-        val capsLayers = if (hasShift) {
-            if (capsLayer != null)
-                listOf(compiledCapsLayer!!, symbolsLayer1, symbolsLayer2) + compiledOtherLayers.map(
-                    ::convertLayerToCaps
-                )
-            else listOf(
-                convertLayerToCaps(baseLayer),
-                symbolsLayer1,
-                symbolsLayer2
-            ) + compiledOtherLayers.map(
-                ::convertLayerToCaps
-            )
-        } else null
-
-        val shiftLayers = if (hasShift) listOf(compiledShiftLayer!!, symbolsLayer1, symbolsLayer2) +
-                compiledOtherLayers.map(::convertLayerToShift)
-        else null
-
         return KbLayout(
             name = name,
             layers = listOf(baseLayer, symbolsLayer1, symbolsLayer2) + compiledOtherLayers,
-            capsLayers = capsLayers,
-            shiftLayers = shiftLayers,
-            //capsLayer = compiledCapsLayer,
+            capsLayer = compiledCapsLayer,
             combiner = combiner
         )
     }
@@ -143,10 +113,10 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             else if (isOtherLayer) 0 else null,
             swipeKeys = swipeList?.find { it.first == text }?.second
         )
-        /*
-                return if (text in moveLayerKeys) {
-                    Key(text = "", label = text, width = width, moveToLayer = 3 + moveLayerKeys.indexOf(text))
-                } else if (isOtherLayer) Key(text = newText, label = if (hasDottedCircle) text else null, width = width, moveToLayer = 0)
-                else Key(text = newText, label = if (hasDottedCircle) text else null, width = width)*/
+/*
+        return if (text in moveLayerKeys) {
+            Key(text = "", label = text, width = width, moveToLayer = 3 + moveLayerKeys.indexOf(text))
+        } else if (isOtherLayer) Key(text = newText, label = if (hasDottedCircle) text else null, width = width, moveToLayer = 0)
+        else Key(text = newText, label = if (hasDottedCircle) text else null, width = width)*/
     }
 }
