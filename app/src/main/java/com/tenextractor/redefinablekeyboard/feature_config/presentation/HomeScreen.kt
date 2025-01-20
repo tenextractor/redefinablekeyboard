@@ -24,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tenextractor.redefinablekeyboard.BuildConfig
 import com.tenextractor.redefinablekeyboard.R
 import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
 
@@ -49,6 +50,8 @@ fun HomeScreen(onNavToSelectLayouts: () -> Unit, onNavToSettings: () -> Unit) {
             onValueChange = { text = it },
             textStyle = TextStyle.Default.copy(fontFamily = notoFamily)
         )
+        Text("version ${BuildConfig.VERSION_NAME}", color = Color.LightGray,
+            modifier = Modifier.padding(10.dp))
     }
 }
 
