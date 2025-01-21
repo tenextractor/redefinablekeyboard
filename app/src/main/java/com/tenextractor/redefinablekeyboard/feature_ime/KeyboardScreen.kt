@@ -1,10 +1,7 @@
 package com.tenextractor.redefinablekeyboard.feature_ime
 
 import android.content.Context
-import android.util.Log
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -13,10 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -39,20 +33,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Popup
-import com.tenextractor.redefinablekeyboard.feature_config.SharedPrefsManager
-import com.tenextractor.redefinablekeyboard.feature_config.HapticFeedbackService
 import com.tenextractor.redefinablekeyboard.feature_config.capitalizeSwipeKeys
 import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
-import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 import com.tenextractor.redefinablekeyboard.feature_config.notoFamily
-import com.tenextractor.redefinablekeyboard.feature_config.presentation.ClickableText
 import com.tenextractor.redefinablekeyboard.feature_config.titleCaseSwipeKeys
 import kotlinx.coroutines.delay
 import kotlin.math.abs
@@ -151,7 +139,7 @@ fun KeyBox(key: Key, screenWidth: Dp, defaultWidth: Float, ctx: Context, selecte
             } else Modifier)*/
             .then(
                 Modifier
-                    .width(getKeyWidth(key.width, screenWidth, defaultWidth))
+                    .width(if (key.width == null) screenWidth * defaultWidth else screenWidth * key.width)
                     .height(56.dp)
             )
             .then(
@@ -328,17 +316,11 @@ fun onDragKey(key: Key, dragOffset: Offset, ctx: Context, selectedLayouts: List<
     onPressKey(keyToSend, ctx, selectedLayouts, state, updateState)
 }
 
-fun getKeyWidth(width: KeyWidth, screenWidth: Dp, defaultWidth: Float): Dp {
-    return when (width) {
-        is KeyWidth.WeightWidth -> screenWidth * defaultWidth * width.width
-        is KeyWidth.FractionWidth -> screenWidth * width.width
-    }
-}
 fun getDefaultWidth(layer: List<List<Key>>): Float {
     return 1 / layer.map { row -> row.fold(0.0F) { acc, key ->
         acc + when (key.width) {
-            is KeyWidth.WeightWidth -> key.width.width
-            is KeyWidth.FractionWidth -> 0F
+            null -> 1F
+            else -> 0F
         }
     } }.maxOrNull()!!
 }

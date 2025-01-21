@@ -35,9 +35,12 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
     fun compile(): KbLayout {
         val rowStrings = layout.split("\n").map { it.trim() }
         val maxNumberOfKeys = rowStrings.maxOf { it.split(' ').size }
-        val shiftAndBackspaceSize = ((maxNumberOfKeys - rowStrings[rowStrings.size - 1].split(' ').size).toFloat() / if (hasShift) 2 else 1)
-            .coerceAtLeast(1F)
-        val symbolsKey1 = symbolsKey1(if (bottomRowKey != null) KeyWidth.FractionWidth(.1F) else KeyWidth.FractionWidth(.15F))
+        //val shiftAndBackspaceSize = ((maxNumberOfKeys - rowStrings[rowStrings.size - 1].split(' ').size).toFloat() / if (hasShift) 2 else 1)
+        //    .coerceAtLeast(1F)
+        val shiftAndBackspaceSize =
+            (((maxNumberOfKeys - rowStrings[rowStrings.size - 1].split(' ').size).toFloat()/
+                    maxNumberOfKeys)/ if (hasShift) 2 else 1).coerceAtLeast(1F/maxNumberOfKeys)
+        val symbolsKey1 = symbolsKey1(if (bottomRowKey != null) null else .15F)
         val bottomRow = bottomRow(comma, space, period, bottomRowKey)
 
         val baseLayer = compileLayer(layout, if (hasShift) shiftKey(shiftAndBackspaceSize) else null,
@@ -47,9 +50,9 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             ) }
 
         val symbolsLayer1 = compileLayer(symbols1, symbolsKey2,
-            backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
+            backSpaceKey(.1F, rightToLeft), alphabetKey, bottomRow, emptyList())
         val symbolsLayer2 = compileLayer(symbols2, null,
-            backSpaceKey(1F, rightToLeft), alphabetKey, bottomRow, emptyList())
+            backSpaceKey(.1F, rightToLeft), alphabetKey, bottomRow, emptyList())
         val compiledCapsLayer = if (capsLayer != null) {
             compileLayer(capsLayer, unShiftKey(shiftAndBackspaceSize), backSpaceKey(shiftAndBackspaceSize, rightToLeft),
                 symbolsKey1, bottomRow, emptyList())
@@ -90,7 +93,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
             } else if (decoupleRows.contains(i)) {
                 val numberOfKeys = rowString.split(' ').size
                 rowString.split(' ').map {
-                    compileKey(it, KeyWidth.FractionWidth(1F/numberOfKeys), isOtherLayer) }
+                    compileKey(it, 1F/numberOfKeys, isOtherLayer) }
                 //decouple the rows that need to be decoupled
             } else {
                 rowString.split(' ').map { compileKey(it, isOtherLayer = isOtherLayer) }
@@ -100,7 +103,7 @@ data class Layout( //"simple" description of layout, that gets compiled into KbL
         return layer
     }
 
-    private fun compileKey(text: String, width: KeyWidth = KeyWidth.WeightWidth(1F),
+    private fun compileKey(text: String, width: Float? = null,
                            isOtherLayer: Boolean = false): Key {
         val hasDottedCircle = text.contains("◌")
         val newText = text.replace("◌", "")

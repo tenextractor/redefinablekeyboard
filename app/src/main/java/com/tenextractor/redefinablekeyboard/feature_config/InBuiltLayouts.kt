@@ -10,9 +10,7 @@ import com.tenextractor.redefinablekeyboard.feature_config.combiners.MalayalamCo
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TamilCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TeluguCombiner
 import com.tenextractor.redefinablekeyboard.feature_config.combiners.TibetanCombiner
-import com.tenextractor.redefinablekeyboard.feature_config.domain.KbLayout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Key
-import com.tenextractor.redefinablekeyboard.feature_config.domain.KeyWidth
 import com.tenextractor.redefinablekeyboard.feature_config.domain.Layout
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SpecialKey
 import com.tenextractor.redefinablekeyboard.feature_config.domain.SwipeKeys
@@ -20,58 +18,58 @@ import com.tenextractor.redefinablekeyboard.feature_config.domain.SwipeKeys
 fun bottomRow(comma: String, space: String, period: String, bottomRowKey: Key? = null): List<Key> {
     return if (bottomRowKey != null) {
         listOf(
-            Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F),
+            Key(text = "", label = "\uD83C\uDF10\uFE0E", width = .1F,
                 specialKey = SpecialKey.LAYOUTCYCLE,
                 swipeKeys = SwipeKeys(
                     up = Key(text = "", label = "\uD83C\uDF10\uFE0E≡", specialKey = SpecialKey.LAYOUTPOPUP),
                     left = Key(text = "", label = "<\uD83C\uDF10\uFE0E", specialKey = SpecialKey.LAYOUTLEFT),
                     right = Key(text = "", label = "\uD83C\uDF10\uFE0E>", specialKey = SpecialKey.LAYOUTRIGHT)
                 )),
-            Key(comma, width = KeyWidth.FractionWidth(.1F),
+            Key(comma, width = .1F,
                 swipeKeys = SwipeKeys(left = Key("„"), right = Key("“"))),
             bottomRowKey,
-            Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.25F),
+            Key(space, label = if (space == " ") "␣" else space, width = .25F,
                 specialKey = SpecialKey.SPACE),
-            Key("'", width = KeyWidth.FractionWidth(.1F),
+            Key("'", width = .1F,
                 swipeKeys = SwipeKeys(up = Key("\""), left = Key("«"), right = Key("»"))),
-            Key(period, width = KeyWidth.FractionWidth(.1F),
+            Key(period, width = .1F,
                 swipeKeys = SwipeKeys(up = Key("?"), down = Key("!"), right = Key("—"))),
-            Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
+            Key(text = "", label = "⏎", width = .15F, specialKey = SpecialKey.ENTER)
         )
     } else listOf(
-        Key(comma, width = KeyWidth.FractionWidth(.1F),
+        Key(comma, width = .1F,
             swipeKeys = SwipeKeys(left = Key("„"), right = Key("“"))),
-        Key(text = "", label = "\uD83C\uDF10\uFE0E", width = KeyWidth.FractionWidth(.1F),
+        Key(text = "", label = "\uD83C\uDF10\uFE0E", width = .1F,
             specialKey = SpecialKey.LAYOUTCYCLE,
             swipeKeys = SwipeKeys(
                 up = Key(text = "", label = "\uD83C\uDF10\uFE0E≡", specialKey = SpecialKey.LAYOUTPOPUP),
                 left = Key(text = "", label = "<", specialKey = SpecialKey.LAYOUTLEFT),
                 right = Key(text = "", label = ">", specialKey = SpecialKey.LAYOUTRIGHT)
             )),
-        Key(space, label = if (space == " ") "␣" else space, width = KeyWidth.FractionWidth(.3F), specialKey = SpecialKey.SPACE),
-        Key("'", width = KeyWidth.FractionWidth(.1F),
+        Key(space, label = if (space == " ") "␣" else space, width = .3F, specialKey = SpecialKey.SPACE),
+        Key("'", width = .1F,
             swipeKeys = SwipeKeys(up = Key("\""), left = Key("«"), right = Key("»"))),
-        Key(period, width = KeyWidth.FractionWidth(.1F),
+        Key(period, width = .1F,
             swipeKeys = SwipeKeys(up = Key("?"), down = Key("!"), right = Key("—"))),
-        Key(text = "", label = "⏎", width = KeyWidth.FractionWidth(.15F), specialKey = SpecialKey.ENTER)
+        Key(text = "", label = "⏎", width = .15F, specialKey = SpecialKey.ENTER)
     )
 }
-fun shiftKey(weight: Float): Key {
-    return Key(text = "", label = "⌃", width = KeyWidth.WeightWidth(weight), specialKey = SpecialKey.SHIFT /*moveToLayer = 3*/)
+fun shiftKey(width: Float?): Key {
+    return Key(text = "", label = "⌃", width = width, specialKey = SpecialKey.SHIFT /*moveToLayer = 3*/)
 }
-fun unShiftKey(weight: Float): Key {
-    return Key(text = "", label = "⌄", width = KeyWidth.WeightWidth(weight), specialKey = SpecialKey.UNSHIFT)
+fun unShiftKey(width: Float?): Key {
+    return Key(text = "", label = "⌄", width = width, specialKey = SpecialKey.UNSHIFT)
 }
-fun backSpaceKey(weight: Float, rightToLeft: Boolean = false): Key {
-    return Key(text = "", label = if (rightToLeft) "⌦" else "⌫", width = KeyWidth.WeightWidth(weight),
+fun backSpaceKey(width: Float?, rightToLeft: Boolean = false): Key {
+    return Key(text = "", label = if (rightToLeft) "⌦" else "⌫", width = width,
         specialKey = SpecialKey.BACKSPACE)
 }
-fun symbolsKey1(width: KeyWidth = KeyWidth.FractionWidth(.15F)): Key {
+fun symbolsKey1(width: Float? = .15F): Key {
     return Key(text = "", label = "?12", width = width, moveToLayer = 1)
 }
 val symbolsKey2 = Key(text = "", label = "={", moveToLayer = 2)
-val alphabetKey = Key(text = "", label = "AB", width = KeyWidth.FractionWidth(.15F), moveToLayer = 0)
-val zwnjKey = Key(text = "‌", label = "‹|›", width = KeyWidth.FractionWidth(.1F))
+val alphabetKey = Key(text = "", label = "AB", width = .15F, moveToLayer = 0)
+val zwnjKey = Key(text = "‌", label = "‹|›", width = .1F)
 
 val symbols1 = """
 1 2 3 4 5 6 7 8 9 0
@@ -971,7 +969,7 @@ val layouts = listOf(
             ф ы в а п р о л д ж ҝ
             ә ч с м и т ғ б ө
         """.trimIndent(),
-        bottomRowKey = Key(text = "ҹ", width = KeyWidth.FractionWidth(.1F))
+        bottomRowKey = Key(text = "ҹ", width = .1F)
     ),
     Layout(
         name = "Azerbaijani (Latin)",
@@ -995,7 +993,7 @@ val layouts = listOf(
             ф ы в а п р о л д ж э
             я ч с м і т ь б ю
         """.trimIndent(),
-        bottomRowKey = Key(text = "ё", width = KeyWidth.FractionWidth(.1F))
+        bottomRowKey = Key(text = "ё", width = .1F)
     ),
     Layout(
         name = "Bengali (InScript)",
@@ -1171,7 +1169,7 @@ val layouts = listOf(
             a o e u i d h t n s
             j k x b m w v z
         """,
-        bottomRowKey = Key(text = "q", width = KeyWidth.FractionWidth(.1F))
+        bottomRowKey = Key(text = "q", width = .1F)
     ),
     Layout(
         name = "Erzya (Latin)",
@@ -1306,7 +1304,7 @@ val layouts = listOf(
             ჭ ჩ ყ ს მ ი ტ ქ ბ ჰ
         """.trimIndent(),
         hasShift = false,
-        bottomRowKey = Key(text = "წ", width = KeyWidth.FractionWidth(.1F))
+        bottomRowKey = Key(text = "წ", width = .1F)
     ),
     Layout(
         name = "Greek",
@@ -2142,7 +2140,7 @@ val layouts = listOf(
             ф ї в а п р о л д ж є
             я ч с м и т ь б ю
         """.trimIndent(),
-        bottomRowKey = Key(text = "ґ", width = KeyWidth.FractionWidth(.1F))
+        bottomRowKey = Key(text = "ґ", width = .1F)
     ),
     Layout(
         name = "Saanich",
@@ -2213,7 +2211,7 @@ val layouts = listOf(
         """.trimIndent()),
         moveLayerKeys = listOf("¯,"),
         decoupleRows = listOf(0),
-        bottomRowKey = Key(text = " ", label = "‹|›", width = KeyWidth.FractionWidth(.1F)),
+        bottomRowKey = Key(text = " ", label = "‹|›", width = .1F),
         combiner = KildinCombiner,
         swipeList = listOf(
             Pair("а", SwipeKeys(Key("а̄"))),
@@ -2459,7 +2457,7 @@ val layouts = listOf(
             ༺ ༄༅།། ཌྷ ༼ གྷ ༽ ༑ ཀྵ ༻
             ཌ ཛྷ ༈ ༐ བྷ ཎ ༑
         """.trimIndent(),
-        bottomRowKey = Key(text = " ", label = "␣", width = KeyWidth.FractionWidth(.1F)),
+        bottomRowKey = Key(text = " ", label = "␣", width = .1F),
         space = "་",
         period = "།",
         combiner = TibetanCombiner
@@ -2508,7 +2506,7 @@ val layouts = listOf(
             ф і в а п р о л д ж є
             я ч с м и т ь б ю
         """.trimIndent(),
-        bottomRowKey = Key("ї", width = KeyWidth.FractionWidth(.1F)),
+        bottomRowKey = Key("ї", width = .1F),
         swipeList = listOf(
             Pair("г", SwipeKeys(Key("ґ"), down = Key("₴")))
         )
